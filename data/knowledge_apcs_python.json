@@ -1,8 +1,8 @@
 {
   "meta": {
     "title": "APCS Python 知識庫",
-    "version": "1.1.0",
-    "updated_at": "2026-02-05"
+    "version": "2.0.0",
+    "updated_at": "2026-02-06"
   },
   "levels": [
     {
@@ -15,45 +15,218 @@
           "title": "變數與資料型態",
           "desc": "認識 Python 基本型態與變數賦值",
           "implementation": "Python 為動態型別語言，不需宣告型態，但需注意隱式轉型問題",
-          "py_syntax": ["int", "float", "str", "bool", "type()"],
-          "common_pitfalls": ["整數除法用 / 會得到 float，應用 //", "字串與數字不能直接相加"],
+          "py_syntax": [
+            "int",
+            "float",
+            "str",
+            "bool",
+            "type()"
+          ],
+          "common_pitfalls": [
+            "整數除法用 / 會得到 float，應用 //",
+            "字串與數字不能直接相加",
+            "Python 的布林值是 True / False（首字母大寫），寫成 true / false 會出現 NameError",
+            "變數名稱不能以數字開頭，例如 2x = 10 會產生 SyntaxError",
+            "使用 Python 內建關鍵字（如 list、str、type）作為變數名稱，會覆蓋原本的內建功能",
+            "浮點數有精度問題，0.1 + 0.2 != 0.3，比較浮點數應使用 abs(a - b) < 1e-9",
+            "多重賦值時搞混順序，例如 a, b = b, a 可以交換，但 a, b = 1 會報錯（右邊不是可迭代物件）"
+          ],
           "mini_examples": [
             {
               "title": "變數賦值與型態檢查",
               "type": "code",
               "content": "x = 10\ny = 3.14\nname = 'APCS'\nprint(type(x))   # <class 'int'>\nprint(type(y))   # <class 'float'>"
+            },
+            {
+              "title": "多重賦值與交換",
+              "type": "code",
+              "content": "a, b = 5, 10\na, b = b, a\nprint(a, b)  # 10 5"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位親切的 Python 家教老師，專門教 APCS 考生「變數與資料型態」的觀念。請按照以下結構進行教學：\n\n## 一、觀念講解（由淺入深，搭配生活化比喻）\n\n### 1. 什麼是變數？\n想像變數就像一個「有名字的盒子」。你可以在盒子上貼標籤（變數名稱），然後把東西放進去（賦值）。例如 `age = 15` 就是在一個叫做 age 的盒子裡放入數字 15。\n\n### 2. 什麼是資料型態？\n盒子裡放的東西有不同種類：\n- **int（整數）**：像是你口袋裡的銅板數量，1、2、3，沒有小數點。就像點飲料的數量，只能是整杯。\n- **float（浮點數）**：像是體重計上的數字，60.5 公斤，有小數點。就像量體溫 36.5 度。\n- **str（字串）**：像是你的名字、地址，用引號括起來的文字。就像手機裡的聯絡人名稱。\n- **bool（布林值）**：像是開關，只有 True（開）和 False（關）兩種狀態。就像電燈開關。\n\n### 3. 動態型別\nPython 是「動態型別」語言。想像你有一個萬用盒子，今天可以放蘋果（整數），明天可以放書本（字串），不需要事先決定盒子只能放什麼。這和 C/Java 不同，它們需要先宣告盒子的用途。\n\n### 4. type() 函式\n如果你忘了盒子裡放什麼，可以用 `type()` 來「透視」盒子內容的類型。\n\n## 二、Python 語法與程式碼範例（由簡到難）\n\n### 範例 1：基本賦值\n```python\nx = 42\nname = \"Alice\"\nprint(x, name)\n```\n\n### 範例 2：檢查型態\n```python\na = 10\nb = 3.14\nc = \"hello\"\nd = True\nprint(type(a))  # <class 'int'>\nprint(type(b))  # <class 'float'>\nprint(type(c))  # <class 'str'>\nprint(type(d))  # <class 'bool'>\n```\n\n### 範例 3：多重賦值與交換\n```python\na, b = 5, 10\nprint(a, b)    # 5 10\na, b = b, a    # 交換\nprint(a, b)    # 10 5\n```\n\n### 範例 4：動態型別示範\n```python\nx = 10\nprint(type(x))  # <class 'int'>\nx = \"hello\"\nprint(type(x))  # <class 'str'>\n# 同一個變數可以改變型態\n```\n\n### 範例 5：整數除法 vs 浮點數除法\n```python\na = 7\nb = 2\nprint(a / b)   # 3.5 (float)\nprint(a // b)  # 3   (int)\nprint(type(a / b))   # <class 'float'>\nprint(type(a // b))  # <class 'int'>\n```\n\n## 三、練習題（5 題，難度遞增）\n\n### 第 1 題 [難度：1 星]\n**題目：** 請宣告三個變數分別儲存你的名字（字串）、年齡（整數）、身高（浮點數），並印出它們的值和型態。\n**範例輸出：**\n```\nAlice 15 165.5\n<class 'str'> <class 'int'> <class 'float'>\n```\n**解答：**\n```python\nname = \"Alice\"\nage = 15\nheight = 165.5\nprint(name, age, height)\nprint(type(name), type(age), type(height))\n```\n\n### 第 2 題 [難度：2 星]\n**題目：** 讀入兩個整數 a 和 b，印出它們的和、差、積。\n**範例輸入：** `5 3`\n**範例輸出：**\n```\n8\n2\n15\n```\n**解答：**\n```python\na, b = map(int, input().split())\nprint(a + b)\nprint(a - b)\nprint(a * b)\n```\n\n### 第 3 題 [難度：3 星]\n**題目：** 讀入一個三位數整數，分別印出它的百位、十位、個位數字。\n**範例輸入：** `256`\n**範例輸出：**\n```\n2 5 6\n```\n**解答：**\n```python\nn = int(input())\na = n // 100\nb = (n // 10) % 10\nc = n % 10\nprint(a, b, c)\n```\n\n### 第 4 題 [難度：4 星]\n**題目：** 讀入兩個整數，交換它們的值後印出。不能使用第三個變數（提示：Python 有特殊語法）。\n**範例輸入：** `10 20`\n**範例輸出：**\n```\n20 10\n```\n**解答：**\n```python\na, b = map(int, input().split())\na, b = b, a\nprint(a, b)\n```\n\n### 第 5 題 [難度：5 星]\n**題目：** 讀入一個整數秒數 s（0 <= s <= 86400），轉換為「時:分:秒」的格式輸出。\n**範例輸入：** `3661`\n**範例輸出：**\n```\n1:1:1\n```\n**解答：**\n```python\ns = int(input())\nh = s // 3600\nm = (s % 3600) // 60\nsec = s % 60\nprint(f\"{h}:{m}:{sec}\")\n```\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n### 陷阱 1：字串和數字相加\n```python\n# 錯誤\nage = 15\nprint(\"我今年\" + age + \"歲\")  # TypeError\n\n# 正確\nprint(\"我今年\" + str(age) + \"歲\")\nprint(f\"我今年{age}歲\")  # 更推薦\n```\n\n### 陷阱 2：布林值大小寫\n```python\n# 錯誤\nx = true   # NameError\n\n# 正確\nx = True\n```\n\n### 陷阱 3：/ 和 // 的差別\n```python\n# 容易搞混\nprint(7 / 2)   # 3.5（浮點數除法）\nprint(7 // 2)  # 3（整數除法）\n# APCS 題目通常要整數結果，記得用 //\n```\n\n### 陷阱 4：用關鍵字當變數名\n```python\n# 錯誤\nlist = [1, 2, 3]  # 覆蓋了內建的 list\nprint(list(\"abc\"))  # TypeError\n\n# 正確\nmy_list = [1, 2, 3]\nprint(list(\"abc\"))  # ['a', 'b', 'c']\n```\n\n## 五、APCS 考題連結\n\n### 出題模式：\n- Level 1 的變數與型態觀念通常不會單獨出題，但會作為所有題目的基礎。\n- 常見結合方式：讀入數字後做簡單的數學運算（如分離位數、單位換算）。\n\n### 歷屆相關題目：\n- **APCS 2016/03 第 1 題「成績指標」**：需要讀入整數並進行比較，考驗變數使用與輸入處理。\n- **APCS 2017/03 第 1 題「秘密差」**：需要分離數字的各位數，直接考驗整數除法與取餘數的觀念。\n- **APCS 2019/06 第 1 題「籃球比賽」**：讀入多筆數值資料，考驗多重賦值與型態處理。\n- 幾乎每次 APCS 的第 1 題都會用到基本的變數宣告、輸入與簡單運算，是本知識點的直接應用。"
         },
         {
           "id": "l1_operator",
           "title": "運算子與表達式",
           "desc": "算術、比較與邏輯運算子的使用",
           "implementation": "注意運算子優先順序，善用括號避免歧義",
-          "py_syntax": ["+", "-", "*", "//", "%", "**", "==", "!=", "and", "or", "not"],
-          "common_pitfalls": ["混淆 = (賦值) 與 == (比較)", "% 取餘數搭配負數時結果可能不如預期"],
+          "py_syntax": [
+            "+",
+            "-",
+            "*",
+            "//",
+            "%",
+            "**",
+            "==",
+            "!=",
+            "and",
+            "or",
+            "not"
+          ],
+          "common_pitfalls": [
+            "混淆 = (賦值) 與 == (比較)",
+            "% 取餘數搭配負數時結果可能不如預期",
+            "** 次方運算子的優先順序很高，-2**2 結果是 -4 而非 4，因為先算 2**2 再取負號",
+            "整數除法 // 搭配負數會向下取整，例如 -7 // 2 結果是 -4 而非 -3",
+            "連續比較 1 < x < 10 在 Python 中合法，但在 C/Java 中不行，遷移時要注意",
+            "and 和 or 具有短路求值特性，如果左邊已經能決定結果就不會執行右邊",
+            "not 的優先順序低於比較運算子，not x == y 等同於 not (x == y) 而非 (not x) == y"
+          ],
           "mini_examples": [
             {
               "title": "常用運算範例",
               "type": "code",
               "content": "a, b = 17, 5\nprint(a // b)  # 3 (整數除法)\nprint(a % b)   # 2 (取餘數)\nprint(a ** 2)  # 289 (次方)"
+            },
+            {
+              "title": "比較與邏輯運算",
+              "type": "code",
+              "content": "x = 15\nprint(x > 10 and x < 20)  # True\nprint(10 < x < 20)        # True (Python 連續比較)\nprint(not (x == 15))       # False"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位親切的 Python 家教老師，專門教 APCS 考生「運算子與表達式」的觀念。請按照以下結構進行教學：\n\n## 一、觀念講解（由淺入深，搭配生活化比喻）\n\n### 1. 什麼是運算子？\n運算子就像數學課本裡的「符號」，告訴電腦要對資料做什麼操作。就像食譜裡的指令：「切」、「攪拌」、「加熱」，運算子告訴 Python 要「加」、「減」、「比較」。\n\n### 2. 算術運算子（基本計算器）\n想像你有一台超級計算機：\n- `+` `-` `*`：基本的加減乘，跟數學課一樣。\n- `/`：普通除法，結果一定有小數點。就像把一塊披薩均分，可能會有零頭。\n- `//`：整數除法，只取整數部分。就像發糖果，7 顆糖分給 2 人，每人拿 3 顆。\n- `%`：取餘數，就像發完糖果剩下的。7 顆糖分給 2 人，剩 1 顆。\n- `**`：次方，2**3 就是 2 的 3 次方 = 8。就像連續乘法的快捷鍵。\n\n### 3. 比較運算子（裁判哨子）\n比較運算子就像球賽裁判，判斷結果只有兩種：True（成立）或 False（不成立）。\n- `==`：兩邊相等嗎？注意有兩個等號！\n- `!=`：兩邊不相等嗎？\n- `>` `<` `>=` `<=`：大於、小於、大於等於、小於等於。\n\n### 4. 邏輯運算子（門禁系統）\n想像一個需要多重驗證的門禁：\n- `and`：兩個條件都要滿足才放行。就像「要有門禁卡 AND 輸入密碼正確」才能進入。\n- `or`：只要一個條件滿足就放行。就像「有鑰匙 OR 有門禁卡」就能開門。\n- `not`：反轉結果。就像「非 VIP」= 不是 VIP。\n\n### 5. 運算子優先順序\n就像數學的「先乘除後加減」，Python 也有優先順序：\n`**` > `* / // %` > `+ -` > `比較運算子` > `not` > `and` > `or`\n不確定的時候，加括號最安全！\n\n## 二、Python 語法與程式碼範例（由簡到難）\n\n### 範例 1：基本算術\n```python\nprint(3 + 4)    # 7\nprint(10 - 3)   # 7\nprint(2 * 6)    # 12\nprint(10 / 3)   # 3.333...\nprint(10 // 3)  # 3\nprint(10 % 3)   # 1\n```\n\n### 範例 2：次方與開根號\n```python\nprint(2 ** 10)     # 1024\nprint(9 ** 0.5)    # 3.0（開根號）\nprint(pow(2, 10))  # 1024（等同 2**10）\n```\n\n### 範例 3：比較運算\n```python\na, b = 5, 10\nprint(a == b)   # False\nprint(a != b)   # True\nprint(a < b)    # True\nprint(a >= 5)   # True\n```\n\n### 範例 4：邏輯運算組合\n```python\nscore = 85\nattendance = 90\n# 成績 >= 80 且出席率 >= 80 才及格\npassed = score >= 80 and attendance >= 80\nprint(passed)  # True\n```\n\n### 範例 5：運算子優先順序實例\n```python\n# 不加括號\nresult = 2 + 3 * 4    # 14（先乘後加）\n# 加括號改變順序\nresult = (2 + 3) * 4  # 20\n# 次方優先順序最高\nresult = -2 ** 2      # -4（先算 2**2=4，再取負號）\nresult = (-2) ** 2    # 4（先取負號，再算次方）\n```\n\n## 三、練習題（5 題，難度遞增）\n\n### 第 1 題 [難度：1 星]\n**題目：** 讀入兩個整數 a 和 b，印出 a 除以 b 的商和餘數。\n**範例輸入：** `17 5`\n**範例輸出：**\n```\n3 2\n```\n**解答：**\n```python\na, b = map(int, input().split())\nprint(a // b, a % b)\n```\n\n### 第 2 題 [難度：2 星]\n**題目：** 讀入三個整數，判斷是否能構成三角形（任意兩邊之和大於第三邊），印出 True 或 False。\n**範例輸入：** `3 4 5`\n**範例輸出：** `True`\n**解答：**\n```python\na, b, c = map(int, input().split())\nprint(a + b > c and a + c > b and b + c > a)\n```\n\n### 第 3 題 [難度：3 星]\n**題目：** 讀入一個年份，判斷是否為閏年。閏年條件：能被 4 整除但不能被 100 整除，或者能被 400 整除。\n**範例輸入：** `2024`\n**範例輸出：** `True`\n**解答：**\n```python\ny = int(input())\nprint(y % 400 == 0 or (y % 4 == 0 and y % 100 != 0))\n```\n\n### 第 4 題 [難度：4 星]\n**題目：** 讀入三個整數 a, b, c，計算一元二次方程式 ax^2 + bx + c = 0 的判別式 D = b^2 - 4ac，並判斷有幾個實數根（D > 0 兩個，D == 0 一個，D < 0 零個）。\n**範例輸入：** `1 -3 2`\n**範例輸出：**\n```\nD = 1\n2 real roots\n```\n**解答：**\n```python\na, b, c = map(int, input().split())\nD = b ** 2 - 4 * a * c\nprint(f\"D = {D}\")\nif D > 0:\n    print(\"2 real roots\")\nelif D == 0:\n    print(\"1 real root\")\nelse:\n    print(\"0 real roots\")\n```\n\n### 第 5 題 [難度：5 星]\n**題目：** 讀入一個正整數 n，判斷 n 是否為 2 的冪次（1, 2, 4, 8, 16, ...）。請使用位元運算的觀念：2 的冪次在二進位中只有一個 1，所以 n & (n - 1) == 0。\n**範例輸入：** `16`\n**範例輸出：** `True`\n**範例輸入：** `12`\n**範例輸出：** `False`\n**解答：**\n```python\nn = int(input())\nprint(n > 0 and n & (n - 1) == 0)\n```\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n### 陷阱 1：= 與 == 搞混\n```python\n# 錯誤\nif x = 10:   # SyntaxError（這是賦值，不是比較）\n\n# 正確\nif x == 10:  # 比較是否相等\n```\n\n### 陷阱 2：負數的整數除法\n```python\n# 容易搞錯\nprint(-7 // 2)   # -4（向下取整，不是 -3）\nprint(-7 % 2)    # 1（不是 -1）\n# Python 的 // 永遠向下取整（floor division）\n```\n\n### 陷阱 3：次方的優先順序\n```python\n# 錯誤理解\nresult = -3 ** 2   # 結果是 -9，不是 9\n# 因為 ** 優先於負號\n\n# 正確寫法\nresult = (-3) ** 2  # 9\n```\n\n### 陷阱 4：浮點數比較\n```python\n# 錯誤\nprint(0.1 + 0.2 == 0.3)  # False！\n\n# 正確\nprint(abs(0.1 + 0.2 - 0.3) < 1e-9)  # True\n```\n\n## 五、APCS 考題連結\n\n### 出題模式：\n- 運算子是所有 APCS 程式題的基礎，幾乎每題都會用到。\n- 常見考法：取餘數判斷奇偶、整除判斷倍數、邏輯運算組合多條件。\n- Level 1 題目常考「位數分離」（用 // 和 % 拆解數字）。\n\n### 歷屆相關題目：\n- **APCS 2017/03 第 1 題「秘密差」**：用 // 和 % 分離數字的各位數並求差值，直接考運算子。\n- **APCS 2016/10 第 1 題「三角形判斷」**：比較運算子加上邏輯 and 的典型應用。\n- **APCS 2019/10 第 1 題「小群體」**：需用到比較運算與邏輯判斷。\n- **APCS 2020/10 第 1 題**：基本數學運算搭配條件判斷。"
         },
         {
           "id": "l1_condition",
           "title": "條件判斷",
           "desc": "使用 if-elif-else 控制程式流程",
           "implementation": "注意縮排一致性，Python 以縮排定義區塊",
-          "py_syntax": ["if", "elif", "else", "if...and...", "if...or..."],
-          "common_pitfalls": ["忘記冒號 (:) 導致 SyntaxError", "縮排混用 Tab 與空格"],
+          "py_syntax": [
+            "if",
+            "elif",
+            "else",
+            "if...and...",
+            "if...or..."
+          ],
+          "common_pitfalls": [
+            "忘記冒號 (:) 導致 SyntaxError",
+            "縮排混用 Tab 與空格",
+            "elif 寫成 else if（這是 C/Java 語法，Python 不接受）",
+            "多個 if 和 if-elif-else 的差異：多個 if 每個都會判斷，elif 只在前面不成立時才判斷",
+            "條件順序錯誤導致邏輯錯誤，例如先判斷 >= 60 再判斷 >= 90，會讓 90 分以上的人落入 >= 60 的區塊",
+            "忘記 else 分支導致某些情況沒有處理到",
+            "巢狀 if 太多層導致可讀性差，應考慮用 elif 或邏輯運算子簡化"
+          ],
           "mini_examples": [
             {
               "title": "成績等第判斷",
               "type": "code",
               "content": "score = int(input())\nif score >= 90:\n    print('A')\nelif score >= 80:\n    print('B')\nelif score >= 70:\n    print('C')\nelse:\n    print('F')"
+            },
+            {
+              "title": "奇偶數判斷",
+              "type": "code",
+              "content": "n = int(input())\nif n % 2 == 0:\n    print('偶數')\nelse:\n    print('奇數')"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位親切的 Python 家教老師，專門教 APCS 考生「條件判斷」的觀念。請按照以下結構進行教學：\n\n## 一、觀念講解（由淺入深，搭配生活化比喻）\n\n### 1. 什麼是條件判斷？\n條件判斷就像生活中的「如果...就...」思維。\n- 出門前看天氣：「如果下雨，就帶傘；否則就不帶。」\n- 買飲料：「如果有 50 元，就買珍奶；如果只有 30 元，就買紅茶；否則就喝水。」\n\n### 2. if 敘述（最基本的岔路口）\n就像走路遇到岔路口：如果條件成立，走這條路；不成立就跳過。\n```python\nif 條件:\n    做某件事\n```\n\n### 3. if-else（二選一的岔路口）\n像十字路口只能左轉或右轉：\n```python\nif 條件:\n    做 A 事\nelse:\n    做 B 事\n```\n\n### 4. if-elif-else（多選一的圓環）\n像一個有多個出口的圓環，只能選一個出口離開：\n```python\nif 條件1:\n    做 A\nelif 條件2:\n    做 B\nelif 條件3:\n    做 C\nelse:\n    做 D\n```\n重點：一旦某個條件成立，後面的都不會再檢查！\n\n### 5. 巢狀 if（門中門）\n就像闖關遊戲，通過第一道門之後才能看到第二道門：\n```python\nif 外層條件:\n    if 內層條件:\n        做某事\n```\n\n### 6. 縮排的重要性\nPython 用「縮排」來決定程式區塊，就像整理房間的抽屜——同一層的東西要對齊放好。縮排不對，Python 就會搞混哪些程式碼屬於 if 區塊。\n\n## 二、Python 語法與程式碼範例（由簡到難）\n\n### 範例 1：基本 if 判斷\n```python\nage = 18\nif age >= 18:\n    print(\"已成年\")\n```\n\n### 範例 2：if-else 判斷奇偶\n```python\nn = int(input())\nif n % 2 == 0:\n    print(\"偶數\")\nelse:\n    print(\"奇數\")\n```\n\n### 範例 3：if-elif-else 成績判定\n```python\nscore = int(input())\nif score >= 90:\n    print(\"優等\")\nelif score >= 80:\n    print(\"甲等\")\nelif score >= 70:\n    print(\"乙等\")\nelif score >= 60:\n    print(\"丙等\")\nelse:\n    print(\"不及格\")\n```\n\n### 範例 4：複合條件（and / or）\n```python\nyear = int(input())\nif (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:\n    print(\"閏年\")\nelse:\n    print(\"平年\")\n```\n\n### 範例 5：巢狀條件與邏輯簡化\n```python\n# 巢狀寫法（較冗長）\nx = int(input())\nif x > 0:\n    if x % 2 == 0:\n        print(\"正偶數\")\n    else:\n        print(\"正奇數\")\nelse:\n    print(\"非正數\")\n\n# 簡化寫法\nif x > 0 and x % 2 == 0:\n    print(\"正偶數\")\nelif x > 0:\n    print(\"正奇數\")\nelse:\n    print(\"非正數\")\n```\n\n## 三、練習題（5 題，難度遞增）\n\n### 第 1 題 [難度：1 星]\n**題目：** 讀入一個整數，判斷它是正數、負數還是零。\n**範例輸入：** `-5`\n**範例輸出：** `negative`\n**解答：**\n```python\nn = int(input())\nif n > 0:\n    print(\"positive\")\nelif n < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\n### 第 2 題 [難度：2 星]\n**題目：** 讀入三個整數，印出最大值。\n**範例輸入：** `3 7 5`\n**範例輸出：** `7`\n**解答：**\n```python\na, b, c = map(int, input().split())\nif a >= b and a >= c:\n    print(a)\nelif b >= c:\n    print(b)\nelse:\n    print(c)\n```\n\n### 第 3 題 [難度：3 星]\n**題目：** 讀入一個西元年份，判斷該年的二月有幾天（閏年 29 天，平年 28 天）。\n**範例輸入：** `2000`\n**範例輸出：** `29`\n**解答：**\n```python\ny = int(input())\nif (y % 4 == 0 and y % 100 != 0) or y % 400 == 0:\n    print(29)\nelse:\n    print(28)\n```\n\n### 第 4 題 [難度：4 星]\n**題目：** 讀入四個整數代表兩個時間點（時1 分1 時2 分2），計算從第一個時間到第二個時間經過幾分鐘。保證第二個時間不早於第一個。\n**範例輸入：** `2 30 4 15`\n**範例輸出：** `105`\n**解答：**\n```python\nh1, m1, h2, m2 = map(int, input().split())\ntotal1 = h1 * 60 + m1\ntotal2 = h2 * 60 + m2\nprint(total2 - total1)\n```\n\n### 第 5 題 [難度：5 星]\n**題目：** BMI 計算器。讀入體重（公斤，浮點數）和身高（公分，整數），計算 BMI = 體重 / (身高/100)^2，並根據以下標準判斷：BMI < 18.5 為「過輕」，18.5 <= BMI < 24 為「正常」，24 <= BMI < 27 為「過重」，BMI >= 27 為「肥胖」。輸出 BMI（取到小數點後一位）和判斷結果。\n**範例輸入：** `65.0 170`\n**範例輸出：**\n```\nBMI: 22.5\n正常\n```\n**解答：**\n```python\nw = float(input())\nh = int(input())\nbmi = w / (h / 100) ** 2\nprint(f\"BMI: {bmi:.1f}\")\nif bmi < 18.5:\n    print(\"過輕\")\nelif bmi < 24:\n    print(\"正常\")\nelif bmi < 27:\n    print(\"過重\")\nelse:\n    print(\"肥胖\")\n```\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n### 陷阱 1：忘記冒號\n```python\n# 錯誤\nif x > 0\n    print(\"正數\")  # SyntaxError\n\n# 正確\nif x > 0:\n    print(\"正數\")\n```\n\n### 陷阱 2：條件順序錯誤\n```python\n# 錯誤（90 分也會被第一個條件攔截）\nif score >= 60:\n    print(\"及格\")\nelif score >= 90:\n    print(\"優等\")  # 永遠不會執行到\n\n# 正確（從最嚴格的條件開始）\nif score >= 90:\n    print(\"優等\")\nelif score >= 60:\n    print(\"及格\")\nelse:\n    print(\"不及格\")\n```\n\n### 陷阱 3：多個 if vs if-elif\n```python\n# 多個 if（每個都會判斷）\nx = 95\nif x >= 90:\n    print(\"A\")  # 印出\nif x >= 80:\n    print(\"B\")  # 也會印出！\n\n# if-elif（只走一個分支）\nif x >= 90:\n    print(\"A\")  # 只印這個\nelif x >= 80:\n    print(\"B\")  # 不會印\n```\n\n### 陷阱 4：else if 不是 Python 語法\n```python\n# 錯誤\nif x > 0:\n    print(\"正\")\nelse if x < 0:   # SyntaxError\n    print(\"負\")\n\n# 正確\nif x > 0:\n    print(\"正\")\nelif x < 0:\n    print(\"負\")\n```\n\n## 五、APCS 考題連結\n\n### 出題模式：\n- 條件判斷是 APCS 觀念題與實作題的核心，每次必考。\n- 觀念題常考：程式碼追蹤（trace code），給一段 if-elif-else 程式碼，問輸出是什麼。\n- 實作題常見：分類問題（成績分等、日期判斷）、求最大最小值。\n\n### 歷屆相關題目：\n- **APCS 2016/03 第 1 題「成績指標」**：if-elif-else 判斷成績等級。\n- **APCS 2017/10 觀念題**：多組 if-elif-else 的程式碼追蹤。\n- **APCS 2018/06 第 1 題「票價計算」**：根據不同年齡與身分計算票價，考驗多條件組合。\n- **APCS 2020/01 第 1 題「購物車折扣」**：巢狀條件判斷的典型應用。"
+        },
+        {
+          "id": "l1_io_basic",
+          "title": "基礎輸入輸出",
+          "desc": "使用 input() 讀取資料與 print() 輸出結果，處理 APCS 標準格式",
+          "implementation": "input() 回傳字串，需搭配 int() 或 split() 轉換；print() 預設換行，可用 end 和 sep 參數控制格式",
+          "py_syntax": [
+            "input()",
+            "print()",
+            "split()",
+            "map()",
+            "int()",
+            "f-string"
+          ],
+          "common_pitfalls": [
+            "input() 讀進來的永遠是字串，忘記轉型就直接做數學運算會出錯或得到意外結果",
+            "用 split() 切割後忘記用 map(int, ...) 轉型，導致拿到的是字串串列",
+            "print() 預設會在結尾加換行，如果不要換行需用 end='' 參數",
+            "print() 多個值之間預設用空格分隔，要改用其他分隔符需設定 sep 參數",
+            "讀取多行輸入時，忘記每次 input() 只讀一行",
+            "APCS 的輸出格式要求嚴格，多一個空格或少一個換行都可能被判 PE（Presentation Error）",
+            "f-string 中的大括號 {} 如果要印出字面的大括號，需寫成 {{ 和 }}"
+          ],
+          "mini_examples": [
+            {
+              "title": "讀取單行多個整數",
+              "type": "code",
+              "content": "a, b = map(int, input().split())\nprint(a + b)"
+            },
+            {
+              "title": "格式化輸出",
+              "type": "code",
+              "content": "name = input()\nscore = int(input())\nprint(f\"{name} 的成績是 {score} 分\")"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位親切的 Python 家教老師，專門教 APCS 考生「基礎輸入輸出」的觀念。請按照以下結構進行教學：\n\n## 一、觀念講解（由淺入深，搭配生活化比喻）\n\n### 1. 什麼是輸入輸出？\n想像你在和電腦對話：\n- **輸入（Input）**就像你「說話」給電腦聽——把資料餵進去。\n- **輸出（Output）**就像電腦「回話」給你——把結果顯示出來。\n就像自動販賣機：你投幣（輸入）、按按鈕選飲料（輸入），機器掉出飲料（輸出）。\n\n### 2. input()：聽你說話\n`input()` 就像電腦豎起耳朵，等你打字。打完按 Enter，電腦就收到了。\n重點：電腦收到的永遠是「文字」（字串），即使你打數字，對電腦來說也是一串文字。就像你在紙上寫「123」，電腦看到的是三個字元 '1', '2', '3'，不是數字一百二十三。\n\n### 3. print()：電腦回話\n`print()` 就像電腦拿起麥克風，把結果唸出來。\n- 預設每次 print 完會換行（就像每句話講完會停頓）。\n- 多個東西用逗號隔開，會自動加空格（就像詞和詞之間有空格）。\n\n### 4. 型態轉換的重要性\n因為 input() 總是給你字串，如果要做數學運算就得「翻譯」成數字：\n- `int(input())`：翻譯成整數。\n- `float(input())`：翻譯成浮點數。\n就像收到英文信要先翻譯成中文才能理解意思。\n\n### 5. split() 與 map()：一次讀多個值\n如果一行有多個值用空格隔開，就像收到一句包含多個單字的句子：\n- `split()` 負責「斷詞」，把一長串文字切成一個個單字。\n- `map(int, ...)` 負責「批量翻譯」，把每個單字都轉成整數。\n就像翻譯一整句英文，先把每個單字拆開，再一個一個翻譯。\n\n## 二、Python 語法與程式碼範例（由簡到難）\n\n### 範例 1：最基本的輸入輸出\n```python\nname = input()\nprint(\"Hello\", name)\n```\n\n### 範例 2：讀取一個整數\n```python\nn = int(input())\nprint(n * 2)\n```\n\n### 範例 3：一行讀取多個整數\n```python\na, b, c = map(int, input().split())\nprint(a + b + c)\n```\n\n### 範例 4：控制輸出格式\n```python\n# sep 控制分隔符\nprint(1, 2, 3, sep=',')\n# 輸出：1,2,3\n\n# end 控制結尾\nfor i in range(5):\n    print(i, end=' ')\n# 輸出：0 1 2 3 4 \n```\n\n### 範例 5：f-string 格式化\n```python\nname = \"Alice\"\nscore = 87.5\nprint(f\"{name} 得了 {score:.1f} 分\")\n# 輸出：Alice 得了 87.5 分\n\n# 控制寬度與對齊\nfor i in range(1, 4):\n    print(f\"{i:3d} x {i:3d} = {i*i:5d}\")\n# 輸出：\n#   1 x   1 =     1\n#   2 x   2 =     4\n#   3 x   3 =     9\n```\n\n## 三、練習題（5 題，難度遞增）\n\n### 第 1 題 [難度：1 星]\n**題目：** 讀入一個人的名字，印出 \"Hello, [名字]!\"。\n**範例輸入：** `Alice`\n**範例輸出：** `Hello, Alice!`\n**解答：**\n```python\nname = input()\nprint(f\"Hello, {name}!\")\n```\n\n### 第 2 題 [難度：2 星]\n**題目：** 讀入兩個整數 a 和 b（同一行，空格隔開），印出它們的和。\n**範例輸入：** `3 5`\n**範例輸出：** `8`\n**解答：**\n```python\na, b = map(int, input().split())\nprint(a + b)\n```\n\n### 第 3 題 [難度：3 星]\n**題目：** 第一行讀入整數 n，第二行讀入 n 個整數（空格隔開），印出這些整數的總和與平均（平均取到小數點後兩位）。\n**範例輸入：**\n```\n4\n10 20 30 40\n```\n**範例輸出：**\n```\n100\n25.00\n```\n**解答：**\n```python\nn = int(input())\nnums = list(map(int, input().split()))\ntotal = sum(nums)\nprint(total)\nprint(f\"{total / n:.2f}\")\n```\n\n### 第 4 題 [難度：4 星]\n**題目：** 讀入 n 行，每行兩個整數，將每行兩個數的乘積印出，每個乘積之間用逗號加空格隔開（最後一個數字後面不要有逗號）。\n**範例輸入：**\n```\n3\n2 3\n4 5\n6 7\n```\n**範例輸出：** `6, 20, 42`\n**解答：**\n```python\nn = int(input())\nresults = []\nfor _ in range(n):\n    a, b = map(int, input().split())\n    results.append(a * b)\nprint(', '.join(map(str, results)))\n```\n\n### 第 5 題 [難度：5 星]\n**題目：** 模擬 APCS 考試的輸入格式。第一行為兩個整數 R 和 C，接下來 R 行每行 C 個整數，形成一個矩陣。請印出矩陣的轉置（行列互換）。\n**範例輸入：**\n```\n2 3\n1 2 3\n4 5 6\n```\n**範例輸出：**\n```\n1 4\n2 5\n3 6\n```\n**解答：**\n```python\nR, C = map(int, input().split())\nmatrix = []\nfor _ in range(R):\n    row = list(map(int, input().split()))\n    matrix.append(row)\nfor c in range(C):\n    row_out = []\n    for r in range(R):\n        row_out.append(str(matrix[r][c]))\n    print(' '.join(row_out))\n```\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n### 陷阱 1：忘記轉型\n```python\n# 錯誤\na = input()  # 使用者輸入 \"5\"\nb = input()  # 使用者輸入 \"3\"\nprint(a + b)  # 輸出 \"53\"（字串相接，不是數學加法）\n\n# 正確\na = int(input())\nb = int(input())\nprint(a + b)  # 輸出 8\n```\n\n### 陷阱 2：split() 後忘記 map\n```python\n# 錯誤\na, b = input().split()\nprint(a + b)  # \"5\" + \"3\" = \"53\"\n\n# 正確\na, b = map(int, input().split())\nprint(a + b)  # 8\n```\n\n### 陷阱 3：輸出格式不符\n```python\n# 題目要求每個數字之間用空格隔開，最後沒有空格\nnums = [1, 2, 3]\n\n# 錯誤（最後多一個空格）\nfor n in nums:\n    print(n, end=' ')\n\n# 正確\nprint(' '.join(map(str, nums)))\n# 或者\nprint(*nums)\n```\n\n## 五、APCS 考題連結\n\n### 出題模式：\n- 每一題 APCS 實作題都需要正確的輸入輸出處理。\n- 常見格式：第一行給 n（資料筆數），後續 n 行為資料。\n- 輸出格式必須完全吻合，多餘的空格、換行都會被判錯。\n\n### 歷屆相關題目：\n- **每屆 APCS 實作題的第 1 題**都會考驗基本的 input/output 處理能力。\n- **APCS 2016/03 第 1 題「成績指標」**：讀入 n 筆成績、排序後輸出，考驗多行輸入的處理。\n- **APCS 2018/10 第 1 題**：讀入特定格式資料並做簡單計算後輸出。\n- 建議練習時特別注意「輸出格式」的要求，養成用 f-string 或 join() 精確控制輸出的習慣。"
+        },
+        {
+          "id": "l1_type_conversion",
+          "title": "型態轉換",
+          "desc": "在不同資料型態之間進行顯式轉換，確保運算與輸出正確",
+          "implementation": "使用 int()、float()、str()、bool() 進行顯式轉型；注意轉換失敗會拋出 ValueError，APCS 測資通常不需要例外處理但觀念要清楚",
+          "py_syntax": [
+            "int()",
+            "float()",
+            "str()",
+            "bool()",
+            "ord()",
+            "chr()"
+          ],
+          "common_pitfalls": [
+            "int('3.14') 會報錯（ValueError），必須先用 float() 再用 int()，即 int(float('3.14'))",
+            "int() 轉換浮點數是無條件捨去（truncate），不是四捨五入，例如 int(3.9) 得到 3",
+            "bool() 轉換時，0、0.0、空字串 ''、空串列 [] 都是 False，其他幾乎都是 True",
+            "字串轉整數時如果字串包含空格或換行符號，要先用 strip() 清除，否則可能出錯",
+            "混淆 str(123) 和 int('123') 的方向，一個是數字變文字，一個是文字變數字",
+            "把非數字字串傳給 int() 會拋出 ValueError，例如 int('abc') 直接崩潰",
+            "float 轉 int 的精度問題：int(0.1 + 0.2) 的結果可能不如預期，建議用 round() 再轉"
+          ],
+          "mini_examples": [
+            {
+              "title": "基本型態轉換",
+              "type": "code",
+              "content": "x = '42'\nn = int(x)       # 字串轉整數\nf = float(x)     # 字串轉浮點數\ns = str(n)       # 整數轉字串\nprint(n, f, s)   # 42 42.0 42"
+            },
+            {
+              "title": "ASCII 字元轉換",
+              "type": "code",
+              "content": "print(ord('A'))   # 65\nprint(chr(65))    # A\nprint(chr(ord('a') + 3))  # d（字母位移）"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位親切的 Python 家教老師，專門教 APCS 考生「型態轉換」的觀念。請按照以下結構進行教學：\n\n## 一、觀念講解（由淺入深，搭配生活化比喻）\n\n### 1. 為什麼需要型態轉換？\n想像你有一張紙，上面寫著「100」。這個「100」到底是一個數字（可以拿來計算），還是一段文字（只是三個字元 1, 0, 0）？在 Python 裡，兩者是完全不同的東西。\n型態轉換就像「翻譯官」，幫你把「文字版的數字」翻譯成「真正的數字」，反之亦然。\n\n### 2. 常見的轉換函式（翻譯官們）\n- **int()**：把東西翻譯成整數。就像把零錢換成整數金額，小數點以下直接砍掉。\n  - `int('42')` 把文字 '42' 變成數字 42\n  - `int(3.7)` 把 3.7 砍成 3（不是四捨五入！）\n- **float()**：把東西翻譯成浮點數。就像把整數金額算到小數點。\n  - `float('3.14')` 變成 3.14\n  - `float(5)` 變成 5.0\n- **str()**：把東西翻譯成字串。就像把數字寫在紙上變成文字。\n  - `str(42)` 變成 '42'\n- **bool()**：把東西翻譯成布林值。就像問「這個東西存在嗎？」\n  - 空的、零的就是 False，其他都是 True。\n\n### 3. ord() 和 chr()：字元的身分證號碼\n每個字元在電腦裡都有一個編號（ASCII 碼），就像每個人都有身分證字號：\n- `ord('A')` 回傳 65（A 的身分證號碼）\n- `chr(65)` 回傳 'A'（65 號是誰？是 A！）\n這在處理字母位移、加密問題時超級好用。\n\n### 4. 隱式轉換 vs 顯式轉換\n- **隱式轉換**：Python 自動幫你轉。例如 `3 + 2.0` 會自動把 3 變成 3.0。就像你用台幣和美元混著算，計算機自動幫你換匯。\n- **顯式轉換**：你自己動手轉。例如 `int('42')`。就像你自己去銀行換外幣。\n\n### 5. 轉換可能失敗！\n如果翻譯官看不懂，就會報錯。例如 `int('hello')` 就像把「你好」翻譯成數字，翻譯官會說「我做不到！」（ValueError）。\n\n## 二、Python 語法與程式碼範例（由簡到難）\n\n### 範例 1：字串轉整數\n```python\ns = input()       # 讀進來是字串\nn = int(s)         # 轉成整數\nprint(n + 1)       # 可以做數學運算了\n```\n\n### 範例 2：浮點數轉整數（注意截斷）\n```python\nprint(int(3.9))    # 3（直接截斷，不是四捨五入）\nprint(int(-3.9))   # -3（往零的方向截斷）\nprint(round(3.5))  # 4（四捨五入用 round）\n```\n\n### 範例 3：bool() 的轉換規則\n```python\nprint(bool(0))      # False\nprint(bool(1))      # True\nprint(bool(-1))     # True\nprint(bool(''))     # False（空字串）\nprint(bool('hi'))   # True（非空字串）\nprint(bool([]))     # False（空串列）\nprint(bool([0]))    # True（非空串列，即使內容是 0）\n```\n\n### 範例 4：ord / chr 字母運算\n```python\n# 把大寫字母轉成小寫\nch = 'C'\nlower_ch = chr(ord(ch) + 32)\nprint(lower_ch)  # c\n\n# 判斷字元是否為大寫字母\nprint(ord('A') <= ord(ch) <= ord('Z'))  # True\n```\n\n### 範例 5：安全的型態轉換鏈\n```python\n# 字串 -> float -> int（分兩步）\ns = '3.14'\n# int(s) 會報錯！\nn = int(float(s))  # 先轉 float 再轉 int\nprint(n)  # 3\n\n# 四捨五入後再轉 int\nn = round(float(s))\nprint(n)  # 3\n```\n\n## 三、練習題（5 題，難度遞增）\n\n### 第 1 題 [難度：1 星]\n**題目：** 讀入一個字串形式的整數，印出它的兩倍。\n**範例輸入：** `25`\n**範例輸出：** `50`\n**解答：**\n```python\ns = input()\nprint(int(s) * 2)\n```\n\n### 第 2 題 [難度：2 星]\n**題目：** 讀入一個浮點數，分別印出無條件捨去和四捨五入到整數的結果。\n**範例輸入：** `3.7`\n**範例輸出：**\n```\n3\n4\n```\n**解答：**\n```python\nf = float(input())\nprint(int(f))\nprint(round(f))\n```\n\n### 第 3 題 [難度：3 星]\n**題目：** 讀入一個小寫英文字母，印出它的 ASCII 碼，以及該字母對應的大寫字母。\n**範例輸入：** `d`\n**範例輸出：**\n```\n100\nD\n```\n**解答：**\n```python\nch = input()\nprint(ord(ch))\nprint(chr(ord(ch) - 32))\n```\n\n### 第 4 題 [難度：4 星]\n**題目：** 讀入一個十進位整數 n（0 <= n <= 255），印出它的二進位、八進位、十六進位表示（不含前綴 0b, 0o, 0x）。\n**範例輸入：** `42`\n**範例輸出：**\n```\n101010\n52\n2a\n```\n**解答：**\n```python\nn = int(input())\nprint(bin(n)[2:])\nprint(oct(n)[2:])\nprint(hex(n)[2:])\n```\n\n### 第 5 題 [難度：5 星]\n**題目：** 凱薩密碼。讀入一個正整數 k（位移量）和一段全小寫英文字串 s，將每個字母向後位移 k 位（超過 z 則繞回 a），印出加密後的字串。\n**範例輸入：**\n```\n3\nabc xyz\n```\n**範例輸出：** `def abc`\n**解答：**\n```python\nk = int(input())\ns = input()\nresult = ''\nfor ch in s:\n    if 'a' <= ch <= 'z':\n        result += chr((ord(ch) - ord('a') + k) % 26 + ord('a'))\n    else:\n        result += ch\nprint(result)\n```\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n### 陷阱 1：int() 無法直接轉含小數點的字串\n```python\n# 錯誤\nprint(int('3.14'))  # ValueError!\n\n# 正確\nprint(int(float('3.14')))  # 3\n```\n\n### 陷阱 2：int() 是截斷不是四捨五入\n```python\n# 容易搞混\nprint(int(3.9))     # 3（不是 4！）\nprint(round(3.9))   # 4（四捨五入）\nprint(int(-3.9))    # -3（往零的方向截斷）\n```\n\n### 陷阱 3：bool() 的陷阱\n```python\n# 容易搞錯\nprint(bool('False'))  # True！因為 'False' 是非空字串\nprint(bool(''))       # False（空字串才是 False）\nprint(bool('0'))      # True！字串 '0' 不是數字 0\nprint(bool(0))        # False（數字 0 才是 False）\n```\n\n### 陷阱 4：字串拼接 vs 數字相加\n```python\nprint(str(1) + str(2))   # '12'（字串拼接）\nprint(int('1') + int('2'))  # 3（數字相加）\n# 想清楚你要哪一種！\n```\n\n## 五、APCS 考題連結\n\n### 出題模式：\n- 型態轉換在 APCS 中最常出現在「輸入處理」階段——把讀進來的字串轉成整數。\n- 字元處理（ord/chr）常在字串相關題目中出現，例如加密、字母位移。\n- 觀念題可能考 bool() 的轉換規則或 int() 的截斷行為。\n\n### 歷屆相關題目：\n- **APCS 2017/03 第 1 題「秘密差」**：需要將數字的各位數分離，涉及整數轉字串再逐字處理的技巧。\n- **APCS 觀念題常見考法**：給一段包含型態轉換的程式碼，問輸出結果（考驗對 int()、float() 行為的理解）。\n- **字串處理相關題**：經常需要用 ord() 和 chr() 來做字母的算術運算。"
+        },
+        {
+          "id": "l1_comment_style",
+          "title": "註解與程式風格",
+          "desc": "撰寫清晰的註解與遵循 Python 程式風格慣例，提升程式碼可讀性與維護性",
+          "implementation": "使用 # 撰寫單行註解，用三引號撰寫多行註解或文件字串；遵循 PEP 8 命名與排版慣例，在 APCS 考試中良好風格有助於減少除錯時間",
+          "py_syntax": [
+            "# 註解",
+            "\"\"\"docstring\"\"\"",
+            "'''多行字串'''",
+            "PEP 8",
+            "snake_case"
+          ],
+          "common_pitfalls": [
+            "註解內容只寫「做了什麼」而不寫「為什麼這樣做」，失去註解的價值",
+            "過度註解：每一行都寫註解反而降低可讀性，應只在關鍵邏輯處加註解",
+            "變數命名用 a, b, c, x, y 等無意義名稱，事後自己也看不懂",
+            "混用 camelCase 和 snake_case 命名風格，Python 慣例是用 snake_case",
+            "忘記在運算子前後加空格（如 x=x+1 應寫成 x = x + 1），降低可讀性",
+            "把測試用的 print() 留在最終版本中，導致 APCS 輸出格式錯誤",
+            "一行程式碼太長（超過 79 字元）卻不換行，不利閱讀與除錯"
+          ],
+          "mini_examples": [
+            {
+              "title": "良好的註解風格",
+              "type": "code",
+              "content": "# 讀取學生人數與成績\nn = int(input())\nscores = list(map(int, input().split()))\n\n# 計算平均分數（用 sum 避免手動迴圈）\navg = sum(scores) / n\n\n# 統計高於平均的人數\ncount = sum(1 for s in scores if s > avg)\nprint(count)"
+            },
+            {
+              "title": "好的變數命名 vs 差的變數命名",
+              "type": "code",
+              "content": "# 差的命名 - 看不出意義\na = 170\nb = 65\nc = b / (a / 100) ** 2\n\n# 好的命名 - 一目瞭然\nheight_cm = 170\nweight_kg = 65\nbmi = weight_kg / (height_cm / 100) ** 2"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位親切的 Python 家教老師，專門教 APCS 考生「註解與程式風格」的觀念。請按照以下結構進行教學：\n\n## 一、觀念講解（由淺入深，搭配生活化比喻）\n\n### 1. 為什麼需要註解？\n程式碼就像你寫的筆記。今天寫的東西，一個月後可能自己都看不懂。註解就像在筆記旁邊加的「小備註」，提醒自己（或別人）這段程式碼在做什麼、為什麼這樣寫。\n就像食譜上寫「中火煮 3 分鐘」旁邊加註「太大火會焦掉」，這個備註可以避免你下次犯錯。\n\n### 2. Python 的註解語法\n- **單行註解**：用 `#` 開頭，後面的內容 Python 會完全忽略。就像在句子前面畫叉叉，電腦就跳過不看。\n- **多行註解 / 文件字串**：用三個引號 `\"\"\"...\"\"\"` 或 `'''...'''` 包起來。通常放在函式開頭，說明這個函式的功能。就像書的序言，告訴讀者這本書在講什麼。\n\n### 3. 什麼是程式風格？\n程式風格就像寫作文的格式——你可以用任何方式寫出正確的程式，但好的格式讓人更容易閱讀。就像兩份報告，內容一樣，但一份排版整齊有標題分段，另一份擠成一團，你會想看哪一份？\n\n### 4. PEP 8：Python 的官方風格指南\nPEP 8 就像 Python 社群約定的「寫作規範」：\n- **變數命名**：用 `snake_case`（蛇形命名法），像蛇一樣用底線連接單字。例如 `student_name`，不是 `studentName`。\n- **空格**：運算子前後要空格，`x = x + 1` 而不是 `x=x+1`。就像中文標點後面要空格一樣。\n- **縮排**：統一用 4 個空格（不要用 Tab，或至少不要混用）。\n- **每行長度**：建議不超過 79 個字元。太長就像一句話不斷句，讀起來很累。\n\n### 5. 在 APCS 考試中的重要性\n雖然 APCS 不會評分程式風格，但好的風格能：\n- 讓你更快找到 bug（除錯時間減少）。\n- 避免因為看錯變數名稱而犯邏輯錯誤。\n- 考試時間有限，清晰的程式碼幫助你更快完成。\n就像考試時字跡工整的人通常比較不容易抄錯答案。\n\n## 二、Python 語法與程式碼範例（由簡到難）\n\n### 範例 1：單行註解\n```python\n# 這是一行註解，Python 會忽略它\nx = 10  # 也可以放在程式碼後面\n```\n\n### 範例 2：多行註解\n```python\n\"\"\"\n這個程式會：\n1. 讀取 n 個數字\n2. 計算總和與平均\n3. 輸出結果\n\"\"\"\nn = int(input())\n```\n\n### 範例 3：好的變數命名\n```python\n# 不好的命名\na = 5\nb = 3\nc = a * b\n\n# 好的命名\nwidth = 5\nheight = 3\narea = width * height\n```\n\n### 範例 4：PEP 8 風格示範\n```python\n# 運算子前後加空格\ntotal_price = base_price + tax\n\n# 逗號後面加空格\nprint(a, b, c)\n\n# 函式定義（未來會學到）\ndef calculate_area(width, height):\n    \"\"\"計算長方形面積\"\"\"\n    return width * height\n```\n\n### 範例 5：完整風格的 APCS 解題範例\n```python\n# APCS 模擬：找出 n 個數字中最大值與最小值的差\n\n# 讀取資料\nn = int(input())\nnumbers = list(map(int, input().split()))\n\n# 找最大值與最小值\nmax_val = max(numbers)\nmin_val = min(numbers)\n\n# 計算並輸出差值\ndiff = max_val - min_val\nprint(diff)\n```\n\n## 三、練習題（5 題，難度遞增）\n\n### 第 1 題 [難度：1 星]\n**題目：** 以下程式碼缺少註解且變數命名不佳，請改寫成有良好風格的版本（功能不變）。\n```python\na=int(input())\nb=int(input())\nc=a+b\nprint(c)\n```\n**解答：**\n```python\n# 讀取兩個整數並印出它們的和\nfirst_num = int(input())\nsecond_num = int(input())\ntotal = first_num + second_num\nprint(total)\n```\n\n### 第 2 題 [難度：2 星]\n**題目：** 找出以下程式碼中所有不符合 PEP 8 的地方，並修正。\n```python\nstudentName=\"Alice\"\nstudent_Age=15\nif studentName==\"Alice\" and student_Age>=18:\n  print(\"成年\")\nelse:\n  print(\"未成年\")\n```\n**解答：**\n```python\n# 修正：統一用 snake_case、運算子加空格、縮排用 4 格\nstudent_name = \"Alice\"\nstudent_age = 15\nif student_name == \"Alice\" and student_age >= 18:\n    print(\"成年\")\nelse:\n    print(\"未成年\")\n```\n\n### 第 3 題 [難度：3 星]\n**題目：** 讀入圓的半徑（整數），計算並印出圓的面積和周長（取到小數點後兩位）。請使用有意義的變數名稱和適當的註解。\n**範例輸入：** `5`\n**範例輸出：**\n```\n78.54\n31.42\n```\n**解答：**\n```python\nimport math\n\n# 讀取圓的半徑\nradius = int(input())\n\n# 計算面積和周長\narea = math.pi * radius ** 2\ncircumference = 2 * math.pi * radius\n\n# 輸出結果（取到小數點後兩位）\nprint(f\"{area:.2f}\")\nprint(f\"{circumference:.2f}\")\n```\n\n### 第 4 題 [難度：4 星]\n**題目：** 以下是一段「義大利麵式」的程式碼（邏輯混亂、命名差、無註解）。請不改變功能，重新整理成乾淨的版本。\n```python\nx=int(input())\nif x%3==0:\n if x%5==0:\n  print(\"FizzBuzz\")\n else:\n  print(\"Fizz\")\nelse:\n if x%5==0:\n  print(\"Buzz\")\n else:\n  print(x)\n```\n**解答：**\n```python\n# FizzBuzz 判斷\nnumber = int(input())\n\nif number % 3 == 0 and number % 5 == 0:\n    print(\"FizzBuzz\")\nelif number % 3 == 0:\n    print(\"Fizz\")\nelif number % 5 == 0:\n    print(\"Buzz\")\nelse:\n    print(number)\n```\n\n### 第 5 題 [難度：5 星]\n**題目：** 請撰寫一段有良好風格的程式：讀入 n 個學生的姓名和成績（每行一組），找出最高分的學生並印出。使用有意義的變數名稱、適當的註解，並遵循 PEP 8。\n**範例輸入：**\n```\n3\nAlice 85\nBob 92\nCharlie 78\n```\n**範例輸出：** `Bob 92`\n**解答：**\n```python\n# 讀取學生數量\nstudent_count = int(input())\n\n# 初始化最高分追蹤變數\nbest_name = \"\"\nbest_score = -1\n\n# 逐一讀取並比較\nfor _ in range(student_count):\n    parts = input().split()\n    name = parts[0]\n    score = int(parts[1])\n    \n    # 更新最高分\n    if score > best_score:\n        best_score = score\n        best_name = name\n\n# 輸出最高分學生\nprint(best_name, best_score)\n```\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n### 陷阱 1：無意義的註解\n```python\n# 不好（只是重述程式碼）\nx = x + 1  # x 加 1\n\n# 好（解釋為什麼）\nx = x + 1  # 因為索引從 0 開始，轉換為從 1 開始的編號\n```\n\n### 陷阱 2：變數命名混亂\n```python\n# 不好\nl = [1, 2, 3]  # l 和 1 長得很像，容易搞混\nO = 0           # O 和 0 長得很像\n\n# 好\nnumbers = [1, 2, 3]\ncount = 0\n```\n\n### 陷阱 3：忘記刪除測試用的 print\n```python\n# 除錯時加的（交卷前要刪掉！）\nn = int(input())\nprint(\"debug: n =\", n)  # 這行會讓輸出格式錯誤！\nprint(n * 2)\n```\n\n### 陷阱 4：縮排不一致\n```python\n# 錯誤（混用 tab 和空格）\nif True:\n    print(\"a\")  # 4 個空格\n\tprint(\"b\")  # 1 個 tab\n# IndentationError!\n\n# 正確（統一用 4 個空格）\nif True:\n    print(\"a\")\n    print(\"b\")\n```\n\n## 五、APCS 考題連結\n\n### 出題模式：\n- APCS 不直接考程式風格，但觀念題會考「程式碼閱讀」——如果你平時寫程式風格好，讀別人的程式碼也會更快。\n- 實作題在考試壓力下，好的風格習慣能幫你更快除錯。\n\n### 歷屆相關題目：\n- **APCS 觀念題（每屆）**：大量的程式碼追蹤題，需要閱讀一段程式碼並判斷輸出。好的閱讀習慣（看變數名稱猜功能）能加速作答。\n- **實作題除錯經驗**：許多考生因為變數命名混亂，在 60 分鐘的限時內浪費大量時間找 bug。養成好的命名習慣，等於給自己多爭取解題時間。\n- 建議在平時練習時就養成良好風格，不要「考試再說」，因為壓力大的時候更容易犯命名錯誤。"
         }
       ]
     },
@@ -67,23 +240,61 @@
           "title": "輸入與輸出",
           "desc": "處理 APCS 測資與格式化輸出",
           "implementation": "使用 sys.stdin 提高效率，利用 f-string 控制格式",
-          "py_syntax": ["input()", "print(f'...')", "sys.stdin.readline"],
-          "common_pitfalls": ["忘了 split() 導致輸入變成整串字串", "print 多出空格導致 PE"],
+          "py_syntax": [
+            "input()",
+            "print(f'...')",
+            "sys.stdin.readline",
+            "sys.stdin.read()",
+            "map(int, ...)",
+            "split()",
+            "print(..., end='')"
+          ],
+          "common_pitfalls": [
+            "忘了 split() 導致輸入變成整串字串，例如 input() 讀到 '3 5' 而非分開的兩個數字",
+            "print 多出空格導致 PE（Presentation Error），APCS 評測對格式要求嚴格",
+            "使用 input() 讀取大量資料時效能過慢，應改用 sys.stdin.read() 一次讀完",
+            "忘了將 input() 的結果用 int() 或 float() 轉型，導致字串與數字比較時出錯",
+            "多筆測資時忘了處理行末換行符號，sys.stdin.readline() 會保留 '\\n'，需用 strip()",
+            "print() 預設會換行，若需要不換行輸出應加 end='' 參數",
+            "多個變數用 print(a, b) 輸出時，預設分隔符號為空格，若需其他分隔應用 sep 參數"
+          ],
           "mini_examples": [
             {
               "title": "快速讀取整數列表",
               "type": "code",
               "content": "import sys\nnums = list(map(int, sys.stdin.read().split()))"
+            },
+            {
+              "title": "讀取 N 行每行兩個整數",
+              "type": "code",
+              "content": "import sys\ninput = sys.stdin.readline\nn = int(input())\nfor _ in range(n):\n    a, b = map(int, input().split())\n    print(a + b)"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「輸入與輸出」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n請從最基礎的 input() 和 print() 開始講起，然後逐步深入到：\n1. input() 的回傳值永遠是字串，需要手動轉型\n2. 使用 split() 拆分多個輸入值\n3. 使用 map() 搭配 split() 一次轉換多個數值\n4. 使用 sys.stdin 系列函式加速大量輸入的讀取\n5. print() 的 end 和 sep 參數控制輸出格式\n6. f-string 格式化輸出的各種技巧\n每個步驟請搭配實作拆解，說明「為什麼要這樣做」以及「什麼時候該用」。\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：基本的 input + print\n範例 2：讀取多個整數並計算\n範例 3：使用 map + split 讀取一行多個數字\n範例 4：使用 sys.stdin.read() 一次讀取所有測資\n範例 5：模擬 APCS 測資格式（第一行為 N，接下來 N 行各有資料）\n每個範例請附上完整程式碼、範例輸入、範例輸出與逐行解說。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：讀取一個整數並輸出其平方\n★★ 第 2 題：讀取兩個整數，輸出它們的和、差、積\n★★★ 第 3 題：讀取 N 個整數，輸出最大值與最小值\n★★★★ 第 4 題：讀取多行資料，每行格式不同，需分別處理\n★★★★★ 第 5 題：模擬 APCS 實作題的完整測資讀取與輸出格式\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法 → 正確寫法」的格式呈現，並解釋為什麼錯誤寫法會出問題。包含：\n- 忘了 split() 的錯誤\n- 忘了轉型的錯誤\n- sys.stdin.readline 保留換行的問題\n- print 格式不符合評測要求的問題\n- 大量輸入時效能問題\n\n【五、APCS 考題連結】\n請說明 APCS 在輸入輸出方面的出題模式，常見的測資格式有哪些（如第一行給 N、矩陣輸入、多筆測資到 EOF 等），以及歷屆 APCS 實作題中哪些題目特別著重輸入輸出處理。請提供具體的歷屆題目名稱與年份。"
         },
         {
           "id": "l2_loop",
           "title": "迴圈結構",
           "desc": "使用 for 與 while 處理重複邏輯",
           "implementation": "for 搭配 range() 處理計次迴圈，while 處理條件迴圈",
-          "py_syntax": ["for i in range(n):", "while condition:", "break", "continue"],
-          "common_pitfalls": ["range(n) 不包含 n，容易少算一次", "while 忘了更新條件變數導致無窮迴圈"],
+          "py_syntax": [
+            "for i in range(n):",
+            "while condition:",
+            "break",
+            "continue",
+            "range(start, stop, step)",
+            "for i, v in enumerate(lst):",
+            "for a, b in zip(x, y):"
+          ],
+          "common_pitfalls": [
+            "range(n) 不包含 n，容易少算一次，例如 range(5) 只到 4",
+            "while 忘了更新條件變數導致無窮迴圈，程式永遠不會停止",
+            "在迴圈中修改正在迭代的串列會導致跳過元素或索引錯誤",
+            "break 只跳出最內層迴圈，巢狀迴圈中想跳出外層需要額外旗標或函式",
+            "continue 是跳過本次迭代，不是跳出迴圈，與 break 混淆是常見錯誤",
+            "range() 的三個參數 (start, stop, step) 搞混順序，或 step 為負數時 start 應大於 stop",
+            "for-else 和 while-else 的 else 區塊在迴圈「正常結束」時執行，被 break 中斷則不執行，容易誤解"
+          ],
           "mini_examples": [
             {
               "title": "計算 1 到 N 的總和",
@@ -95,22 +306,237 @@
               "type": "code",
               "content": "while True:\n    x = int(input())\n    if x == 0:\n        break\n    print(x * 2)"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「迴圈結構」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n請從迴圈的基本概念開始：\n1. 為什麼需要迴圈？手動重複 vs 迴圈自動化\n2. for 迴圈與 range() 的基本用法：range(n)、range(start, stop)、range(start, stop, step)\n3. while 迴圈的基本用法：條件判斷與更新\n4. break 與 continue 的差異與使用時機\n5. for-else 與 while-else 的特殊語法\n6. 迴圈效能考量：何時用 for、何時用 while\n7. enumerate() 和 zip() 讓迴圈更 Pythonic\n每個步驟請用具體的情境說明，例如「累加 1 到 100」、「找到第一個質數就停止」等。\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：用 for 印出 1 到 10\n範例 2：用 while 計算階乘\n範例 3：用 break 找到串列中第一個負數\n範例 4：用 range 的 step 參數倒序印出數字\n範例 5：用 for-else 判斷一個數是否為質數\n每個範例請附上完整程式碼、執行結果與逐行解說。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：印出 1 到 N 的所有偶數\n★★ 第 2 題：計算 N 的階乘\n★★★ 第 3 題：找出 1 到 N 之間所有質數\n★★★★ 第 4 題：模擬猜數字遊戲（二分搜尋思維）\n★★★★★ 第 5 題：讀取多筆測資直到 EOF，每筆計算數列第 N 項\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤：\n- range(n) 忘了 +1 導致少跑一次\n- while 忘了更新變數導致無窮迴圈\n- 在 for 迴圈中修改串列\n- break 與 continue 混淆\n- range 步進值為 0 導致 ValueError\n每個都用「錯誤寫法 → 正確寫法」的格式呈現。\n\n【五、APCS 考題連結】\n請說明 APCS 實作題中迴圈的出題模式，例如：累加求和、數列計算、模擬操作等。哪些歷屆題目的核心考點是迴圈控制？請提供具體的題目名稱、年份，以及該題如何運用迴圈解題的簡要說明。"
         },
         {
           "id": "l2_string",
           "title": "字串處理",
           "desc": "字串切片、搜尋與基本操作",
           "implementation": "Python 字串為不可變物件，操作會產生新字串",
-          "py_syntax": ["s[i]", "s[a:b]", "s.split()", "s.find()", "s.replace()", "len(s)"],
-          "common_pitfalls": ["索引從 0 開始，s[len(s)] 會越界", "字串不可變，不能用 s[i] = 'x' 修改"],
+          "py_syntax": [
+            "s[i]",
+            "s[a:b]",
+            "s.split()",
+            "s.find()",
+            "s.replace()",
+            "len(s)",
+            "s.strip()",
+            "s.join()",
+            "s.isdigit()",
+            "s.lower()",
+            "s.upper()",
+            "ord()",
+            "chr()"
+          ],
+          "common_pitfalls": [
+            "索引從 0 開始，s[len(s)] 會越界產生 IndexError",
+            "字串不可變，不能用 s[i] = 'x' 修改，需要用切片重組或轉成 list",
+            "split() 不帶參數會以連續空白分割，split(' ') 只以單一空格分割，行為不同",
+            "find() 找不到時回傳 -1 而非拋出例外，但 index() 會拋出 ValueError",
+            "字串比較是按照字典序（ASCII 值），'9' > '10' 為 True，數字字串比較需先轉型",
+            "切片 s[a:b] 不包含索引 b，容易誤以為會取到 b",
+            "使用 + 拼接大量字串效率很差，應改用 ''.join(list) 或 f-string"
+          ],
           "mini_examples": [
             {
               "title": "反轉字串",
               "type": "code",
               "content": "s = input()\nprint(s[::-1])"
+            },
+            {
+              "title": "統計母音字母數量",
+              "type": "code",
+              "content": "s = input().lower()\nvowels = 'aeiou'\ncount = sum(1 for c in s if c in vowels)\nprint(count)"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「字串處理」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n1. 字串的本質：Python 中字串是不可變（immutable）的序列，每個字元都有索引\n2. 字串索引與切片：正向索引、負向索引、s[a:b:step] 的完整用法\n3. 常用字串方法：split()、strip()、find()、replace()、join()、upper()、lower()\n4. 字串與 ASCII：ord() 與 chr() 的轉換，字元運算的技巧\n5. 字串的比較規則：字典序比較的原理\n6. 字串格式化：f-string、format()、% 運算子\n7. 字串在 APCS 中的應用場景：解析輸入、字元統計、回文判斷等\n每個概念請搭配實際程式碼範例說明。\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：取得字串長度與存取特定字元\n範例 2：字串切片取子字串\n範例 3：用 split() 和 join() 處理文字\n範例 4：判斷回文字串\n範例 5：Caesar 密碼加密（字元位移）\n每個範例請附上完整程式碼、範例輸入/輸出、逐行解說。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：輸入一個字串，輸出其長度與反轉結果\n★★ 第 2 題：統計字串中各字元出現次數\n★★★ 第 3 題：判斷兩個字串是否為變位詞（anagram）\n★★★★ 第 4 題：實作字串壓縮（如 'aaabbc' → 'a3b2c1'）\n★★★★★ 第 5 題：最長不重複子字串（sliding window 技巧）\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤：\n- 嘗試修改字串中的字元 s[i] = 'x'\n- s[len(s)] 越界\n- split() 與 split(' ') 的差異\n- 用 + 大量拼接字串的效能問題\n- 字串數字比較的陷阱\n每個都用「錯誤寫法 → 正確寫法」的格式呈現。\n\n【五、APCS 考題連結】\n請分析 APCS 中字串相關的出題模式，例如：字串解析、字元統計、回文判斷、密碼學相關等。哪些歷屆題目涉及字串處理？請提供具體的題目名稱與年份。"
+        },
+        {
+          "id": "l2_nested_loop",
+          "title": "巢狀迴圈",
+          "desc": "使用多層迴圈處理二維問題，如圖形列印、矩陣走訪與窮舉搜尋",
+          "implementation": "外層迴圈控制列（row），內層迴圈控制行（column），注意迴圈變數的範圍與關聯性",
+          "py_syntax": [
+            "for i in range(n): for j in range(m):",
+            "for i in range(n): for j in range(i):",
+            "print('*' * n)",
+            "print(end='')",
+            "for i in range(n): for j in range(i+1, n):"
+          ],
+          "common_pitfalls": [
+            "內外層迴圈變數名稱重複（如都用 i），導致外層變數被覆蓋",
+            "內層迴圈的範圍應依外層變數而變，但寫成固定值導致圖形錯誤",
+            "忘了在每列結束時換行，使用 print() 或 print(end='\\n') 換行",
+            "巢狀迴圈的時間複雜度是 O(n*m)，三層就是 O(n^3)，容易超時（TLE）",
+            "break 只會跳出最內層迴圈，想要跳出外層需要使用旗標變數或將迴圈包在函式中用 return",
+            "列印圖形時搞混空格與星號的數量關係，建議先手動推導前幾列的規律",
+            "窮舉搜尋時忘了避免重複組合，例如 (i,j) 與 (j,i) 算同一組時內層應從 i+1 開始"
+          ],
+          "mini_examples": [
+            {
+              "title": "九九乘法表",
+              "type": "code",
+              "content": "for i in range(1, 10):\n    for j in range(1, 10):\n        print(f'{i}*{j}={i*j:2d}', end='  ')\n    print()"
+            },
+            {
+              "title": "直角三角形星號圖形",
+              "type": "code",
+              "content": "n = int(input())\nfor i in range(1, n + 1):\n    print('*' * i)"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「巢狀迴圈」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n1. 什麼是巢狀迴圈？把一個迴圈放在另一個迴圈裡面，外層每執行一次，內層就完整跑一輪\n2. 巢狀迴圈的執行流程：用具體數字追蹤 i 和 j 的變化過程\n3. 外層控制列、內層控制行的觀念：以九九乘法表為例說明\n4. 內層範圍依賴外層變數：如三角形圖形中 j 的範圍隨 i 變化\n5. 巢狀迴圈的時間複雜度分析：O(n^2) 與 O(n^3) 的差異\n6. 巢狀迴圈的實際應用場景：圖形列印、矩陣操作、窮舉搜尋、配對列舉\n7. 最佳化技巧：何時可以提前 break、何時可以用數學公式取代迴圈\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：列印 n×n 的星號正方形\n範例 2：列印直角三角形（右對齊，包含空格處理）\n範例 3：九九乘法表（格式對齊）\n範例 4：找出陣列中所有和為 target 的配對\n範例 5：列印菱形圖案（上半部 + 下半部）\n每個範例請附上完整程式碼、執行結果與逐行解說，特別標註 i 和 j 的範圍如何設定。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：列印 n 列的直角三角形（左對齊）\n★★ 第 2 題：列印倒三角形\n★★★ 第 3 題：列印數字金字塔（如第 3 列印出 1 2 3 2 1）\n★★★★ 第 4 題：螺旋矩陣（n×n 矩陣按螺旋順序填入 1 到 n²）\n★★★★★ 第 5 題：N-Queen 問題的暴力搜尋版本（窮舉所有排列判斷合法性）\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤：\n- 內外層迴圈變數同名\n- 忘了換行的 print()\n- 內層範圍寫死而非依賴外層\n- break 只跳出內層的問題\n- 圖形列印時空格數量算錯\n每個都用「錯誤寫法 → 正確寫法」的格式呈現。\n\n【五、APCS 考題連結】\n請分析 APCS 中巢狀迴圈的出題模式，包括：圖形列印題（觀念題常見）、矩陣走訪（實作題常見）、配對列舉等。請提供歷屆 APCS 中涉及巢狀迴圈的具體題目名稱與年份，並簡要說明考點。"
+        },
+        {
+          "id": "l2_math_ops",
+          "title": "數學運算技巧",
+          "desc": "取餘數、整數除法、最大公因數、次方運算等基礎數學操作",
+          "implementation": "善用 Python 內建運算子與 math 模組，注意整數除法與浮點數精度問題",
+          "py_syntax": [
+            "%",
+            "//",
+            "**",
+            "abs()",
+            "math.gcd()",
+            "math.sqrt()",
+            "divmod()",
+            "pow(a, b, mod)"
+          ],
+          "common_pitfalls": [
+            "/ 是浮點除法，// 才是整數除法，例如 7/2 得 3.5 而非 3",
+            "負數取餘數的結果在 Python 中恆為非負（與 C/Java 不同），-7 % 3 == 2",
+            "math.sqrt() 回傳 float，判斷完全平方數時應用 int() 轉換後再驗證",
+            "大數次方運算 a**b 可能產生極大數字拖慢速度，若需取模應用 pow(a, b, mod) 三參數版本",
+            "浮點數精度問題：0.1 + 0.2 != 0.3，比較浮點數應用 abs(a - b) < 1e-9",
+            "divmod(a, b) 同時回傳商和餘數，比分別用 // 和 % 更有效率但常被忽略",
+            "math.gcd() 在 Python 3.5+ 可用，但只接受兩個參數，Python 3.9+ 才支援多個參數"
+          ],
+          "mini_examples": [
+            {
+              "title": "判斷完全平方數",
+              "type": "code",
+              "content": "import math\nn = int(input())\nroot = int(math.sqrt(n))\nif root * root == n:\n    print(f'{n} 是完全平方數')\nelse:\n    print(f'{n} 不是完全平方數')"
+            },
+            {
+              "title": "輾轉相除法求 GCD 與 LCM",
+              "type": "code",
+              "content": "import math\na, b = map(int, input().split())\ng = math.gcd(a, b)\nl = a * b // g\nprint(f'GCD={g}, LCM={l}')"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「數學運算技巧」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n1. Python 的除法運算：/ (浮點除法) vs // (整數除法) vs % (取餘數) 的差異\n2. divmod() 函式：一次取得商和餘數，以及實際應用場景（如時間轉換）\n3. 次方運算：** 運算子與 pow() 函式，以及 pow(a, b, mod) 的快速模冪\n4. abs() 取絕對值、round() 四捨五入及其 banker's rounding 特性\n5. math 模組常用函式：math.sqrt()、math.gcd()、math.ceil()、math.floor()、math.log()\n6. 數論基礎：質數判斷、最大公因數（GCD）、最小公倍數（LCM）、因數分解\n7. 浮點數精度問題與解決方案\n8. 大數運算：Python 原生支援大整數，但要注意效能\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：基本的整數除法與取餘數（時間轉換：秒 → 時:分:秒）\n範例 2：判斷一個數是否為質數\n範例 3：計算最大公因數與最小公倍數\n範例 4：快速模冪運算 pow(a, b, mod)\n範例 5：找出 N 以內所有質數（埃拉托斯特尼篩法）\n每個範例請附上完整程式碼、範例輸入/輸出、逐行解說。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：輸入秒數，轉換為「X小時Y分鐘Z秒」的格式\n★★ 第 2 題：判斷輸入的數是否為質數\n★★★ 第 3 題：求 N 個整數的最大公因數\n★★★★ 第 4 題：計算 a^b mod m（b 可能很大，需要快速冪）\n★★★★★ 第 5 題：分解質因數並以指數形式輸出（如 12 = 2^2 * 3^1）\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤：\n- / 與 // 混淆\n- 負數取餘數的行為差異（Python vs C）\n- math.sqrt() 回傳 float 的精度問題\n- 直接用 a**b 計算大數次方的效能問題\n- 浮點數比較用 == 的問題\n每個都用「錯誤寫法 → 正確寫法」的格式呈現。\n\n【五、APCS 考題連結】\n請分析 APCS 中數學運算相關的出題模式，包括：取餘數應用（如判斷奇偶、循環操作）、質數判斷、GCD/LCM 計算等。哪些歷屆題目的核心考點涉及數學運算？請提供具體的題目名稱與年份。"
+        },
+        {
+          "id": "l2_tuple",
+          "title": "元組 (Tuple)",
+          "desc": "不可變序列型別，用於固定資料組合、多值回傳與字典鍵值",
+          "implementation": "元組建立後不可修改，適合當作字典的 key 或函式多值回傳的容器，善用 packing/unpacking 簡化程式碼",
+          "py_syntax": [
+            "(a, b, c)",
+            "tuple()",
+            "a, b = func()",
+            "t[0]",
+            "t[1:]",
+            "len(t)",
+            "*args",
+            "t1 + t2",
+            "t * n"
+          ],
+          "common_pitfalls": [
+            "建立單元素元組必須加逗號：(1,) 而非 (1)，後者只是整數 1 加括號",
+            "元組不可變，不能用 t[i] = x 修改元素，會拋出 TypeError",
+            "元組雖然不可變，但如果元素是可變物件（如 list），內部的 list 仍可修改",
+            "tuple 與 list 混淆：tuple 用小括號 ()，list 用中括號 []，功能與特性不同",
+            "unpacking 時左邊變數數量必須與元組元素數量一致，否則 ValueError",
+            "空元組是 () 或 tuple()，但空括號在某些語境下可能被解讀為運算子的一部分",
+            "元組可以比較大小（按元素逐一比較），但元素型別不一致時會拋出 TypeError"
+          ],
+          "mini_examples": [
+            {
+              "title": "多值回傳與 unpacking",
+              "type": "code",
+              "content": "def min_max(lst):\n    return min(lst), max(lst)\n\nnums = [3, 1, 4, 1, 5, 9]\nlo, hi = min_max(nums)\nprint(f'最小值={lo}, 最大值={hi}')"
+            },
+            {
+              "title": "元組作為字典的 key",
+              "type": "code",
+              "content": "# 用座標元組作為字典的 key\ngrid = {}\ngrid[(0, 0)] = 'start'\ngrid[(2, 3)] = 'end'\nfor pos, label in grid.items():\n    print(f'位置 {pos}: {label}')"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「元組 (Tuple)」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n1. 什麼是元組？與串列（list）的比較：不可變 vs 可變\n2. 元組的建立方式：直接賦值、tuple() 建構子、單元素元組的陷阱\n3. 元組的索引與切片：與串列語法相同，但不能修改\n4. Packing 與 Unpacking：a, b, c = (1, 2, 3) 的語法，以及星號 *rest 收集剩餘元素\n5. 元組在函式中的應用：多值回傳、*args 可變參數\n6. 元組作為字典的 key：為什麼 list 不能當 key 但 tuple 可以（hashable 概念）\n7. 元組的效能優勢：比 list 佔用更少記憶體、建立更快\n8. namedtuple 簡介：為元組的元素命名，提升可讀性\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：建立元組與基本操作（索引、切片、len）\n範例 2：Unpacking 與交換變數值 a, b = b, a\n範例 3：函式多值回傳（回傳最大值、最小值、平均值）\n範例 4：用元組作為字典 key 記錄二維座標資訊\n範例 5：sorted() 搭配元組排序（多重排序鍵）\n每個範例請附上完整程式碼、執行結果與逐行解說。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：建立一個包含 5 個學生姓名的元組，印出第 3 個學生的名字\n★★ 第 2 題：寫一個函式回傳串列的最大值、最小值和總和\n★★★ 第 3 題：給定一串座標元組 [(x1,y1), (x2,y2), ...]，找出距離原點最近的點\n★★★★ 第 4 題：用元組實作簡易的學生成績系統（姓名、國文、英文、數學），支援按總分排序\n★★★★★ 第 5 題：實作一個函式，接受任意數量的參數（*args），回傳統計摘要（元組形式：平均、中位數、眾數）\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤：\n- 單元素元組忘了加逗號 (1) vs (1,)\n- 嘗試修改元組元素 t[0] = 5\n- unpacking 數量不匹配\n- 混淆 tuple 和 list 的使用場景\n- 元組內含可變物件的意外修改\n每個都用「錯誤寫法 → 正確寫法」的格式呈現。\n\n【五、APCS 考題連結】\n請說明元組在 APCS 解題中的實際應用，例如：用元組儲存座標、用元組作為排序的複合鍵、函式多值回傳等。雖然 APCS 不會直接考元組語法，但哪些題目的解法可以善用元組來簡化？請提供具體例子。"
+        },
+        {
+          "id": "l2_format_output",
+          "title": "格式化輸出",
+          "desc": "使用 f-string、format() 與格式規範控制輸出的對齊、補零與精度",
+          "implementation": "Python 3.6+ 推薦使用 f-string，格式規範語法為 {value:格式碼}，包含填充、對齊、寬度、精度等控制",
+          "py_syntax": [
+            "f'{x}'",
+            "f'{x:d}'",
+            "f'{x:.2f}'",
+            "f'{x:>10}'",
+            "f'{x:05d}'",
+            "f'{x:<10s}'",
+            "'{}'.format(x)",
+            "f'{x:,}'"
+          ],
+          "common_pitfalls": [
+            "f-string 需要 Python 3.6+，舊版本需用 .format() 或 % 格式化",
+            "格式碼中 d 代表整數、f 代表浮點數、s 代表字串，型別不符會 ValueError",
+            "對齊符號 < 左對齊、> 右對齊、^ 置中，容易搞混方向",
+            "補零 :05d 表示寬度 5 且補零，但只適用於數字，字串補零需用 zfill()",
+            "浮點數精度 :.2f 是四捨五入到小數第 2 位，但 Python 使用 banker's rounding（偶數捨入）",
+            "f-string 中的大括號需要用 {{ 和 }} 跳脫，否則會被當成格式化語法",
+            "print(a, b, c) 預設用空格分隔，若需要特定格式應自行用 f-string 組合"
+          ],
+          "mini_examples": [
+            {
+              "title": "數字補零與對齊",
+              "type": "code",
+              "content": "for i in range(1, 6):\n    print(f'第 {i:02d} 名: 分數 {i * 17.5:8.2f}')"
+            },
+            {
+              "title": "表格式輸出",
+              "type": "code",
+              "content": "data = [('Alice', 95), ('Bob', 87), ('Charlie', 100)]\nprint(f'{\"姓名\":<10s} {\"分數\":>5s}')\nprint('-' * 16)\nfor name, score in data:\n    print(f'{name:<10s} {score:>5d}')"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「格式化輸出」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n1. 為什麼需要格式化輸出？APCS 評測中輸出格式必須完全正確\n2. Python 格式化輸出的三種方式：% 運算子（舊式）、.format()（Python 3）、f-string（Python 3.6+）\n3. f-string 基本語法：f'{變數}' 以及 f'{表達式}' 的用法\n4. 格式規範迷你語言：{value:[填充][對齊][寬度][,][.精度][類型]}\n   - 對齊：< 左對齊、> 右對齊、^ 置中\n   - 寬度與填充：指定輸出最小寬度，不足部分用指定字元填充\n   - 精度：浮點數的小數位數、字串的最大長度\n   - 類型：d 整數、f 浮點數、s 字串、b 二進位、x 十六進位\n5. 數字格式化技巧：千分位逗號 {:,}、百分比 {:.2%}、補零 {:05d}\n6. 多行字串格式化與表格輸出\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：基本 f-string 插入變數\n範例 2：浮點數控制小數位數 f'{pi:.4f}'\n範例 3：整數補零 f'{n:03d}' 與右對齊 f'{n:>10d}'\n範例 4：表格式輸出（姓名左對齊、分數右對齊）\n範例 5：模擬 APCS 輸出格式（矩陣輸出、特定分隔符號等）\n每個範例請附上完整程式碼、執行結果與逐行解說。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：輸入姓名和年齡，用 f-string 輸出 '我叫XXX，今年XX歲'\n★★ 第 2 題：輸入一個浮點數，分別輸出小數後 1、2、3、4 位的結果\n★★★ 第 3 題：輸入 N 個學生的姓名和三科成績，輸出格式化的成績表（含平均）\n★★★★ 第 4 題：輸入一個整數，同時輸出其十進位、二進位、八進位、十六進位表示\n★★★★★ 第 5 題：模擬 APCS 的矩陣輸出格式（每個數字佔固定寬度，右對齊，空格分隔）\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤：\n- 格式碼型別不匹配（如對字串用 :d）\n- 對齊方向搞反\n- f-string 中忘了跳脫大括號\n- 浮點數 banker's rounding 的意外行為\n- 忘了在 print 控制 end 和 sep 參數\n每個都用「錯誤寫法 → 正確寫法」的格式呈現。\n\n【五、APCS 考題連結】\n請說明 APCS 實作題中對輸出格式的要求，常見的格式包括：每行數字用空格分隔、矩陣格式輸出、特定小數位數等。Presentation Error (PE) 是常見失分原因，如何避免？請舉歷屆 APCS 題目中需要注意輸出格式的具體例子。"
+        },
+        {
+          "id": "l2_scope",
+          "title": "變數作用域",
+          "desc": "理解 Python 的 LEGB 作用域規則、local/global 變數差異與 global 關鍵字的使用",
+          "implementation": "Python 以 LEGB（Local → Enclosing → Global → Built-in）順序查找變數，函式內賦值會建立區域變數，需用 global 或 nonlocal 存取外層變數",
+          "py_syntax": [
+            "global x",
+            "nonlocal x",
+            "locals()",
+            "globals()",
+            "def outer(): def inner():",
+            "LEGB 規則"
+          ],
+          "common_pitfalls": [
+            "在函式內對全域變數重新賦值會建立新的區域變數，而非修改全域變數，導致 UnboundLocalError",
+            "忘了使用 global 宣告就在函式內嘗試修改全域變數",
+            "nonlocal 用於巢狀函式存取外層函式的變數，與 global 的用途不同，容易混淆",
+            "Python 沒有區塊作用域（block scope），if/for/while 內的變數在區塊外仍可存取",
+            "預設參數在函式定義時就被求值，可變物件（如 list）作為預設值會在多次呼叫間共享狀態",
+            "覆蓋內建函式名稱（如 input = 10、list = [1,2,3]）會導致原本的內建函式無法使用",
+            "在 comprehension 中的迴圈變數在 Python 3 有自己的作用域，不會洩漏到外部（Python 2 會）"
+          ],
+          "mini_examples": [
+            {
+              "title": "global 關鍵字示範",
+              "type": "code",
+              "content": "count = 0\n\ndef increment():\n    global count\n    count += 1\n\nincrement()\nincrement()\nprint(count)  # 2"
+            },
+            {
+              "title": "nonlocal 與巢狀函式",
+              "type": "code",
+              "content": "def make_counter():\n    n = 0\n    def increment():\n        nonlocal n\n        n += 1\n        return n\n    return increment\n\ncounter = make_counter()\nprint(counter())  # 1\nprint(counter())  # 2"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專業的 APCS Python 家教老師。請教我「變數作用域」這個主題，按照以下結構進行教學：\n\n【一、觀念講解（由淺入深）】\n1. 什麼是作用域（scope）？變數在哪裡可以被看到、被存取？\n2. Python 的 LEGB 規則：\n   - Local（區域）：函式內部定義的變數\n   - Enclosing（外層函式）：巢狀函式中外層函式的變數\n   - Global（全域）：模組層級的變數\n   - Built-in（內建）：Python 內建的名稱（如 print、len、int）\n3. 變數查找的順序：Python 從最內層開始往外找，找到就停\n4. 區域變數 vs 全域變數：函式內賦值就會變成區域變數\n5. global 關鍵字：在函式內修改全域變數的方法\n6. nonlocal 關鍵字：在巢狀函式中修改外層函式的變數\n7. Python 沒有區塊作用域：if/for 中的變數在外面仍可存取\n8. 實際建議：盡量避免過度使用全域變數，善用函式參數和回傳值\n\n【二、Python 語法與程式碼範例（5 個，由簡到難）】\n範例 1：區域變數與全域變數的基本差異\n範例 2：UnboundLocalError 的經典錯誤與修正\n範例 3：使用 global 修改全域計數器\n範例 4：巢狀函式與 nonlocal 的使用\n範例 5：閉包（closure）與工廠函式（函式回傳函式）\n每個範例請附上完整程式碼、執行結果與逐行解說，特別標註每個變數的作用域。\n\n【三、練習題（5 題，難度 1-5 星遞增）】\n★ 第 1 題：判斷以下程式碼的輸出結果（區域 vs 全域變數）\n★★ 第 2 題：修正一段有 UnboundLocalError 的程式碼\n★★★ 第 3 題：用 global 實作一個簡易的存款/提款函式\n★★★★ 第 4 題：用 nonlocal 實作一個帶記憶的計算器（閉包）\n★★★★★ 第 5 題：分析一段複雜的巢狀函式程式碼，追蹤每個變數的作用域與值的變化\n每題請提供：題目描述、範例測資（輸入/輸出）、完整解答程式碼、解題思路說明。\n\n【四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）】\n請列出至少 5 個常見錯誤：\n- 在函式內修改全域變數忘了 global\n- 覆蓋內建函式名稱（如 input = 10）\n- 可變預設參數的共享狀態問題\n- nonlocal 與 global 的混淆\n- 以為 if/for 會建立新的作用域\n每個都用「錯誤寫法 → 正確寫法」的格式呈現。\n\n【五、APCS 考題連結】\n請說明變數作用域在 APCS 觀念題中的考法，例如：給一段包含函式的程式碼，問某個 print 會輸出什麼值？這類題目要求考生手動追蹤變數的值，理解區域/全域的差異。請舉歷屆 APCS 觀念題中涉及作用域的具體題型與解題思路。"
         }
       ]
     },
@@ -124,38 +550,82 @@
           "title": "串列 (List) 操作",
           "desc": "使用串列儲存與處理序列資料",
           "implementation": "善用 list comprehension 簡化程式碼，注意淺拷貝與深拷貝差異",
-          "py_syntax": ["list()", "append()", "pop()", "sort()", "len()", "[x for x in ...]"],
-          "common_pitfalls": ["用 a = b 複製串列只是參考，修改 b 會影響 a", "sort() 是原地排序無回傳值，sorted() 才會回傳新串列"],
+          "py_syntax": [
+            "list()",
+            "append()",
+            "pop()",
+            "sort()",
+            "len()",
+            "[x for x in ...]"
+          ],
+          "common_pitfalls": [
+            "用 a = b 複製串列只是參考，修改 b 會影響 a，應使用 a = b[:] 或 a = list(b)",
+            "sort() 是原地排序無回傳值，sorted() 才會回傳新串列；寫 a = a.sort() 會讓 a 變成 None",
+            "在迴圈中對串列做 append 或 remove 會導致索引偏移或無窮迴圈，應改用新串列收集結果",
+            "list.index(x) 找不到元素會拋出 ValueError，應先用 in 檢查或改用 try-except",
+            "串列切片 a[start:end] 的 end 不包含在內，容易少算一個元素",
+            "使用 + 串接大量串列效能差（每次產生新物件），應改用 extend() 或 list comprehension",
+            "del a[i] 與 a.pop(i) 都是 O(n) 操作，頻繁在中間刪除元素效能很差"
+          ],
           "mini_examples": [
             {
               "title": "List Comprehension 過濾偶數",
               "type": "code",
               "content": "nums = [1, 2, 3, 4, 5, 6]\nevens = [x for x in nums if x % 2 == 0]\nprint(evens)  # [2, 4, 6]"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「串列 (List) 操作」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 什麼是串列？為什麼需要串列？（與單一變數的差異）\n2. 串列的建立方式：直接宣告 []、list() 建構子、range 轉換\n3. 串列的基本操作：新增 (append, insert, extend)、刪除 (pop, remove, del)、查詢 (index, count, in)\n4. 串列切片 (slicing)：a[start:end:step] 的完整用法\n5. List Comprehension：語法結構、帶條件的寫法、巢狀寫法\n6. 淺拷貝 vs 深拷貝：為什麼 a = b 只是參考？如何正確複製？\n7. 串列作為函式參數時的傳參考行為\n\n請搭配實作步驟拆解，每個觀念都給出「先想 → 再寫 → 最後驗證」的流程。\n\n【Python 語法與程式碼範例】\n請提供 5 個範例，由簡到難：\n範例 1：建立串列並印出每個元素（for 迴圈走訪）\n範例 2：使用 append 和 pop 模擬堆疊行為\n範例 3：List Comprehension 產生 1~100 中所有 3 的倍數\n範例 4：二維串列的建立與走訪（印出九九乘法表）\n範例 5：實作一個函式，接收串列並回傳去除重複元素後的排序結果\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：讀入 n 個整數，輸出最大值與最小值\n  範例輸入：5\\n3 1 4 1 5\n  範例輸出：5 1\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：讀入一串整數，輸出反轉後的串列\n  範例輸入：5\\n1 2 3 4 5\n  範例輸出：5 4 3 2 1\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：讀入 n 個整數，移除所有重複元素並保持原順序輸出\n  範例輸入：7\\n3 1 4 1 5 9 3\n  範例輸出：3 1 4 5 9\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：給定一個整數串列，找出連續子陣列的最大和（Kadane's Algorithm）\n  範例輸入：8\\n-2 1 -3 4 -1 2 1 -5\n  範例輸出：6\n  解答：附上完整程式碼與解題思路\n\n第 5 題（★★★★★）：給定兩個已排序串列，合併為一個排序串列（不使用 sort）\n  範例輸入：\n  3\\n1 3 5\n  4\\n2 4 6 8\n  範例輸出：1 2 3 4 5 6 8\n  解答：附上完整程式碼\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 串列複製錯誤：a = b vs a = b[:]\n2. sort() 回傳值錯誤：a = a.sort() vs a.sort() 或 a = sorted(a)\n3. 迴圈中修改串列：邊走訪邊刪除 vs 使用新串列\n4. 二維串列初始化：[[0]*m]*n vs [[0]*m for _ in range(n)]\n\n【APCS 考題連結】\n1. 說明 APCS 實作題中串列操作的常見出題模式（如：模擬、統計、排序前處理）\n2. 列出歷屆相關題目（如：2017/03 成績指標、2016/10 矩陣轉換等）\n3. 提供應考策略：何時該用串列、何時該用其他資料結構"
         },
         {
           "id": "l3_function",
           "title": "函式設計",
           "desc": "將重複邏輯封裝為函式，提升可讀性與重用性",
           "implementation": "注意參數傳遞方式，可變物件 (list, dict) 傳參考",
-          "py_syntax": ["def func(args):", "return", "lambda x: x", "def func(*args):"],
-          "common_pitfalls": ["預設參數使用可變物件 (如 def f(a=[])：) 會導致共用狀態", "忘了 return 導致函式回傳 None"],
+          "py_syntax": [
+            "def func(args):",
+            "return",
+            "lambda x: x",
+            "def func(*args):"
+          ],
+          "common_pitfalls": [
+            "預設參數使用可變物件（如 def f(a=[]）會導致共用狀態，每次呼叫都會累積",
+            "忘了 return 導致函式回傳 None，常見於需要回傳計算結果的場景",
+            "在函式內修改全域變數未使用 global 關鍵字，導致產生區域變數而非修改全域變數",
+            "遞迴函式忘了設定終止條件 (base case)，導致無窮遞迴與 RecursionError",
+            "混淆位置參數與關鍵字參數的順序，位置參數必須在關鍵字參數之前",
+            "lambda 只能包含一個表達式，不能使用 if-else 語句（但可用三元運算子）",
+            "函式內 list 參數是傳參考，在函式內修改會影響外部串列，可能造成非預期副作用"
+          ],
           "mini_examples": [
             {
               "title": "判斷質數函式",
               "type": "code",
               "content": "def is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「函式設計」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 為什麼需要函式？（程式碼重用、模組化、可讀性提升）\n2. 函式的基本結構：def、參數、return\n3. 參數傳遞方式：位置參數、關鍵字參數、預設值參數、*args 與 **kwargs\n4. 回傳值：單一回傳、多值回傳 (tuple)、沒有 return 時回傳 None\n5. 變數作用域：區域變數 vs 全域變數、global 關鍵字\n6. 可變物件（list, dict）作為參數的傳參考行為\n7. lambda 匿名函式：語法與適用場景\n8. 函式作為參數傳遞（高階函式概念，搭配 map、filter）\n\n請搭配實作步驟拆解，每個觀念都給出「先想需求 → 設計函式介面 → 實作內容 → 測試驗證」的流程。\n\n【Python 語法與程式碼範例】\n請提供 5 個範例，由簡到難：\n範例 1：寫一個函式計算兩數的最大公因數 (GCD)\n範例 2：寫一個函式接收串列，回傳平均值與標準差\n範例 3：使用預設參數與關鍵字參數設計一個格式化輸出函式\n範例 4：使用 lambda 搭配 sorted 做自訂排序\n範例 5：寫一個遞迴函式計算組合數 C(n, k)\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：寫一個函式 is_even(n)，判斷整數 n 是否為偶數\n  範例輸入：4\n  範例輸出：True\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：寫一個函式 factorial(n)，計算 n 的階乘\n  範例輸入：5\n  範例輸出：120\n  解答：附上完整程式碼（迴圈版與遞迴版）\n\n第 3 題（★★★☆☆）：寫一個函式 count_digits(n)，回傳正整數 n 的各位數字出現次數（用 dict）\n  範例輸入：112233\n  範例輸出：{1: 2, 2: 2, 3: 2}\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：寫一個函式 flatten(lst)，將巢狀串列攤平為一維串列（使用遞迴）\n  範例輸入：[1, [2, 3], [4, [5, 6]]]\n  範例輸出：[1, 2, 3, 4, 5, 6]\n  解答：附上完整程式碼\n\n第 5 題（★★★★★）：實作一個 memoize 裝飾器，為任意函式加上快取功能，並用它加速費氏數列計算\n  範例輸入：fib(50)\n  範例輸出：12586269025\n  解答：附上完整程式碼與效能分析\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 預設可變參數陷阱：def f(a=[]) vs def f(a=None): a = a or []\n2. 忘記 return：result 算完沒 return vs 明確 return result\n3. 全域變數修改：直接賦值 vs 使用 global 宣告\n4. 傳參考副作用：直接修改傳入的 list vs 先複製再修改\n\n【APCS 考題連結】\n1. 說明 APCS 觀念題中函式相關的常見考法（呼叫順序、回傳值追蹤、遞迴展開）\n2. 說明 APCS 實作題中如何善用函式拆解問題\n3. 列出歷屆涉及函式設計的相關題目\n4. 提供考試時函式設計的建議：何時該抽函式、函式命名慣例"
         },
         {
           "id": "l3_sorting",
           "title": "排序與搜尋",
           "desc": "內建排序與二分搜尋的使用時機",
           "implementation": "Python 內建 Timsort 為 O(n log n)，搭配 bisect 模組做二分搜尋",
-          "py_syntax": ["sorted()", ".sort()", "key=lambda", "bisect.bisect_left", "bisect.insort"],
-          "common_pitfalls": ["自訂排序 key 忘了回傳值", "二分搜尋的前提是資料已排序"],
+          "py_syntax": [
+            "sorted()",
+            ".sort()",
+            "key=lambda",
+            "bisect.bisect_left",
+            "bisect.insort"
+          ],
+          "common_pitfalls": [
+            "自訂排序 key 忘了回傳值，例如 key=lambda x: print(x) 會讓所有元素的 key 都是 None",
+            "二分搜尋的前提是資料已排序，對未排序資料使用 bisect 會得到錯誤結果",
+            "sort() 與 sorted() 的 reverse 參數只影響排序方向，不影響穩定性",
+            "多重條件排序時搞混優先順序，應善用 tuple 作為 key（如 key=lambda x: (x[0], -x[1])）",
+            "bisect_left 與 bisect_right 的差異：遇到相同元素時插入位置不同，選錯會影響結果",
+            "手寫二分搜尋時 while 條件用 l < r 或 l <= r 搞混，導致漏判或無窮迴圈",
+            "排序的 key 函式每次比較都會被呼叫，若 key 計算量大會嚴重影響效能"
+          ],
           "mini_examples": [
             {
               "title": "依照第二元素排序",
@@ -167,22 +637,247 @@
               "type": "code",
               "content": "from bisect import bisect_left\n\narr = [1, 3, 5, 7, 9]\nidx = bisect_left(arr, 5)\nprint(idx)  # 2"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「排序與搜尋」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 為什麼排序重要？排序後能做哪些事情更快？\n2. Python 內建排序：sort() vs sorted() 的差異與使用時機\n3. 自訂排序：key 參數的用法、多重條件排序（用 tuple）、reverse 參數\n4. 排序穩定性：什麼是穩定排序？Python 的 Timsort 為何重要？\n5. 線性搜尋 vs 二分搜尋：時間複雜度比較 O(n) vs O(log n)\n6. 手寫二分搜尋：左閉右開 vs 左閉右閉的模板差異\n7. bisect 模組：bisect_left、bisect_right、insort 的使用\n8. 二分搜尋的應用：二分答案（Binary Search on Answer）\n\n請搭配實作步驟拆解，每個觀念都用「問題 → 分析 → 選擇排序/搜尋方法 → 實作 → 驗證」的流程說明。\n\n【Python 語法與程式碼範例】\n請提供 5 個範例，由簡到難：\n範例 1：將一串數字由小到大排序並輸出\n範例 2：將學生成績按分數降序排列，同分則按名字升序\n範例 3：手寫二分搜尋找到目標值的索引\n範例 4：使用 bisect 找到第一個大於等於 x 的位置\n範例 5：二分答案：給定 n 條繩子，求最多能切成 k 段的最大長度\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：讀入 n 個整數，排序後輸出\n  範例輸入：5\\n3 1 4 1 5\n  範例輸出：1 1 3 4 5\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：讀入 n 個整數，輸出第 k 小的數\n  範例輸入：5 3\\n7 2 5 1 9\n  範例輸出：5\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：給定一個排序陣列和目標值，用二分搜尋判斷是否存在\n  範例輸入：5 5\\n1 3 5 7 9\n  範例輸出：Yes\n  解答：附上完整程式碼（手寫二分搜尋）\n\n第 4 題（★★★★☆）：給定 n 個區間 [start, end]，按結束時間排序後求最多能選幾個不重疊區間\n  範例輸入：4\\n1 3\\n2 5\\n4 7\\n6 8\n  範例輸出：3\n  解答：附上完整程式碼與解題思路\n\n第 5 題（★★★★★）：給定 n 個數與 k，找出最小的區間長度使得區間內至少包含 k 個不同的數\n  範例輸入：7 3\\n1 2 1 3 2 1 3\n  範例輸出：3\n  解答：附上完整程式碼（排序 + 滑動窗口或二分答案）\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. key 忘了 return：key=lambda x: print(x) vs key=lambda x: x[1]\n2. 對未排序資料用 bisect：直接 bisect vs 先 sort 再 bisect\n3. 二分搜尋邊界錯誤：while l < r 漏判 vs while l <= r 正確處理\n4. 多重排序搞混：兩次 sort vs 一次 sort 搭配 tuple key\n\n【APCS 考題連結】\n1. 說明 APCS 中排序相關的觀念題型（排序結果追蹤、時間複雜度比較）\n2. 說明 APCS 實作題中排序與搜尋的常見出題模式\n3. 列出歷屆相關題目（如：2017/03 成績指標、排序相關實作題）\n4. 提供應考策略：何時用內建排序、何時需要手寫、何時該用二分搜尋"
         },
         {
           "id": "l3_2d_array",
           "title": "二維陣列",
           "desc": "使用巢狀串列處理矩陣與格子問題",
           "implementation": "初始化二維陣列需用 comprehension，避免淺拷貝陷阱",
-          "py_syntax": ["[[0]*m for _ in range(n)]", "grid[r][c]", "enumerate()"],
-          "common_pitfalls": ["[[0]*m]*n 會讓每列指向同一物件", "存取超出邊界未檢查導致 IndexError"],
+          "py_syntax": [
+            "[[0]*m for _ in range(n)]",
+            "grid[r][c]",
+            "enumerate()"
+          ],
+          "common_pitfalls": [
+            "[[0]*m]*n 會讓每列指向同一物件，修改一列會連動影響所有列",
+            "存取超出邊界未檢查導致 IndexError，走訪格子時要先判斷 0 <= r < n and 0 <= c < m",
+            "混淆 row 和 column 的順序，grid[r][c] 中 r 是列（垂直）、c 是行（水平）",
+            "旋轉或轉置矩陣時搞混新舊索引對應關係，建議先在紙上畫出對應",
+            "二維陣列當參數傳入函式後，在函式內修改會影響原陣列（傳參考），需要時應先做深拷貝",
+            "讀取二維測資時忘了每列要分開讀取，或是把所有數字讀成一維再轉換時索引算錯",
+            "使用 enumerate 走訪二維陣列時忘了同時解包 row index 與 col index"
+          ],
           "mini_examples": [
             {
               "title": "建立並走訪二維陣列",
               "type": "code",
               "content": "n, m = 3, 4\ngrid = [[0] * m for _ in range(n)]\nfor r in range(n):\n    for c in range(m):\n        grid[r][c] = r * m + c\nprint(grid)"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「二維陣列」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 什麼是二維陣列？（矩陣的概念、格子地圖的應用）\n2. 二維陣列的正確初始化：為什麼 [[0]*m]*n 是錯的？\n3. 二維陣列的走訪：雙重迴圈、搭配 enumerate\n4. 二維陣列的常見操作：讀取測資、印出矩陣、轉置、旋轉\n5. 鄰居格子的走訪：四方向 (上下左右) 與八方向的 dx, dy 技巧\n6. 邊界檢查：如何確保存取不越界\n7. 二維陣列在 APCS 中的應用場景：棋盤、地圖、迷宮\n\n請搭配實作步驟拆解，每個操作都用「畫圖理解 → 確定索引關係 → 寫程式 → 用小測資驗證」的流程。\n\n【Python 語法與程式碼範例】\n請提供 5 個範例，由簡到難：\n範例 1：讀取 n x m 的矩陣並印出\n範例 2：計算矩陣中所有元素的總和\n範例 3：矩陣轉置（行列互換）\n範例 4：在格子地圖中找出所有相鄰格子（四方向走訪）\n範例 5：矩陣順時針旋轉 90 度\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：讀入 n x m 矩陣，輸出每列的最大值\n  範例輸入：3 4\\n1 2 3 4\\n5 6 7 8\\n9 10 11 12\n  範例輸出：4\\n8\\n12\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：讀入方陣，輸出主對角線元素的和\n  範例輸入：3\\n1 2 3\\n4 5 6\\n7 8 9\n  範例輸出：15\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：讀入矩陣，將其轉置後輸出\n  範例輸入：2 3\\n1 2 3\\n4 5 6\n  範例輸出：1 4\\n2 5\\n3 6\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：給定 n x m 的 0/1 矩陣，計算有幾個由 1 組成的連通區域（使用 DFS 或 BFS）\n  範例輸入：4 5\\n1 1 0 0 1\\n1 0 0 1 1\\n0 0 1 0 0\\n0 0 0 1 1\n  範例輸出：4\n  解答：附上完整程式碼與解題思路\n\n第 5 題（★★★★★）：螺旋矩陣——將 1~n*m 的數字以螺旋方式填入 n x m 矩陣\n  範例輸入：3 4\n  範例輸出：\n  1 2 3 4\n  10 11 12 5\n  9 8 7 6\n  解答：附上完整程式碼\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 初始化錯誤：[[0]*m]*n vs [[0]*m for _ in range(n)]\n2. 索引越界：直接存取 grid[r][c] vs 先檢查邊界\n3. 行列混淆：grid[c][r] vs grid[r][c]（r=row, c=col）\n4. 轉置錯誤：原地修改 vs 建立新矩陣\n\n【APCS 考題連結】\n1. 說明 APCS 中二維陣列的常見考法（矩陣操作、格子走訪、連通判斷）\n2. 列出歷屆相關題目（如：2016/10 矩陣轉換、2017/10 地圖走訪等）\n3. 提供二維陣列問題的解題模板與應考建議"
+        },
+        {
+          "id": "l3_simulation",
+          "title": "模擬法",
+          "desc": "依照題意逐步模擬過程，忠實地將問題描述轉化為程式碼",
+          "implementation": "仔細閱讀題目，將每一步操作轉為對應的程式碼，善用迴圈與條件處理狀態變化",
+          "py_syntax": [
+            "while True:",
+            "if-elif-else",
+            "for i in range(n):",
+            "break",
+            "state = 0"
+          ],
+          "common_pitfalls": [
+            "沒有仔細讀懂題意就開始寫，導致模擬流程與題目描述不一致",
+            "邊界條件漏判，例如時鐘模擬中 23:59 的下一分鐘是 00:00 而非 24:00",
+            "狀態轉換順序錯誤，應在同一輪中先讀取舊狀態再更新，不能邊讀邊改",
+            "模擬迴圈的終止條件設定錯誤，導致提前結束或無窮迴圈",
+            "大量測資時模擬效率太低（如 O(n^2)），沒有思考是否能用數學公式或前綴和優化",
+            "忘記初始化狀態變數或在每次測試案例前重置狀態",
+            "模擬多個物件互動時，更新順序影響結果（例如同時移動 vs 依序移動）"
+          ],
+          "mini_examples": [
+            {
+              "title": "時鐘模擬：計算經過 k 分鐘後的時間",
+              "type": "code",
+              "content": "h, m = map(int, input().split(':'))\nk = int(input())\nm += k\nh = (h + m // 60) % 24\nm = m % 60\nprint(f'{h:02d}:{m:02d}')"
+            },
+            {
+              "title": "約瑟夫問題模擬",
+              "type": "code",
+              "content": "def josephus(n, k):\n    people = list(range(1, n + 1))\n    idx = 0\n    order = []\n    while people:\n        idx = (idx + k - 1) % len(people)\n        order.append(people.pop(idx))\n    return order\n\nprint(josephus(7, 3))"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「模擬法」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 什麼是模擬法？（將題目描述的操作步驟忠實地轉化為程式碼）\n2. 模擬法的適用場景：題目有明確的操作流程、狀態會隨時間步改變\n3. 模擬法的實作步驟拆解：\n   a. 讀懂題意，標記每一步操作\n   b. 決定用什麼資料結構表示狀態（串列、二維陣列、變數等）\n   c. 寫出狀態轉移邏輯（每一步如何從舊狀態變成新狀態）\n   d. 確定迴圈終止條件\n   e. 處理邊界情況\n4. 常見模擬類型：\n   a. 時鐘 / 計時器模擬（時間進位、循環）\n   b. 棋盤 / 格子模擬（移動、翻轉）\n   c. 排隊 / 輪流模擬（約瑟夫問題、輪轉）\n   d. 狀態機模擬（有限狀態自動機）\n5. 模擬法的效率考量：何時需要優化、常見優化技巧\n\n【Python 語法與程式碼範例】\n請提供 4 個範例，由簡到難：\n範例 1：模擬計數器——從 1 數到 n，遇到 3 的倍數印 Fizz、5 的倍數印 Buzz\n範例 2：時鐘模擬——給定起始時間和經過的分鐘數，計算結束時間\n範例 3：約瑟夫問題——n 個人圍成一圈，每次數到第 k 個人淘汰\n範例 4：機器人走格子——在 n x m 的網格上，按照指令字串 (U/D/L/R) 移動，輸出最終位置\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：模擬骰子擲 n 次，統計每個面出現的次數\n  範例輸入：10\\n1 3 5 2 6 4 1 3 5 2\n  範例輸出：1:2 2:2 3:2 4:1 5:2 6:1\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：模擬洗牌——將一副牌分成兩半，交替合併\n  範例輸入：6\\n1 2 3 4 5 6\n  範例輸出：1 4 2 5 3 6\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：模擬排隊——n 個人排隊，每次服務最前面的人需要 t 分鐘，求每個人的等待時間\n  範例輸入：5\\n3 2 5 1 4\n  範例輸出：0 3 5 10 11\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：模擬約瑟夫問題，輸出最後存活的人的編號\n  範例輸入：7 3\n  範例輸出：4\n  解答：附上完整程式碼（模擬法與數學公式法）\n\n第 5 題（★★★★★）：模擬掃雷遊戲——給定 n x m 的地雷佈局，計算每個非地雷格子周圍的地雷數\n  範例輸入：3 4\\n*...\\n..*.\\n....\n  範例輸出：*100\\n12*1\\n0111\n  解答：附上完整程式碼\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 邊讀邊改狀態：在同一輪中用新狀態計算 vs 先複製舊狀態再更新\n2. 循環邊界處理：h = h + 1（可能超過 23）vs h = (h + 1) % 24\n3. 索引偏移：約瑟夫問題中 idx = idx + k vs idx = (idx + k - 1) % len(people)\n4. 忘記重置狀態：多組測資共用變數 vs 每組測資前重新初始化\n\n【APCS 考題連結】\n1. 說明 APCS 中模擬題的常見出題模式（按照規則操作、棋盤移動、排隊問題）\n2. 列出歷屆模擬相關題目（如：2016/03 機器人模擬、各年份的模擬實作題等）\n3. 提供模擬題的解題策略：先理解再寫、善用小測資手動驗證、注意邊界"
+        },
+        {
+          "id": "l3_prefix_sum",
+          "title": "前綴和",
+          "desc": "利用預處理的累加陣列，實現 O(1) 的區間和查詢",
+          "implementation": "建立前綴和陣列 prefix[i] = a[0] + a[1] + ... + a[i-1]，區間 [l, r] 的和為 prefix[r+1] - prefix[l]",
+          "py_syntax": [
+            "prefix = [0] * (n+1)",
+            "prefix[i+1] = prefix[i] + a[i]",
+            "sum_lr = prefix[r+1] - prefix[l]",
+            "itertools.accumulate"
+          ],
+          "common_pitfalls": [
+            "前綴和陣列長度應為 n+1（多一個 0 在最前面），否則區間查詢的公式會出錯",
+            "區間查詢的索引 off-by-one 錯誤：prefix[r+1] - prefix[l] 而非 prefix[r] - prefix[l-1]（取決於定義方式）",
+            "忘了前綴和是唯讀的預處理結果，原陣列被修改後前綴和需要重建",
+            "將前綴和與差分陣列搞混：前綴和用於快速查詢區間和，差分陣列用於快速區間修改",
+            "二維前綴和的容斥原理忘了加回重複扣除的部分：sum = p[r2][c2] - p[r1-1][c2] - p[r2][c1-1] + p[r1-1][c1-1]",
+            "對負數陣列使用前綴和時，忘了前綴和可能為負數，不能用來判斷最大值"
+          ],
+          "mini_examples": [
+            {
+              "title": "一維前綴和與區間查詢",
+              "type": "code",
+              "content": "a = [3, 1, 4, 1, 5, 9, 2, 6]\nn = len(a)\nprefix = [0] * (n + 1)\nfor i in range(n):\n    prefix[i + 1] = prefix[i] + a[i]\n\n# 查詢區間 [2, 5] 的和（index 從 0 開始）\nl, r = 2, 5\nprint(prefix[r + 1] - prefix[l])  # 4+1+5+9 = 19"
+            },
+            {
+              "title": "差分陣列：區間加值",
+              "type": "code",
+              "content": "n = 8\ndiff = [0] * (n + 1)\n\n# 對區間 [2, 5] 每個元素加 3\nl, r, val = 2, 5, 3\ndiff[l] += val\ndiff[r + 1] -= val\n\n# 還原原陣列\na = [0] * n\na[0] = diff[0]\nfor i in range(1, n):\n    a[i] = a[i - 1] + diff[i]\nprint(a)  # [0, 0, 3, 3, 3, 3, 0, 0]"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「前綴和」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 問題引入：為什麼需要前綴和？（多次區間查詢的暴力做法太慢）\n2. 一維前綴和的定義與建立：prefix[i] = a[0] + a[1] + ... + a[i-1]\n3. 區間和查詢公式：sum(l, r) = prefix[r+1] - prefix[l]，搭配圖解說明\n4. 前綴和的建立步驟拆解：\n   a. 建立長度 n+1 的陣列，prefix[0] = 0\n   b. 依序計算 prefix[i+1] = prefix[i] + a[i]\n   c. 查詢時直接套公式\n5. 差分陣列：前綴和的逆操作，用於快速區間修改\n   a. 差分陣列的定義\n   b. 區間加值操作：diff[l] += val, diff[r+1] -= val\n   c. 還原原陣列：對差分陣列做前綴和\n6. 二維前綴和簡介：容斥原理的應用\n7. 使用 itertools.accumulate 快速建立前綴和\n\n請搭配實作步驟拆解，特別注意索引的對應關係，建議用小陣列 [3, 1, 4, 1, 5] 做完整示範。\n\n【Python 語法與程式碼範例】\n請提供 4 個範例，由簡到難：\n範例 1：建立一維前綴和並查詢區間 [l, r] 的和\n範例 2：使用前綴和計算每個長度為 k 的連續子陣列的平均值\n範例 3：使用差分陣列處理多次區間加值操作\n範例 4：二維前綴和：計算矩陣中任意子矩陣的和\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：給定 n 個整數與 q 次查詢，每次查詢一個區間 [l, r] 的和\n  範例輸入：5\\n1 2 3 4 5\\n3\\n0 2\\n1 4\\n2 3\n  範例輸出：6\\n14\\n7\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：給定 n 個整數，找出和最大的長度為 k 的連續子陣列\n  範例輸入：7 3\\n1 -2 3 4 -1 2 1\n  範例輸出：6（子陣列 [3, 4, -1]）\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：差分陣列應用——有 n 個座位與 m 次訂票，每次訂 [l, r] 區間的座位，求每個座位被訂了幾次\n  範例輸入：10 3\\n2 5\\n3 7\\n1 4\n  範例輸出：0 1 2 3 3 2 1 1 0 0\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：給定 n 個整數，找出和為 0 的最長連續子陣列長度\n  範例輸入：8\\n1 -1 2 -2 3 -3 1 1\n  範例輸出：6\n  解答：附上完整程式碼（前綴和 + 雜湊表）\n\n第 5 題（★★★★★）：二維前綴和——給定 n x m 矩陣與 q 次查詢，每次查詢子矩陣 (r1,c1)~(r2,c2) 的和\n  範例輸入：3 3\\n1 2 3\\n4 5 6\\n7 8 9\\n2\\n0 0 1 1\\n0 0 2 2\n  範例輸出：12\\n45\n  解答：附上完整程式碼\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 前綴和長度錯誤：prefix = [0]*n vs prefix = [0]*(n+1)\n2. 區間查詢 off-by-one：prefix[r]-prefix[l] vs prefix[r+1]-prefix[l]\n3. 差分陣列邊界：只加 diff[l] 忘了減 diff[r+1] vs 正確做加減\n4. 二維容斥漏項：只減兩邊 vs 減兩邊加回交集\n\n【APCS 考題連結】\n1. 說明前綴和在 APCS 中的應用場景（區間查詢優化、子陣列和問題）\n2. 列出歷屆可用前綴和優化的題目\n3. 提供判斷何時該使用前綴和的技巧：看到「多次區間查詢」就該想到前綴和"
+        },
+        {
+          "id": "l3_enumerate_brute",
+          "title": "枚舉與暴力法",
+          "desc": "系統性地列舉所有可能的解，逐一檢查是否滿足條件",
+          "implementation": "使用巢狀迴圈或遞迴產生所有候選解，搭配剪枝提升效率",
+          "py_syntax": [
+            "for i in range(n):",
+            "itertools.permutations",
+            "itertools.combinations",
+            "itertools.product",
+            "1 << n"
+          ],
+          "common_pitfalls": [
+            "枚舉範圍估算錯誤，n 太大時暴力法會 TLE（如 n=20 的子集枚舉有 2^20 = 1048576 種）",
+            "忘了考慮空集合或全集合等邊界情況",
+            "排列與組合搞混：排列 P(n,k) 考慮順序，組合 C(n,k) 不考慮順序",
+            "使用位元枚舉 (bitmask) 時搞混位元運算：& (AND) vs | (OR) vs ^ (XOR) vs << (左移)",
+            "暴力法沒有加剪枝導致不必要的計算，例如已超過目標值仍繼續枚舉",
+            "遞迴枚舉時忘了回溯 (backtrack)，導致狀態汙染影響後續枚舉",
+            "重複計算相同狀態，沒有用集合或排序去重"
+          ],
+          "mini_examples": [
+            {
+              "title": "枚舉所有子集（位元枚舉）",
+              "type": "code",
+              "content": "def subsets(arr):\n    n = len(arr)\n    result = []\n    for mask in range(1 << n):\n        subset = []\n        for i in range(n):\n            if mask & (1 << i):\n                subset.append(arr[i])\n        result.append(subset)\n    return result\n\nprint(subsets([1, 2, 3]))"
+            },
+            {
+              "title": "使用 itertools 產生排列組合",
+              "type": "code",
+              "content": "from itertools import permutations, combinations\n\n# 3 個元素的全排列\nfor p in permutations([1, 2, 3]):\n    print(p)\n\n# 從 4 個元素中選 2 個的組合\nfor c in combinations([1, 2, 3, 4], 2):\n    print(c)"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「枚舉與暴力法」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 什麼是枚舉法？什麼是暴力法？（窮舉所有可能性，檢查哪些符合條件）\n2. 枚舉法的適用場景：問題規模小、需要找所有解或最佳解、沒有明顯的數學規律\n3. 常見的枚舉類型與實作步驟：\n   a. 單層迴圈枚舉：逐一檢查每個元素\n   b. 多層巢狀迴圈：檢查所有配對或組合\n   c. 子集枚舉（位元枚舉）：用 bitmask 列舉 2^n 個子集\n   d. 排列枚舉：用 itertools.permutations 或遞迴回溯\n   e. 組合枚舉：用 itertools.combinations 或遞迴\n4. 時間複雜度分析：如何估算暴力法是否在時限內（n <= 20 可枚舉子集，n <= 10 可枚舉排列）\n5. 剪枝技巧：提前終止不可能的分支，大幅減少計算量\n6. 回溯法 (Backtracking) 簡介：遞迴枚舉 + 回溯的框架\n\n【Python 語法與程式碼範例】\n請提供 5 個範例，由簡到難：\n範例 1：枚舉 1~n 中所有 3 和 5 的公倍數\n範例 2：找出陣列中和為 target 的兩個數（雙層迴圈暴力法）\n範例 3：用位元枚舉列出所有子集，找出子集和等於 target 的子集\n範例 4：使用 itertools.permutations 枚舉排列，解決全排列問題\n範例 5：回溯法解 N 皇后問題（n=8）\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：給定 n 個正整數，找出所有成對的數其和為偶數\n  範例輸入：4\\n1 2 3 4\n  範例輸出：(1,3) (2,4) (1,1 不算，需不同索引)\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：給定 n 個數，判斷是否存在三個數的和等於 0\n  範例輸入：5\\n-1 0 1 2 -2\n  範例輸出：Yes（如 -1+0+1=0）\n  解答：附上完整程式碼（三重迴圈暴力法）\n\n第 3 題（★★★☆☆）：給定 n 個物品（n<=15），每個物品有重量和價值，背包容量為 W，求最大價值（子集枚舉）\n  範例輸入：4 10\\n5 10\\n4 40\\n6 30\\n3 50\n  範例輸出：90\n  解答：附上完整程式碼（位元枚舉法）\n\n第 4 題（★★★★☆）：給定 1~n 的數字，輸出所有排列（回溯法實作）\n  範例輸入：3\n  範例輸出：列出所有 6 種排列\n  解答：附上完整程式碼\n\n第 5 題（★★★★★）：數獨驗證與求解——給定一個 9x9 的數獨棋盤（0 表示空格），用回溯法填入數字\n  範例輸入：9x9 的數獨棋盤\n  範例輸出：完成的數獨\n  解答：附上完整程式碼與回溯剪枝解說\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 枚舉範圍錯誤：range(n) 漏算最後一個 vs range(n+1) 或確認邊界\n2. 位元枚舉搞混：mask & i vs mask & (1 << i)\n3. 回溯忘記還原：修改狀態後沒有 undo vs 在遞迴返回後恢復狀態\n4. 重複枚舉：(i,j) 和 (j,i) 算兩次 vs 讓 j 從 i+1 開始\n\n【APCS 考題連結】\n1. 說明 APCS 中暴力枚舉的出題模式（子集和、排列、棋盤放置等）\n2. 列出歷屆適合用暴力法的題目及其規模限制\n3. 提供判斷是否該用暴力法的技巧：看 n 的範圍決定可行性"
+        },
+        {
+          "id": "l3_string_advanced",
+          "title": "進階字串處理",
+          "desc": "處理較複雜的字串操作，包含比對、搜尋與正則表達式基礎",
+          "implementation": "善用 Python 的字串方法與 re 模組處理複雜的文字比對需求",
+          "py_syntax": [
+            "s.join()",
+            "s.strip()",
+            "s.startswith()",
+            "s.endswith()",
+            "re.match()",
+            "re.findall()",
+            "s[::-1]"
+          ],
+          "common_pitfalls": [
+            "字串是不可變物件 (immutable)，所有操作都會產生新字串，頻繁拼接應改用 ''.join(list)",
+            "混淆 find() 與 index()：find() 找不到回傳 -1，index() 找不到拋出 ValueError",
+            "正則表達式中忘了跳脫特殊字元（如 . 要寫成 \\\\.），導致比對範圍過大",
+            "回文判斷時忘了統一大小寫或忽略非字母字元",
+            "使用 + 在迴圈中串接字串效能為 O(n^2)，應使用串列收集後用 join 合併",
+            "split() 預設會分割所有空白字元（含換行、tab），可能產生非預期結果",
+            "比較字串時用 is 而非 ==：is 比較記憶體位址，== 比較內容值"
+          ],
+          "mini_examples": [
+            {
+              "title": "回文判斷",
+              "type": "code",
+              "content": "def is_palindrome(s):\n    s = s.lower()\n    cleaned = ''.join(c for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]\n\nprint(is_palindrome('A man a plan a canal Panama'))  # True"
+            },
+            {
+              "title": "使用正則表達式提取數字",
+              "type": "code",
+              "content": "import re\n\ntext = 'Alice has 3 cats and 5 dogs'\nnumbers = re.findall(r'\\d+', text)\nprint(numbers)  # ['3', '5']\nprint(sum(int(x) for x in numbers))  # 8"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「進階字串處理」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 複習字串基礎：不可變性、索引、切片\n2. 進階字串方法：\n   a. strip/lstrip/rstrip：去除前後空白\n   b. split 與 join：分割與合併\n   c. startswith/endswith：前後綴檢查\n   d. replace：取代子字串\n   e. isdigit/isalpha/isalnum：字元分類判斷\n3. 字串比對與搜尋：\n   a. in 運算子：子字串存在性檢查\n   b. find/rfind：尋找子字串位置\n   c. count：計算出現次數\n4. 回文判斷：基本方法與處理大小寫、特殊字元的技巧\n5. 正則表達式基礎（re 模組）：\n   a. 基本語法：. * + ? [] () | \\\n   b. re.match vs re.search vs re.findall\n   c. 常見應用：提取數字、驗證格式\n6. 字串效能優化：為什麼迴圈拼接慢？join 的原理\n\n請搭配實作步驟拆解，每個字串操作都示範「輸入 → 處理 → 輸出」的完整流程。\n\n【Python 語法與程式碼範例】\n請提供 5 個範例，由簡到難：\n範例 1：將字串中的所有小寫字母轉成大寫，其他字元不變\n範例 2：判斷兩個字串是否為字謎 (anagram)，即字母相同但順序不同\n範例 3：回文判斷函式（忽略大小寫和非字母字元）\n範例 4：使用 re.findall 提取字串中的所有電子郵件地址\n範例 5：實作簡單的字串壓縮（如 aabcccaaa → a2b1c3a3）\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：讀入一個字串，統計其中大寫字母、小寫字母和數字的個數\n  範例輸入：Hello World 123\n  範例輸出：大寫:2 小寫:8 數字:3\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：讀入一個句子，將每個單字反轉後輸出\n  範例輸入：Hello World\n  範例輸出：olleH dlroW\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：判斷字串是否為回文（忽略空格和大小寫）\n  範例輸入：Was It A Rat I Saw\n  範例輸出：Yes\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：找出字串中最長的回文子字串\n  範例輸入：babad\n  範例輸出：bab 或 aba\n  解答：附上完整程式碼（中心擴展法）\n\n第 5 題（★★★★★）：實作 KMP 字串比對演算法，找出 pattern 在 text 中所有出現位置\n  範例輸入：\n  ababcababcabc\n  ababc\n  範例輸出：0 5\n  解答：附上完整程式碼（含 failure function 建立）\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 迴圈拼接字串：s += c 在迴圈中 vs parts.append(c) 最後 ''.join(parts)\n2. 字串比較：s1 is s2 vs s1 == s2\n3. find 與 index 混用：不處理 find 回傳 -1 的情況 vs 先檢查再使用\n4. 正則跳脫：re.findall('.') 匹配所有字元 vs re.findall('\\\\.') 只匹配句點\n\n【APCS 考題連結】\n1. 說明 APCS 中字串處理的常見考法（字串操作追蹤、模式比對、字元統計）\n2. 列出歷屆字串相關的觀念題與實作題\n3. 提供字串題的應考策略：善用 Python 內建方法、注意邊界情況"
+        },
+        {
+          "id": "l3_error_handling",
+          "title": "例外處理",
+          "desc": "使用 try-except 機制處理程式執行中的錯誤，提升程式穩健性",
+          "implementation": "將可能出錯的程式碼放入 try 區塊，針對不同例外類型分別處理",
+          "py_syntax": [
+            "try:",
+            "except Exception as e:",
+            "finally:",
+            "raise",
+            "except (TypeError, ValueError):"
+          ],
+          "common_pitfalls": [
+            "使用過於寬泛的 except: 或 except Exception: 會捕捉到所有錯誤，掩蓋真正的 bug",
+            "在 except 區塊中沒有做任何處理（空的 except: pass），讓錯誤被完全忽略",
+            "把不應該用例外處理的邏輯包在 try-except 中，例如用 try-except 取代 if 檢查",
+            "finally 區塊無論是否發生例外都會執行，在裡面 return 會覆蓋 try 或 except 中的 return",
+            "混淆 except 的順序：子類別例外要放在父類別之前，否則永遠不會被捕捉到",
+            "raise 後面不加例外物件會重新拋出當前例外，但在非 except 區塊中使用會出錯"
+          ],
+          "mini_examples": [
+            {
+              "title": "安全的整數輸入",
+              "type": "code",
+              "content": "def safe_int_input(prompt='請輸入整數: '):\n    while True:\n        try:\n            return int(input(prompt))\n        except ValueError:\n            print('輸入格式錯誤，請重新輸入')"
+            },
+            {
+              "title": "檔案讀取的例外處理",
+              "type": "code",
+              "content": "try:\n    with open('data.txt', 'r') as f:\n        content = f.read()\n        print(content)\nexcept FileNotFoundError:\n    print('找不到檔案')\nexcept PermissionError:\n    print('沒有讀取權限')\nfinally:\n    print('處理完畢')"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「例外處理」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 什麼是例外？為什麼程式會出錯？（執行期錯誤 vs 語法錯誤）\n2. 常見的例外類型：\n   a. ValueError：值不合法（如 int('abc')）\n   b. TypeError：型別不匹配（如 '3' + 5）\n   c. IndexError：索引超出範圍\n   d. KeyError：字典中找不到 key\n   e. ZeroDivisionError：除以零\n   f. FileNotFoundError：找不到檔案\n3. try-except 的基本語法與執行流程\n4. 捕捉多種例外：多個 except 子句、except (E1, E2) 合併捕捉\n5. else 與 finally 子句的用途與執行時機\n6. raise 手動拋出例外：何時該用、如何自訂例外訊息\n7. 例外處理的最佳實踐：\n   a. 盡量捕捉特定例外，不要用 except:\n   b. 不要用例外控制正常流程\n   c. 適當記錄或回報錯誤訊息\n\n請搭配實作步驟拆解，每個觀念都用「情境 → 問題 → 解法 → 程式碼」的流程說明。\n\n【Python 語法與程式碼範例】\n請提供 4 個範例，由簡到難：\n範例 1：安全的整數輸入——持續要求使用者輸入直到給出合法整數\n範例 2：安全的串列存取——用 try-except 處理 IndexError\n範例 3：多重例外處理——一段程式碼可能發生不同類型的錯誤\n範例 4：自訂例外類別——繼承 Exception 建立自己的例外\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：寫一個函式 safe_divide(a, b)，處理除以零的情況\n  範例輸入：safe_divide(10, 0)\n  範例輸出：無法除以零，回傳 None\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：寫一個函式讀取使用者輸入的整數串列，處理非整數輸入\n  範例輸入：1 2 abc 3\n  範例輸出：警告 'abc' 不是整數，最終結果 [1, 2, 3]\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：寫一個函式 safe_dict_access(d, keys)，依序存取巢狀字典，處理 KeyError\n  範例輸入：d={'a':{'b':{'c':1}}}，keys=['a','b','c']\n  範例輸出：1\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：實作一個簡單的計算機，處理各種輸入錯誤（格式錯誤、除以零、溢位）\n  範例輸入：10 / 0\n  範例輸出：錯誤：除以零\n  解答：附上完整程式碼\n\n第 5 題（★★★★★）：實作一個帶有例外處理的批次資料處理器，讀取多筆資料，記錄成功/失敗筆數與錯誤訊息\n  範例輸入：多筆格式不一的資料\n  範例輸出：處理成功 N 筆，失敗 M 筆，附上錯誤明細\n  解答：附上完整程式碼\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 過度捕捉：except: pass vs except ValueError as e: print(e)\n2. 例外順序錯誤：先 except Exception 再 except ValueError vs 先 ValueError 再 Exception\n3. finally 中 return：finally 裡 return 覆蓋結果 vs 只在 try/except 中 return\n4. 用例外代替 if：try: d[key] except KeyError vs if key in d:\n\n【APCS 考題連結】\n1. 說明 APCS 觀念題中例外處理的考法（例外類型判斷、try-except 執行流程追蹤）\n2. 說明 APCS 實作題中例外處理的應用（輸入驗證、邊界防護）\n3. 提供考試建議：APCS 實作題中例外處理的使用時機（通常用 if 更好，但讀取輸入時可用 try-except）"
+        },
+        {
+          "id": "l3_file_io",
+          "title": "檔案讀寫",
+          "desc": "使用 Python 的 open() 函式與 with 語法進行檔案的讀取與寫入",
+          "implementation": "務必使用 with 語法確保檔案自動關閉，注意編碼問題與讀寫模式的選擇",
+          "py_syntax": [
+            "open(filename, mode)",
+            "with open(...) as f:",
+            "f.read()",
+            "f.readline()",
+            "f.readlines()",
+            "f.write()",
+            "f.writelines()"
+          ],
+          "common_pitfalls": [
+            "忘了使用 with 語法或手動 close()，導致檔案未正確關閉，資料可能遺失",
+            "寫入模式 'w' 會清空原有內容，若要追加應使用 'a' 模式",
+            "讀取文字檔時沒有指定 encoding='utf-8'，在不同系統上可能出現亂碼",
+            "readlines() 每行末尾會包含換行符 \\n，忘了用 strip() 移除會影響後續處理",
+            "以 'r' 模式開啟不存在的檔案會拋出 FileNotFoundError，應先檢查或用 try-except",
+            "混淆文字模式與二進位模式：'r' 讀文字、'rb' 讀二進位，寫入亦同",
+            "write() 不會自動加換行符，需要手動加 \\n"
+          ],
+          "mini_examples": [
+            {
+              "title": "使用 with 語法讀寫檔案",
+              "type": "code",
+              "content": "# 寫入檔案\nwith open('output.txt', 'w', encoding='utf-8') as f:\n    f.write('第一行\\n')\n    f.write('第二行\\n')\n\n# 讀取檔案\nwith open('output.txt', 'r', encoding='utf-8') as f:\n    for line in f:\n        print(line.strip())"
+            },
+            {
+              "title": "讀取 CSV 格式資料",
+              "type": "code",
+              "content": "data = []\nwith open('scores.csv', 'r', encoding='utf-8') as f:\n    header = f.readline().strip().split(',')\n    for line in f:\n        fields = line.strip().split(',')\n        data.append(fields)\n\nfor row in data:\n    print(row)"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精 Python 的 APCS 教學助教。請針對「檔案讀寫」這個主題，為準備 APCS 檢定的高中生提供完整教學。\n\n【觀念講解（由淺入深）】\n請依照以下順序講解：\n1. 為什麼需要檔案讀寫？（程式結束後資料保存、處理大量資料）\n2. open() 函式的基本用法：\n   a. 檔案路徑：相對路徑 vs 絕對路徑\n   b. 開啟模式：'r' 讀取、'w' 寫入（覆蓋）、'a' 追加、'r+' 讀寫\n   c. encoding 參數：UTF-8 編碼的重要性\n3. with 語法（上下文管理器）：\n   a. 為什麼要用 with？（自動關閉檔案、防止資源洩漏）\n   b. with 的基本結構\n4. 讀取檔案的方法：\n   a. read()：一次讀取全部內容\n   b. readline()：逐行讀取\n   c. readlines()：讀取所有行成串列\n   d. for line in f：迭代器方式逐行讀取（最推薦）\n5. 寫入檔案的方法：\n   a. write()：寫入字串\n   b. writelines()：寫入字串串列\n   c. print(..., file=f)：用 print 寫入檔案\n6. 實用技巧：\n   a. 處理 CSV 格式資料\n   b. 讀取後去除換行符\n   c. 檢查檔案是否存在（os.path.exists）\n\n請搭配實作步驟拆解，每個操作都用「需求 → 選擇模式 → 寫程式 → 驗證結果」的流程。\n\n【Python 語法與程式碼範例】\n請提供 5 個範例，由簡到難：\n範例 1：建立一個文字檔並寫入 3 行文字\n範例 2：讀取文字檔並逐行印出（去除換行符）\n範例 3：讀取 CSV 格式的成績檔，計算每個學生的平均分\n範例 4：將程式的運算結果同時輸出到螢幕和檔案\n範例 5：實作一個簡單的日誌系統——每次執行程式時追加一筆記錄（包含時間戳）\n\n【練習題（5 題，難度遞增）】\n第 1 題（★☆☆☆☆）：建立一個檔案，寫入 1~10 的數字，每行一個\n  範例輸出檔案內容：1\\n2\\n3\\n...\\n10\n  解答：附上完整程式碼\n\n第 2 題（★★☆☆☆）：讀取一個文字檔，統計其中的行數、單字數和字元數\n  範例輸入檔案：Hello World\\nPython is great\n  範例輸出：行數:2 單字數:5 字元數:27\n  解答：附上完整程式碼\n\n第 3 題（★★★☆☆）：讀取一個包含學生成績的 CSV 檔案，計算平均分並寫入新檔案\n  範例輸入檔案：name,math,english\\nAlice,90,85\\nBob,78,92\n  範例輸出檔案：name,average\\nAlice,87.5\\nBob,85.0\n  解答：附上完整程式碼\n\n第 4 題（★★★★☆）：實作一個文字檔搜尋工具——在指定檔案中找出包含某關鍵字的所有行，輸出行號與內容\n  範例輸入：search('data.txt', 'Python')\n  範例輸出：第 3 行: Python is great\\n第 7 行: I love Python\n  解答：附上完整程式碼\n\n第 5 題（★★★★★）：實作一個簡易的通訊錄系統——支援新增、查詢、刪除聯絡人，資料儲存在 JSON 檔案中\n  範例操作：add Alice 0912345678 → query Alice → delete Alice\n  解答：附上完整程式碼（使用 json 模組讀寫）\n\n【常見錯誤與陷阱】\n請用「錯誤寫法 vs 正確寫法」對比格式呈現：\n1. 忘記關閉檔案：f = open(...) 沒有 close() vs with open(...) as f:\n2. 寫入模式覆蓋：用 'w' 覆蓋原有資料 vs 用 'a' 追加\n3. 換行符殘留：直接使用 readline() 結果 vs strip() 後再使用\n4. 編碼問題：open('f.txt') 在不同平台預設編碼不同 vs 明確指定 encoding='utf-8'\n\n【APCS 考題連結】\n1. 說明 APCS 中檔案讀寫的應用情境（雖然 APCS 主要用標準輸入輸出，但觀念題可能出現）\n2. 說明檔案讀寫觀念如何幫助理解 stdin/stdout 的重導向\n3. 提供建議：APCS 實作題中使用 sys.stdin 模擬檔案讀取的技巧"
         }
       ]
     },
@@ -195,61 +890,361 @@
           "id": "l4_recursion",
           "title": "遞迴與 DFS",
           "desc": "分解問題，處理樹狀或圖狀搜尋",
-          "implementation": "必須設定遞迴深度，注意終止條件",
-          "py_syntax": ["sys.setrecursionlimit", "def dfs(v):"],
-          "common_pitfalls": ["遞迴太深導致 RecursionError", "忘了標記 visited 導致死迴圈"],
+          "implementation": "必須設定遞迴深度，注意終止條件。遞迴的核心思想是將大問題拆解為結構相同的小問題，每次呼叫自身處理子問題，直到觸及基底情況 (base case) 才開始回傳。DFS 則是遞迴在圖論中的典型應用，沿著一條路徑深入到底再回溯。實作時務必使用 sys.setrecursionlimit() 調高遞迴上限，並搭配 visited 集合避免重複拜訪。",
+          "py_syntax": [
+            "sys.setrecursionlimit",
+            "def dfs(v):",
+            "visited.add(v)",
+            "if v not in visited:",
+            "for u in adj[v]:"
+          ],
+          "common_pitfalls": [
+            "遞迴太深導致 RecursionError，未使用 sys.setrecursionlimit() 調高上限",
+            "忘了標記 visited 導致死迴圈，在有環的圖中會無限遞迴",
+            "基底條件 (base case) 設定錯誤，導致遞迴永遠不會停止或提前結束",
+            "遞迴函式回傳值處理不當，忘了 return 導致拿到 None",
+            "在遞迴中使用可變預設參數（如 def f(lst=[])），導致狀態在呼叫間被共享",
+            "混淆前序、中序、後序處理的時機，在回溯前或回溯後做了錯誤的操作",
+            "遞迴時忘了還原狀態（回溯），導致後續分支看到錯誤的狀態"
+          ],
           "mini_examples": [
             {
               "title": "DFS 遍歷框架",
               "type": "code",
               "content": "def dfs(u):\n    visited.add(u)\n    for v in adj[u]:\n        if v not in visited:\n            dfs(v)"
+            },
+            {
+              "title": "計算費氏數列（含記憶化）",
+              "type": "code",
+              "content": "from functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fib(n):\n    if n <= 1:\n        return n\n    return fib(n - 1) + fib(n - 2)"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「遞迴與 DFS（深度優先搜尋）」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是遞迴？用「俄羅斯套娃」或「鏡中鏡」的生活比喻解釋。\n2. 遞迴三要素：(a) 基底條件 base case (b) 遞迴呼叫 recursive call (c) 問題規模縮小。\n3. 遞迴的執行流程：呼叫堆疊 (call stack) 如何運作，畫出堆疊圖。\n4. DFS 的定義：在圖或樹上「一條路走到底再回頭」的搜尋策略。\n5. DFS 與遞迴的關係：DFS 天生適合用遞迴實作，也可以用顯式堆疊模擬。\n6. 時間複雜度分析：DFS 在圖上為 O(V+E)，在樹上為 O(N)。空間複雜度為遞迴深度 O(V) 或 O(H)。\n7. 用圖示或 ASCII art 說明 DFS 在一張圖上的走訪順序。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：計算 n! 階乘（最基礎的遞迴）\n範例 2：費氏數列 — 樸素遞迴 vs 記憶化遞迴（@lru_cache）\n範例 3：DFS 走訪無向圖（鄰接表 + visited 集合）\n範例 4：DFS 求連通分量個數\n範例 5：DFS 判斷二分圖（著色法）\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：計算 1+2+...+n（用遞迴實作）\n★★☆☆☆ 題目 2：二進位表示（遞迴求一個正整數的二進位字串）\n★★★☆☆ 題目 3：迷宮可達性（給定二維陣列，判斷起點能否到達終點）\n★★★★☆ 題目 4：島嶼數量（經典 DFS flood fill）\n★★★★★ 題目 5：圖的環偵測（有向圖中偵測是否有環）\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 忘了設定 sys.setrecursionlimit\n- 忘了 visited 標記\n- base case 漏寫或寫錯\n- 回傳值未正確傳遞\n- 可變預設參數陷阱\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 實作題中常見的遞迴/DFS 出題模式（如：樹狀 DP、連通分量、flood fill）。\n2. 列出歷屆相關題目（如有），說明其考點。\n3. 提供解題策略與時間分配建議。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格比較：樸素遞迴 vs 記憶化遞迴 vs 迭代的時間與空間複雜度。\n2. 畫出遞迴樹（recursion tree），說明重疊子問題。\n3. 用 ASCII art 畫出 DFS 在一張圖上的走訪順序與堆疊變化。"
         },
         {
           "id": "l4_bfs",
           "title": "BFS 廣度優先搜尋",
           "desc": "利用佇列進行逐層搜尋，適用最短路徑問題",
-          "implementation": "使用 collections.deque 實作佇列，避免用 list.pop(0) 造成 O(n)",
-          "py_syntax": ["from collections import deque", "deque.append()", "deque.popleft()"],
-          "common_pitfalls": ["用 list 當佇列效能差", "忘了在入隊時標記 visited 導致重複拜訪"],
+          "implementation": "使用 collections.deque 實作佇列，避免用 list.pop(0) 造成 O(n)。BFS 的核心是「先進先出」的佇列結構，每次從佇列前端取出節點，將其未拜訪的鄰居加入佇列後端。這種逐層展開的特性使得 BFS 天然適合求解無權圖的最短路徑。實作時必須在「入隊時」就標記 visited，而非出隊時，否則會導致同一節點被重複加入佇列。",
+          "py_syntax": [
+            "from collections import deque",
+            "deque.append()",
+            "deque.popleft()",
+            "while queue:",
+            "dist[v] = dist[u] + 1"
+          ],
+          "common_pitfalls": [
+            "用 list 當佇列效能差，list.pop(0) 是 O(n) 操作",
+            "忘了在入隊時標記 visited 導致重複拜訪，造成 TLE 或錯誤結果",
+            "在出隊時才標記 visited，同一節點可能被多次加入佇列",
+            "BFS 求最短路徑時忘了記錄距離或層數，只做了可達性判斷",
+            "混淆 BFS 與 DFS 的適用場景，在需要最短路徑時誤用 DFS",
+            "忘了處理起點本身的初始化（如 dist[start] = 0、visited.add(start)）",
+            "在加權圖上直接用 BFS 求最短路徑，這只對無權圖或邊權為 1 的圖正確"
+          ],
           "mini_examples": [
             {
               "title": "BFS 最短路徑框架",
               "type": "code",
-              "content": "from collections import deque\n\ndef bfs(start):\n    q = deque([start])\n    visited = {start}\n    dist = {start: 0}\n    while q:\n        u = q.popleft()\n        for v in adj[u]:\n            if v not in visited:\n                visited.add(v)\n                dist[v] = dist[u] + 1\n                q.append(v)\n    return dist"
+              "content": "from collections import deque\n\ndef bfs(start, adj, n):\n    dist = [-1] * n\n    dist[start] = 0\n    queue = deque([start])\n    while queue:\n        u = queue.popleft()\n        for v in adj[u]:\n            if dist[v] == -1:\n                dist[v] = dist[u] + 1\n                queue.append(v)\n    return dist"
+            },
+            {
+              "title": "BFS 逐層遍歷（記錄層數）",
+              "type": "code",
+              "content": "from collections import deque\n\ndef bfs_level(start, adj):\n    visited = {start}\n    queue = deque([start])\n    level = 0\n    while queue:\n        for _ in range(len(queue)):\n            u = queue.popleft()\n            for v in adj[u]:\n                if v not in visited:\n                    visited.add(v)\n                    queue.append(v)\n        level += 1\n    return level - 1"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「BFS 廣度優先搜尋」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是 BFS？用「水波擴散」或「逐層剝洋蔥」的比喻解釋。\n2. BFS 與 DFS 的差異：搜尋順序、使用的資料結構（佇列 vs 堆疊）、適用場景。\n3. 佇列 (Queue) 的角色：為什麼 BFS 需要 FIFO 結構？\n4. BFS 的正確性：為什麼 BFS 能保證在無權圖中找到最短路徑？用歸納法說明。\n5. 時間複雜度 O(V+E)、空間複雜度 O(V) 的推導。\n6. BFS 的變體：逐層遍歷（level-order traversal）、0-1 BFS。\n7. 用 ASCII art 畫出 BFS 在一張圖上的走訪順序與佇列變化。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：BFS 走訪無向圖（基礎模板）\n範例 2：BFS 求兩點間最短距離\n範例 3：BFS 逐層遍歷（計算每層節點數）\n範例 4：BFS 在二維網格上找最短路徑（迷宮問題）\n範例 5：雙向 BFS 加速搜尋\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：判斷兩節點是否連通（BFS 版）\n★★☆☆☆ 題目 2：求無權圖中兩節點的最短距離\n★★★☆☆ 題目 3：二維迷宮最短路徑長度\n★★★★☆ 題目 4：腐爛的橘子（多源 BFS）\n★★★★★ 題目 5：字梯問題（word ladder，字串圖上的 BFS）\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 用 list.pop(0) 代替 deque.popleft()\n- 在出隊時才標記 visited\n- 忘了初始化起點\n- BFS 求距離但沒有 dist 陣列\n- 在加權圖上誤用 BFS\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 實作題中 BFS 的常見出題模式（如：最短路徑、連通性、多源 BFS）。\n2. 列出歷屆相關題目，說明其考點。\n3. 提供 BFS vs DFS 的選擇策略與應試技巧。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格比較 BFS 與 DFS 的時間、空間複雜度。\n2. 畫出 BFS 的佇列狀態變化圖（每步展示佇列內容）。\n3. 在網格地圖上用 ASCII art 標示 BFS 擴散的波前（wavefront）。"
         },
         {
           "id": "l4_stack_queue",
           "title": "堆疊與佇列",
           "desc": "使用堆疊 (Stack) 與佇列 (Queue) 解決特定問題",
-          "implementation": "堆疊用 list 即可，佇列務必使用 deque",
-          "py_syntax": ["list.append()", "list.pop()", "deque.append()", "deque.popleft()"],
-          "common_pitfalls": ["堆疊 pop() 取最後元素，佇列 popleft() 取第一個", "空容器呼叫 pop 會拋出 IndexError"],
+          "implementation": "堆疊用 list 即可，佇列務必使用 deque。堆疊遵循後進先出 (LIFO) 原則，適合處理括號配對、運算式求值、DFS 模擬等問題；佇列遵循先進先出 (FIFO) 原則，適合 BFS、排程模擬等場景。單調堆疊 (monotone stack) 是進階技巧，可用於求解 next greater element 等經典問題。",
+          "py_syntax": [
+            "list.append()",
+            "list.pop()",
+            "deque.append()",
+            "deque.popleft()",
+            "stack[-1]",
+            "len(stack) == 0"
+          ],
+          "common_pitfalls": [
+            "堆疊 pop() 取最後元素，佇列 popleft() 取第一個，兩者容易混淆",
+            "空容器呼叫 pop 會拋出 IndexError，操作前應先檢查是否為空",
+            "用 list.pop(0) 模擬佇列，時間複雜度為 O(n)，應改用 deque",
+            "括號配對問題中，只檢查了數量相等卻忽略了順序（例如 ')(' 被誤判為合法）",
+            "單調堆疊忘了在迴圈結束後處理堆疊中剩餘的元素",
+            "混淆 stack[-1]（查看頂端）與 stack.pop()（取出頂端）的差異",
+            "在需要保留索引的題目中，堆疊只存了值而沒存索引"
+          ],
           "mini_examples": [
             {
               "title": "括號配對檢查",
               "type": "code",
-              "content": "def is_valid(s):\n    stack = []\n    match = {')': '(', ']': '[', '}': '{'}\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in ')]}':\n            if not stack or stack[-1] != match[ch]:\n                return False\n            stack.pop()\n    return len(stack) == 0"
+              "content": "def is_valid(s):\n    stack = []\n    pairs = {')': '(', ']': '[', '}': '{'}\n    for ch in s:\n        if ch in '([{':\n            stack.append(ch)\n        elif ch in pairs:\n            if not stack or stack[-1] != pairs[ch]:\n                return False\n            stack.pop()\n    return len(stack) == 0"
+            },
+            {
+              "title": "單調堆疊 — 下一個更大元素",
+              "type": "code",
+              "content": "def next_greater(nums):\n    n = len(nums)\n    result = [-1] * n\n    stack = []  # 存索引\n    for i in range(n):\n        while stack and nums[i] > nums[stack[-1]]:\n            idx = stack.pop()\n            result[idx] = nums[i]\n        stack.append(i)\n    return result"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「堆疊與佇列」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是堆疊 (Stack)？用「疊盤子」的比喻解釋 LIFO 原則。\n2. 什麼是佇列 (Queue)？用「排隊買票」的比喻解釋 FIFO 原則。\n3. 兩者的核心操作：push/pop (堆疊)、enqueue/dequeue (佇列)，以及 peek/front。\n4. Python 中的實作選擇：堆疊用 list，佇列用 collections.deque，為什麼？\n5. 堆疊的應用場景：括號配對、函式呼叫堆疊、運算式求值（後序表示法）、DFS。\n6. 佇列的應用場景：BFS、排程模擬、滑動視窗。\n7. 進階：單調堆疊 (Monotone Stack) 的概念與應用，時間複雜度分析。\n8. 用圖示說明各操作的時間複雜度：O(1) push/pop vs O(n) list.pop(0)。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：用 list 實作堆疊（push、pop、peek、is_empty）\n範例 2：用 deque 實作佇列（enqueue、dequeue、front）\n範例 3：括號配對檢查（含三種括號）\n範例 4：後序表示法 (Reverse Polish Notation) 求值\n範例 5：單調堆疊求每日溫度（Daily Temperatures）\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：反轉字串（用堆疊實作）\n★★☆☆☆ 題目 2：括號是否合法\n★★★☆☆ 題目 3：後序表示法求值\n★★★★☆ 題目 4：柱狀圖最大矩形面積（單調堆疊經典題）\n★★★★★ 題目 5：滑動視窗最大值（deque 應用）\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 空堆疊 pop 導致 IndexError\n- list.pop(0) vs deque.popleft() 效能差異\n- 括號配對只數數量不管順序\n- stack[-1] vs stack.pop() 混淆\n- 單調堆疊只存值不存索引\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中堆疊/佇列的出題模式（括號配對、模擬題、運算式處理）。\n2. 列出歷屆相關題目，說明其考點。\n3. 提供快速辨識何時該用堆疊、何時該用佇列的口訣。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格列出各操作的時間複雜度（list vs deque）。\n2. 用 ASCII art 畫出堆疊與佇列的操作過程。\n3. 畫出單調堆疊在處理陣列時的狀態變化。"
         },
         {
           "id": "l4_dict_set",
           "title": "字典與集合",
           "desc": "利用雜湊結構實現快速查找與去重",
-          "implementation": "dict 與 set 的查找為 O(1)，適合計數與存在性檢查",
-          "py_syntax": ["dict()", "set()", "defaultdict()", "Counter()", "in"],
-          "common_pitfalls": ["存取不存在的 key 會拋出 KeyError，應用 get() 或 defaultdict", "set 是無序的，不能用索引存取"],
+          "implementation": "dict 與 set 的查找為 O(1)，適合計數與存在性檢查。dict 可用 defaultdict 避免 KeyError，Counter 可快速統計元素頻率。set 支援集合運算（交集、聯集、差集），在去重與判斷存在性方面極為高效。APCS 中常見的應用包括：兩數之和（two sum）、頻率統計、快速查表等。",
+          "py_syntax": [
+            "dict()",
+            "set()",
+            "defaultdict()",
+            "Counter()",
+            "in",
+            "dict.get(key, default)",
+            "dict.setdefault()",
+            "set.add()",
+            "set.discard()"
+          ],
+          "common_pitfalls": [
+            "存取不存在的 key 會拋出 KeyError，應用 get() 或 defaultdict",
+            "set 是無序的，不能用索引存取，也不保證迭代順序（Python 3.7+ dict 保證插入順序，但 set 不保證）",
+            "將 list 或 dict 等不可雜湊 (unhashable) 的物件放入 set 或當作 dict 的 key，會拋出 TypeError",
+            "Counter 的 most_common() 回傳的是 (element, count) 的 tuple 列表，不是 dict",
+            "混淆 set.remove() 與 set.discard()：remove 在元素不存在時拋出 KeyError，discard 則不會",
+            "在迭代 dict 的同時修改其大小（新增或刪除 key），會拋出 RuntimeError",
+            "忘了 defaultdict 需要傳入工廠函式（如 int、list），而不是初始值"
+          ],
           "mini_examples": [
             {
-              "title": "字元頻率計數",
+              "title": "兩數之和 (Two Sum)",
               "type": "code",
-              "content": "from collections import Counter\n\ns = 'abracadabra'\nfreq = Counter(s)\nprint(freq.most_common(3))\n# [('a', 5), ('b', 2), ('r', 2)]"
+              "content": "def two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []"
+            },
+            {
+              "title": "頻率統計與排序",
+              "type": "code",
+              "content": "from collections import Counter\n\ndef top_k_frequent(nums, k):\n    count = Counter(nums)\n    return [x for x, _ in count.most_common(k)]"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「字典與集合」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是雜湊 (Hash)？用「書的目錄/索引」比喻解釋為什麼查找是 O(1)。\n2. dict 的基本操作：建立、存取、修改、刪除、遍歷 keys/values/items。\n3. set 的基本操作：建立、新增、刪除、集合運算（交集 &、聯集 |、差集 -、對稱差集 ^）。\n4. defaultdict 與 Counter 的用途與差異。\n5. 可雜湊 (hashable) 的概念：為什麼 list 不能當 key，但 tuple 可以？\n6. 雜湊碰撞與最壞情況：O(1) 是平均，最壞為 O(n)。\n7. dict 在 Python 3.7+ 保證插入順序，但 set 不保證。\n8. 時間複雜度總覽表。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：字典基本操作（建立、存取、遍歷）\n範例 2：用 set 去除重複元素並做集合運算\n範例 3：defaultdict 做分組 (grouping)\n範例 4：Counter 統計字元頻率\n範例 5：兩數之和 (Two Sum) 用 dict 實現 O(n) 解法\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：統計一段文字中每個字元出現的次數\n★★☆☆☆ 題目 2：找出兩個陣列的共同元素（用 set）\n★★★☆☆ 題目 3：兩數之和 (Two Sum)\n★★★★☆ 題目 4：字母異位詞分組 (Group Anagrams)\n★★★★★ 題目 5：最長無重複字元子字串（dict + 滑動視窗）\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 直接 dict[key] 存取不存在的 key\n- 用 list 當 dict key 或放入 set\n- 迭代 dict 時同時修改\n- set.remove() vs set.discard()\n- defaultdict 傳入錯誤的工廠函式\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中 dict/set 的出題模式（查表、計數、去重、配對）。\n2. 列出歷屆相關題目，說明其考點。\n3. 提供何時該用 dict、何時該用 set 的判斷準則。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格比較 list 線性搜尋 O(n) vs dict/set 雜湊查找 O(1)。\n2. 畫出雜湊表的結構圖（桶陣列 + 鏈結串列解碰撞）。\n3. 用實際數據量 (n=10^5, 10^6) 計算兩種方案的操作次數差異。"
+        },
+        {
+          "id": "l4_linked_concept",
+          "title": "鏈結串列概念",
+          "desc": "用 class 實作節點與鏈結串列，理解指標操作的邏輯",
+          "implementation": "Python 中沒有原生指標，但可以用 class 定義 Node（含 val 和 next 屬性）來模擬鏈結串列。鏈結串列的優勢在於 O(1) 的插入與刪除（已知位置時），但隨機存取為 O(n)。APCS 考試中，鏈結串列通常以觀念題出現，或在實作題中需要理解其操作邏輯。使用 dummy head（虛擬頭節點）技巧可以簡化邊界處理。",
+          "py_syntax": [
+            "class Node:",
+            "self.val = val",
+            "self.next = None",
+            "current = head",
+            "while current:",
+            "current = current.next"
+          ],
+          "common_pitfalls": [
+            "忘了處理空串列 (head is None) 的邊界情況",
+            "修改 next 指標的順序錯誤，導致節點遺失（例如插入時先斷後接就會丟失後半段）",
+            "走訪時忘了移動指標 (current = current.next)，導致無窮迴圈",
+            "混淆「修改指標變數」與「修改節點的 next 屬性」的差異",
+            "刪除節點時沒有保留前驅節點的參照，導致無法重新串接",
+            "在單向鏈結串列中試圖往回走訪，但沒有 prev 指標",
+            "忘了更新 head 指標，當插入或刪除的是第一個節點時"
+          ],
+          "mini_examples": [
+            {
+              "title": "Node 類別與串列建構",
+              "type": "code",
+              "content": "class Node:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\ndef build_list(arr):\n    dummy = Node()\n    current = dummy\n    for v in arr:\n        current.next = Node(v)\n        current = current.next\n    return dummy.next\n\ndef print_list(head):\n    current = head\n    while current:\n        print(current.val, end=' -> ')\n        current = current.next\n    print('None')"
+            },
+            {
+              "title": "反轉鏈結串列",
+              "type": "code",
+              "content": "def reverse_list(head):\n    prev = None\n    current = head\n    while current:\n        next_node = current.next\n        current.next = prev\n        prev = current\n        current = next_node\n    return prev"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「鏈結串列概念」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是鏈結串列？與陣列 (list) 的差異：用「火車車廂」比喻，每個車廂記得下一個車廂的位置。\n2. 節點 (Node) 的結構：資料欄位 (val) + 指標欄位 (next)。\n3. 單向鏈結串列 vs 雙向鏈結串列 vs 環狀鏈結串列。\n4. 鏈結串列的基本操作：走訪、插入（頭部/尾部/中間）、刪除、搜尋。\n5. Dummy head（虛擬頭節點）技巧：為什麼它能簡化邊界處理？\n6. Python 中用 class 模擬鏈結串列的方式（與 C/C++ 指標的對應關係）。\n7. 鏈結串列 vs 陣列的時間複雜度比較表：存取 O(n) vs O(1)、插入/刪除 O(1) vs O(n)。\n8. 用圖示說明指標操作的順序（為什麼順序很重要）。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：定義 Node 類別並建構鏈結串列\n範例 2：走訪鏈結串列並列印所有值\n範例 3：在指定位置插入新節點（使用 dummy head）\n範例 4：刪除鏈結串列中值為 target 的所有節點\n範例 5：反轉單向鏈結串列（迭代法）\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：建構鏈結串列並列印\n★★☆☆☆ 題目 2：計算鏈結串列的長度\n★★★☆☆ 題目 3：合併兩個已排序的鏈結串列\n★★★★☆ 題目 4：偵測鏈結串列是否有環（快慢指標）\n★★★★★ 題目 5：找到兩個鏈結串列的交會點\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 插入節點時指標操作順序錯誤\n- 忘了處理空串列\n- 走訪時忘了移動指標\n- 刪除節點時未保留前驅\n- head 更新遺漏\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中鏈結串列的出題模式（觀念題居多，實作題偶爾出現）。\n2. 列出歷屆相關題目，說明其考點。\n3. 說明在 APCS Python 實作中，何時該用 list 模擬、何時該用 class Node。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格比較陣列 vs 鏈結串列各操作的時間複雜度。\n2. 用 ASCII art 畫出鏈結串列的節點結構與指標指向。\n3. 用圖示說明反轉鏈結串列的每一步指標變化。"
+        },
+        {
+          "id": "l4_tree",
+          "title": "樹狀結構",
+          "desc": "二元樹的建構、走訪與基本性質計算",
+          "implementation": "樹是無環的連通圖，二元樹中每個節點最多有左右兩個子節點。常見的走訪方式有前序 (preorder)、中序 (inorder)、後序 (postorder) 與層序 (level-order)。Python 中通常用 class TreeNode 定義節點，包含 val、left、right 三個屬性。遞迴是處理樹問題最自然的方式，因為樹本身就是遞迴結構。計算高度、節點數、判斷是否平衡等問題都可以用遞迴優雅地解決。",
+          "py_syntax": [
+            "class TreeNode:",
+            "self.left = None",
+            "self.right = None",
+            "def inorder(root):",
+            "def preorder(root):",
+            "def postorder(root):"
+          ],
+          "common_pitfalls": [
+            "忘了處理 root is None 的基底情況，導致 AttributeError",
+            "混淆前序、中序、後序的走訪順序（前序：根左右；中序：左根右；後序：左右根）",
+            "計算樹高時回傳值混淆，應是 max(左高, 右高) + 1 而非 min",
+            "在遞迴中忘了 return，導致上層拿到 None",
+            "混淆「二元樹」與「二元搜尋樹 (BST)」的性質，BST 要求左子樹 < 根 < 右子樹",
+            "建構二元樹時，沒有正確處理空節點的標記（如 -1 或 None）",
+            "層序走訪時忘了用佇列，或在遞迴中試圖實作層序走訪但邏輯混亂"
+          ],
+          "mini_examples": [
+            {
+              "title": "二元樹定義與三種走訪",
+              "type": "code",
+              "content": "class TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\n\ndef inorder(root):\n    if root is None:\n        return []\n    return inorder(root.left) + [root.val] + inorder(root.right)\n\ndef preorder(root):\n    if root is None:\n        return []\n    return [root.val] + preorder(root.left) + preorder(root.right)\n\ndef postorder(root):\n    if root is None:\n        return []\n    return postorder(root.left) + postorder(root.right) + [root.val]"
+            },
+            {
+              "title": "計算二元樹的高度與節點數",
+              "type": "code",
+              "content": "def tree_height(root):\n    if root is None:\n        return 0\n    return max(tree_height(root.left), tree_height(root.right)) + 1\n\ndef count_nodes(root):\n    if root is None:\n        return 0\n    return 1 + count_nodes(root.left) + count_nodes(root.right)"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「樹狀結構」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是樹？用「家族族譜」或「檔案系統資料夾」的比喻解釋。\n2. 樹的基本術語：根 (root)、葉 (leaf)、父節點、子節點、兄弟節點、深度 (depth)、高度 (height)。\n3. 二元樹 (Binary Tree)：每個節點最多兩個子節點（左子、右子）。\n4. 完美二元樹、完全二元樹、完滿二元樹的差異。\n5. 二元搜尋樹 (BST) 的定義：左子樹 < 根 < 右子樹。\n6. 四種走訪方式：前序 (NLR)、中序 (LNR)、後序 (LRN)、層序 (BFS)。\n7. 為什麼樹的問題天然適合遞迴？因為子樹本身也是一棵樹。\n8. 時間複雜度：走訪 O(N)，BST 查找平均 O(log N) 最壞 O(N)。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：定義 TreeNode 類別\n範例 2：前序、中序、後序走訪（遞迴版）\n範例 3：層序走訪（BFS + deque）\n範例 4：計算樹的高度與節點數\n範例 5：從前序 + 中序陣列重建二元樹\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：給定二元樹，輸出中序走訪結果\n★★☆☆☆ 題目 2：計算二元樹的高度\n★★★☆☆ 題目 3：判斷二元樹是否為對稱樹\n★★★★☆ 題目 4：二元搜尋樹的查找與插入\n★★★★★ 題目 5：從前序與中序走訪結果重建二元樹\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 忘了 root is None 基底條件\n- 前/中/後序順序搞混\n- 計算高度用 min 而非 max\n- 忘了 return 遞迴結果\n- BST 與一般二元樹混淆\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中樹的出題模式（走訪輸出、樹高計算、BST 操作、樹狀 DP）。\n2. 列出歷屆相關題目，說明其考點。\n3. 提供樹題的解題策略：先畫圖、確認走訪順序、考慮邊界。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格比較各走訪方式的時間與空間複雜度。\n2. 用 ASCII art 畫出一棵二元樹與其四種走訪結果。\n3. 畫出 BST 的查找過程，說明 O(log N) 的由來。"
+        },
+        {
+          "id": "l4_backtracking",
+          "title": "回溯法",
+          "desc": "系統性地枚舉所有可能解，並在發現不合法時立即回溯剪枝",
+          "implementation": "回溯法是 DFS 的特化應用，核心思想是「選擇、探索、撤銷選擇」三步驟。在每一步做出選擇後深入搜尋，若發現當前路徑不可能產生合法解，就立即回溯（撤銷選擇）並嘗試其他選項。剪枝 (pruning) 是提升效率的關鍵，可以大幅減少搜尋空間。經典問題包括 N-Queens、排列生成、子集生成、組合總和等。",
+          "py_syntax": [
+            "def backtrack(path, choices):",
+            "path.append(choice)",
+            "backtrack(path, new_choices)",
+            "path.pop()",
+            "if is_valid(path):",
+            "if len(path) == target:"
+          ],
+          "common_pitfalls": [
+            "忘了回溯（撤銷選擇），導致 path 不斷累積，後續分支看到錯誤的狀態",
+            "將 path 直接加入結果集而非加入 path 的副本，因為 path 是可變物件，後續修改會影響已存入的結果",
+            "剪枝條件設定錯誤，導致遺漏合法解或仍然搜尋了不必要的分支",
+            "排列問題中忘了用 used 陣列或 set 追蹤已使用的元素",
+            "子集問題中未使用 start 參數控制起始位置，導致產生重複的子集",
+            "有重複元素時未先排序並跳過相鄰重複元素，產生重複的排列或組合",
+            "遞迴終止條件設定不當，導致搜尋過深或提前結束"
+          ],
+          "mini_examples": [
+            {
+              "title": "生成所有排列",
+              "type": "code",
+              "content": "def permutations(nums):\n    result = []\n    used = [False] * len(nums)\n    def backtrack(path):\n        if len(path) == len(nums):\n            result.append(path[:])\n            return\n        for i in range(len(nums)):\n            if used[i]:\n                continue\n            used[i] = True\n            path.append(nums[i])\n            backtrack(path)\n            path.pop()\n            used[i] = False\n    backtrack([])\n    return result"
+            },
+            {
+              "title": "N-Queens 問題",
+              "type": "code",
+              "content": "def solve_n_queens(n):\n    result = []\n    cols = set()\n    diag1 = set()  # row - col\n    diag2 = set()  # row + col\n    def backtrack(row, queens):\n        if row == n:\n            result.append(queens[:])\n            return\n        for col in range(n):\n            if col in cols or (row - col) in diag1 or (row + col) in diag2:\n                continue\n            cols.add(col)\n            diag1.add(row - col)\n            diag2.add(row + col)\n            queens.append(col)\n            backtrack(row + 1, queens)\n            queens.pop()\n            cols.discard(col)\n            diag1.discard(row - col)\n            diag2.discard(row + col)\n    backtrack(0, [])\n    return result"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「回溯法 (Backtracking)」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是回溯法？用「走迷宮」的比喻：走到死路就退回上一個岔路口，試另一條路。\n2. 回溯法的三步驟：(a) 做選擇 (b) 進入下一層遞迴 (c) 撤銷選擇。\n3. 回溯法與暴力枚舉的差異：剪枝 (pruning) 如何減少搜尋空間。\n4. 回溯法的通用框架模板。\n5. 排列 (Permutation) vs 組合 (Combination) vs 子集 (Subset) 的差異與對應解法。\n6. 處理重複元素：排序 + 跳過相鄰重複。\n7. 時間複雜度分析：排列 O(N!)、子集 O(2^N)、為什麼剪枝能降低常數。\n8. 回溯法的搜尋樹（決策樹）視覺化。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：生成所有子集\n範例 2：生成所有排列\n範例 3：組合總和（candidates 中的數字可重複使用）\n範例 4：N-Queens 問題\n範例 5：數獨求解器\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：輸出 1~N 的所有排列\n★★☆☆☆ 題目 2：生成長度為 K 的所有組合（從 N 個數中選 K 個）\n★★★☆☆ 題目 3：括號生成（生成 N 對合法括號）\n★★★★☆ 題目 4：N-Queens 問題（輸出解的數量）\n★★★★★ 題目 5：分割回文串（將字串分割成所有子串都是回文的方案）\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 忘了撤銷選擇（path.pop()）\n- result.append(path) vs result.append(path[:])（淺拷貝問題）\n- 排列中忘了 used 陣列\n- 子集中忘了 start 參數\n- 有重複元素時未跳過\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中回溯法的出題模式（枚舉所有解、計數、最佳解搜尋）。\n2. 列出歷屆相關題目，說明其考點。\n3. 提供回溯法的解題 SOP：畫出決策樹 → 定義狀態 → 確認剪枝條件。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格列出排列 O(N!)、組合 O(C(N,K))、子集 O(2^N) 的複雜度。\n2. 畫出排列問題的決策樹（以 [1,2,3] 為例）。\n3. 用 ASCII art 畫出 4-Queens 的搜尋過程（含剪枝）。"
+        },
+        {
+          "id": "l4_heap",
+          "title": "堆積 (Heap)",
+          "desc": "使用 heapq 模組實作優先佇列，高效取得最小/最大元素",
+          "implementation": "Python 的 heapq 模組提供最小堆 (min-heap) 的實作，支援 O(log n) 的插入與取出最小值操作。若需要最大堆，可以將元素取負號後存入。heapq.nlargest() 與 heapq.nsmallest() 可用於 Top-K 問題。優先佇列 (Priority Queue) 是堆積的典型應用，在排程、Dijkstra 最短路徑、合併 K 個已排序序列等問題中極為常見。",
+          "py_syntax": [
+            "import heapq",
+            "heapq.heappush(heap, item)",
+            "heapq.heappop(heap)",
+            "heapq.heapify(list)",
+            "heapq.nlargest(k, iterable)",
+            "heapq.nsmallest(k, iterable)"
+          ],
+          "common_pitfalls": [
+            "Python 的 heapq 只支援最小堆，若要最大堆需手動取負號 (-val)，取出時再取負還原",
+            "直接用 heap[0] 查看最小值是 O(1)，但 heap[1] 不一定是第二小的（堆積只保證根最小）",
+            "heapq.heapify() 是 O(n)，但逐一 heappush 是 O(n log n)，建堆時應優先用 heapify",
+            "往堆積中放入不可比較的物件（如 dict）會拋出 TypeError，可用 (priority, index, item) 三元組解決",
+            "忘了 heappop 會改變堆的大小，在迴圈中邊 pop 邊判斷長度時要小心",
+            "混淆 heapq 模組函式（作用於 list）與 queue.PriorityQueue 類別（執行緒安全但較慢）",
+            "在需要「刪除特定元素」時，heapq 不直接支援，需使用懶刪除 (lazy deletion) 技巧"
+          ],
+          "mini_examples": [
+            {
+              "title": "Top-K 最大元素",
+              "type": "code",
+              "content": "import heapq\n\ndef top_k_largest(nums, k):\n    # 維護大小為 k 的最小堆\n    min_heap = []\n    for num in nums:\n        heapq.heappush(min_heap, num)\n        if len(min_heap) > k:\n            heapq.heappop(min_heap)\n    return sorted(min_heap, reverse=True)"
+            },
+            {
+              "title": "合併 K 個已排序列表",
+              "type": "code",
+              "content": "import heapq\n\ndef merge_k_sorted(lists):\n    heap = []\n    for i, lst in enumerate(lists):\n        if lst:\n            heapq.heappush(heap, (lst[0], i, 0))\n    result = []\n    while heap:\n        val, list_idx, elem_idx = heapq.heappop(heap)\n        result.append(val)\n        if elem_idx + 1 < len(lists[list_idx]):\n            next_val = lists[list_idx][elem_idx + 1]\n            heapq.heappush(heap, (next_val, list_idx, elem_idx + 1))\n    return result"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「堆積 (Heap)」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是堆積？用「公司組織層級」比喻：老闆（最小/最大值）永遠在最上面。\n2. 最小堆 (Min-Heap) 與最大堆 (Max-Heap) 的性質：父節點 <= 子節點（或 >=）。\n3. 堆積是一棵完全二元樹，可以用陣列 (list) 高效儲存：parent = (i-1)//2, left = 2*i+1, right = 2*i+2。\n4. 核心操作：插入 (sift up) O(log n)、取出最小值 (sift down) O(log n)、建堆 O(n)。\n5. Python heapq 模組的使用方式。\n6. 優先佇列 (Priority Queue) 的概念與應用場景。\n7. 最大堆的模擬：取負號技巧。\n8. 時間複雜度對比：排序後取 Top-K O(n log n) vs 堆積 O(n log k)。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：heapq 基本操作（push、pop、heapify）\n範例 2：找到陣列中第 K 大的元素\n範例 3：合併 K 個已排序的列表\n範例 4：最大堆的實作（取負號技巧）\n範例 5：使用堆積模擬任務排程（每次取優先權最高的任務）\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：找到陣列中最小的 K 個數\n★★☆☆☆ 題目 2：找到陣列中第 K 大的數\n★★★☆☆ 題目 3：合併 K 個已排序列表\n★★★★☆ 題目 4：動態中位數（同時維護最大堆和最小堆）\n★★★★★ 題目 5：前 K 個高頻元素（結合 Counter 與堆積）\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 誤以為 heapq 是最大堆\n- heap[1] 不是第二小的元素\n- 逐一 push vs heapify 的效率差異\n- 放入不可比較的物件\n- 混淆 heapq 與 PriorityQueue\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中堆積/優先佇列的出題模式（Top-K、排程模擬、貪心策略）。\n2. 列出歷屆相關題目，說明其考點。\n3. 提供何時該用堆積、何時用排序的判斷準則。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格比較各操作的時間複雜度。\n2. 用 ASCII art 畫出最小堆的陣列表示與樹狀表示對照。\n3. 用圖示說明 heappush 和 heappop 的 sift up/down 過程。"
+        },
+        {
+          "id": "l4_two_pointer",
+          "title": "雙指標技巧",
+          "desc": "使用左右指標或快慢指標在陣列或鏈結串列上高效解題",
+          "implementation": "雙指標是一種將 O(n^2) 暴力解優化到 O(n) 的常用技巧。主要分為三類：(1) 左右指標（對撞指標）：從兩端向中間移動，常用於已排序陣列的配對問題；(2) 快慢指標：兩個指標以不同速度移動，用於偵測環、找中點等；(3) 滑動視窗：維護一個大小可變的區間，用於子陣列/子字串問題。關鍵是正確設定指標移動的條件與時機。",
+          "py_syntax": [
+            "left, right = 0, len(nums) - 1",
+            "while left < right:",
+            "left += 1",
+            "right -= 1",
+            "while right < len(nums):",
+            "window[s[right]] += 1"
+          ],
+          "common_pitfalls": [
+            "左右指標的邊界條件搞錯：while left < right vs while left <= right，差一個等號結果完全不同",
+            "滑動視窗中忘了在縮小視窗時更新狀態（例如移除左端元素的計數）",
+            "在未排序的陣列上使用對撞指標，雙指標的正確性依賴排序",
+            "快慢指標偵測環時，忘了檢查 fast 和 fast.next 是否為 None，導致 AttributeError",
+            "滑動視窗的 right 指標移動條件設定錯誤，導致無窮迴圈或跳過元素",
+            "混淆固定大小的滑動視窗與可變大小的滑動視窗的處理邏輯",
+            "雙指標移動的方向搞反，或在需要移動左指標時移動了右指標"
+          ],
+          "mini_examples": [
+            {
+              "title": "已排序陣列的兩數之和",
+              "type": "code",
+              "content": "def two_sum_sorted(nums, target):\n    left, right = 0, len(nums) - 1\n    while left < right:\n        s = nums[left] + nums[right]\n        if s == target:\n            return [left, right]\n        elif s < target:\n            left += 1\n        else:\n            right -= 1\n    return []"
+            },
+            {
+              "title": "滑動視窗 — 最長無重複字元子字串",
+              "type": "code",
+              "content": "def length_of_longest_substring(s):\n    char_set = set()\n    left = 0\n    max_len = 0\n    for right in range(len(s)):\n        while s[right] in char_set:\n            char_set.remove(s[left])\n            left += 1\n        char_set.add(s[right])\n        max_len = max(max_len, right - left + 1)\n    return max_len"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「雙指標技巧」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是雙指標？用「兩個人從不同方向走路最終相遇」來比喻對撞指標。\n2. 三種雙指標模式：(a) 對撞指標（左右往中間）(b) 快慢指標（同向不同速）(c) 滑動視窗（同向同速但控制區間）。\n3. 為什麼雙指標能將 O(n^2) 降到 O(n)？直覺解釋與嚴謹說明。\n4. 對撞指標的前提：通常需要陣列已排序。\n5. 快慢指標的應用：鏈結串列偵測環、找中點。\n6. 滑動視窗的核心邏輯：擴大視窗（右指標右移）→ 當不滿足條件時收縮視窗（左指標右移）。\n7. 時間複雜度 O(n) 的保證：每個元素最多被左右指標各經過一次。\n8. 用圖示說明三種模式的指標移動方式。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：已排序陣列的兩數之和（對撞指標）\n範例 2：移除已排序陣列中的重複元素（快慢指標）\n範例 3：判斷鏈結串列是否有環（快慢指標）\n範例 4：最小覆蓋子字串（滑動視窗）\n範例 5：三數之和 (3Sum)（排序 + 對撞指標）\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：反轉陣列（對撞指標）\n★★☆☆☆ 題目 2：已排序陣列的兩數之和\n★★★☆☆ 題目 3：最長連續不重複子字串長度（滑動視窗）\n★★★★☆ 題目 4：盛最多水的容器 (Container With Most Water)\n★★★★★ 題目 5：最小覆蓋子字串 (Minimum Window Substring)\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- while left < right vs while left <= right 邊界錯誤\n- 滑動視窗忘了更新左端狀態\n- 未排序就用對撞指標\n- 快慢指標忘了 None 檢查\n- 固定 vs 可變視窗的混淆\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中雙指標的出題模式（配對問題、子陣列問題、字串問題）。\n2. 列出歷屆相關題目，說明其考點。\n3. 提供辨識「此題可用雙指標」的訊號與口訣。\n\n## 六、複雜度分析與視覺化\n\n1. 用表格比較暴力法 O(n^2) vs 雙指標 O(n) 在不同資料量下的差異。\n2. 用 ASCII art 畫出對撞指標的移動過程。\n3. 用 ASCII art 畫出滑動視窗的擴張與收縮過程。"
+        },
+        {
+          "id": "l4_grid_search",
+          "title": "網格搜尋",
+          "desc": "在二維網格上進行 DFS/BFS 搜尋，處理迷宮、連通區域等問題",
+          "implementation": "網格搜尋是 DFS/BFS 在二維陣列上的應用。關鍵技巧包括：(1) 使用方向陣列 dx, dy 或 directions 來簡化四方向/八方向的移動；(2) 邊界檢查確保不越界；(3) visited 陣列或直接修改原始網格來避免重複拜訪。常見問題類型有迷宮最短路徑（BFS）、島嶼數量（DFS flood fill）、連通區域面積等。網格搜尋是 APCS 實作題的高頻考點。",
+          "py_syntax": [
+            "directions = [(0,1),(0,-1),(1,0),(-1,0)]",
+            "for dx, dy in directions:",
+            "if 0 <= nx < rows and 0 <= ny < cols:",
+            "grid[x][y] = '#'",
+            "visited = [[False]*cols for _ in range(rows)]"
+          ],
+          "common_pitfalls": [
+            "邊界檢查寫錯，例如用 nx <= rows 而非 nx < rows，導致 IndexError",
+            "忘了標記已拜訪的格子，造成無窮迴圈或重複計算",
+            "方向陣列只寫了上下左右四方向，但題目要求八方向（含對角線）",
+            "在 BFS 求最短路徑時，忘了在起點就標記 visited，導致起點被重複處理",
+            "用 visited = [[False]*cols]*rows 建立二維陣列，這是淺拷貝陷阱，所有列共用同一個列表",
+            "混淆 (row, col) 與 (x, y) 的對應關係：row 對應 x（垂直），col 對應 y（水平）",
+            "DFS 在大型網格上遞迴太深導致 RecursionError，應改用迭代式 DFS 或 BFS"
+          ],
+          "mini_examples": [
+            {
+              "title": "島嶼數量 (Flood Fill DFS)",
+              "type": "code",
+              "content": "def count_islands(grid):\n    if not grid:\n        return 0\n    rows, cols = len(grid), len(grid[0])\n    count = 0\n    def dfs(r, c):\n        if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] != '1':\n            return\n        grid[r][c] = '#'  # 標記已拜訪\n        for dr, dc in [(0,1),(0,-1),(1,0),(-1,0)]:\n            dfs(r + dr, c + dc)\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] == '1':\n                dfs(r, c)\n                count += 1\n    return count"
+            },
+            {
+              "title": "迷宮最短路徑 (BFS)",
+              "type": "code",
+              "content": "from collections import deque\n\ndef shortest_path(grid, start, end):\n    rows, cols = len(grid), len(grid[0])\n    queue = deque([(start[0], start[1], 0)])\n    visited = [[False] * cols for _ in range(rows)]\n    visited[start[0]][start[1]] = True\n    directions = [(0,1),(0,-1),(1,0),(-1,0)]\n    while queue:\n        r, c, dist = queue.popleft()\n        if (r, c) == tuple(end):\n            return dist\n        for dr, dc in directions:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < rows and 0 <= nc < cols and not visited[nr][nc] and grid[nr][nc] == 0:\n                visited[nr][nc] = True\n                queue.append((nr, nc, dist + 1))\n    return -1"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位 APCS Python 教學助教，請針對「網格搜尋」這個主題，為高中生提供完整的教學。請依照以下結構回答：\n\n---\n\n## 一、觀念講解（由淺入深）\n\n1. 什麼是網格搜尋？把二維陣列想像成一張地圖，每個格子是一個節點，相鄰格子之間有邊。\n2. 網格上的鄰居：四方向 (上下左右) 與八方向 (含對角線) 的差異。\n3. 方向陣列技巧：用 directions = [(0,1),(0,-1),(1,0),(-1,0)] 簡化程式碼。\n4. DFS vs BFS 在網格上的選擇：flood fill/連通區域用 DFS，最短路徑用 BFS。\n5. 邊界檢查的標準寫法：0 <= nr < rows and 0 <= nc < cols。\n6. 標記已拜訪：visited 陣列 vs 直接修改原始網格的取捨。\n7. 時間複雜度 O(R*C)，空間複雜度 O(R*C)（visited 陣列或遞迴堆疊）。\n8. 用 ASCII art 畫出網格與搜尋路徑。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n\n範例 1：四方向遍歷網格（基礎模板）\n範例 2：島嶼數量（DFS flood fill）\n範例 3：迷宮最短路徑（BFS）\n範例 4：最大島嶼面積（DFS 計算連通區域大小）\n範例 5：被圍繞的區域（邊界 DFS + 翻轉）\n\n每個範例請附上完整可執行的 Python 程式碼與逐行註解。\n\n## 三、練習題（5 題，難度 1-5 星遞增）\n\n每題請提供：題目描述、輸入格式、輸出格式、範例測資（至少 2 組含解答）、提示、完整解答程式碼。\n\n★☆☆☆☆ 題目 1：計算網格中值為 1 的格子數量（基礎遍歷）\n★★☆☆☆ 題目 2：島嶼數量\n★★★☆☆ 題目 3：迷宮最短路徑長度\n★★★★☆ 題目 4：腐爛的橘子（多源 BFS 在網格上）\n★★★★★ 題目 5：單詞搜尋（在網格中搜尋是否存在指定單詞路徑）\n\n## 四、常見錯誤與陷阱（錯誤 vs 正確寫法對比）\n\n請列出至少 5 個常見錯誤，每個都用「錯誤寫法」與「正確寫法」對比呈現，並解釋原因。包含：\n- 邊界檢查用 <= 而非 <\n- [[False]*cols]*rows 淺拷貝陷阱\n- 忘了標記 visited\n- 四方向 vs 八方向搞錯\n- row/col 與 x/y 混淆\n\n## 五、APCS 考題連結\n\n1. 說明 APCS 中網格搜尋的出題模式（迷宮、flood fill、最短路徑、連通區域）。\n2. 列出歷屆相關題目（如：機器人走迷宮、血流成河等），說明其考點。\n3. 提供網格搜尋的解題 SOP：讀取網格 → 確定搜尋方式 → 設定方向陣列 → 邊界檢查 → visited 處理。\n\n## 六、複雜度分析與視覺化\n\n1. 說明為什麼網格搜尋的時間複雜度是 O(R*C)。\n2. 用 ASCII art 畫出 BFS 在迷宮中的波前擴散過程。\n3. 用 ASCII art 畫出 DFS flood fill 的遞迴走訪順序。"
         }
       ]
     },
@@ -263,28 +1258,54 @@
           "title": "動態規劃 (DP)",
           "desc": "透過子問題分解與記憶化避免重複計算",
           "implementation": "先定義狀態與轉移方程式，可用 Top-down (記憶化遞迴) 或 Bottom-up (迭代表格)",
-          "py_syntax": ["dp = [0] * (n+1)", "@functools.lru_cache", "dp[i] = dp[i-1] + dp[i-2]"],
-          "common_pitfalls": ["狀態定義不明確導致轉移方程式錯誤", "忘了初始化邊界條件 (base case)", "二維 DP 表格初始化用 [[0]*m]*n 造成共用參考"],
+          "py_syntax": [
+            "dp = [0] * (n+1)",
+            "@functools.lru_cache",
+            "dp[i] = dp[i-1] + dp[i-2]"
+          ],
+          "common_pitfalls": [
+            "狀態定義不明確導致轉移方程式錯誤",
+            "忘了初始化邊界條件 (base case)",
+            "二維 DP 表格初始化用 [[0]*m]*n 造成共用參考，應改用 [[0]*m for _ in range(n)]",
+            "Top-down 記憶化遞迴未設定 sys.setrecursionlimit 導致 RecursionError",
+            "轉移方程式的迴圈順序錯誤，導致使用到尚未計算的子問題結果",
+            "空間複雜度未優化，明明只需前一列的值卻開了整張二維表格",
+            "將 lru_cache 用在含有 list 參數的函式上導致 TypeError（list 不可雜湊）"
+          ],
           "mini_examples": [
             {
               "title": "費氏數列 (Bottom-up)",
               "type": "code",
-              "content": "def fib(n):\n    if n <= 1:\n        return n\n    dp = [0] * (n + 1)\n    dp[1] = 1\n    for i in range(2, n + 1):\n        dp[i] = dp[i-1] + dp[i-2]\n    return dp[n]"
+              "content": "def fib(n):\n    dp = [0] * (n + 1)\n    dp[1] = 1\n    for i in range(2, n + 1):\n        dp[i] = dp[i-1] + dp[i-2]\n    return dp[n]"
             },
             {
               "title": "0/1 背包問題",
               "type": "code",
-              "content": "def knapsack(W, weights, values):\n    n = len(weights)\n    dp = [0] * (W + 1)\n    for i in range(n):\n        for w in range(W, weights[i] - 1, -1):\n            dp[w] = max(dp[w], dp[w - weights[i]] + values[i])\n    return dp[W]"
+              "content": "def knapsack(W, wt, val, n):\n    dp = [[0] * (W+1) for _ in range(n+1)]\n    for i in range(1, n+1):\n        for w in range(W+1):\n            dp[i][w] = dp[i-1][w]\n            if wt[i-1] <= w:\n                dp[i][w] = max(dp[i][w], dp[i-1][w-wt[i-1]] + val[i-1])\n    return dp[n][W]"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「動態規劃 (Dynamic Programming, DP)」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 先解釋什麼是「重疊子問題」與「最佳子結構」，用費氏數列的遞迴樹說明為何暴力遞迴很慢。\n2. 介紹 Top-down（記憶化遞迴）：在遞迴的基礎上加上一個字典或陣列來儲存已計算過的結果，避免重複運算。\n3. 介紹 Bottom-up（迭代表格法）：從最小的子問題開始，逐步填表到目標問題。\n4. 說明「狀態定義」的重要性：dp[i] 代表什麼意義？如何根據題意設計狀態？\n5. 說明「轉移方程式」：如何從已知的子問題推導出更大問題的答案？\n6. 說明空間優化技巧：滾動陣列、只保留前一列等。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n1. **費氏數列（Top-down + lru_cache）**：使用 @functools.lru_cache(maxsize=None) 裝飾器實作記憶化。\n2. **爬樓梯問題（Bottom-up）**：每次可走 1 或 2 階，求到第 n 階的方法數。展示基本的一維 DP。\n3. **0/1 背包問題**：給定物品重量與價值，在重量限制內求最大價值。展示二維 DP 表格。\n4. **最長共同子序列 (LCS)**：兩字串的最長共同子序列長度，展示二維 DP 與回溯路徑。\n5. **編輯距離 (Edit Distance)**：將字串 A 轉換成字串 B 的最少操作次數（插入、刪除、替換），展示完整的狀態定義與轉移方程式。\n\n每個範例請提供完整可執行的 Python 程式碼，附上註解說明每一步的邏輯。\n\n## 三、練習題（5 題，難度遞增）\n1. ★☆☆☆☆ **硬幣問題**：給定面額集合與目標金額，求最少硬幣數。輸入：coins = [1, 5, 10, 25], amount = 36。輸出：3（25+10+1）。提供範例測資與完整解答。\n2. ★★☆☆☆ **最大子陣列和**：給定整數陣列，求連續子陣列的最大和（Kadane's Algorithm 也可用 DP 觀點理解）。輸入：[-2,1,-3,4,-1,2,1,-5,4]。輸出：6。提供範例測資與完整解答。\n3. ★★★☆☆ **不同路徑 (Unique Paths)**：m x n 的網格，從左上到右下，只能往右或往下走，求路徑數。支援有障礙物的版本。提供範例測資與完整解答。\n4. ★★★★☆ **0/1 背包變體**：求恰好裝滿背包的方案數（而非最大價值）。提供範例測資與完整解答。\n5. ★★★★★ **最長遞增子序列 (LIS) 的 O(n log n) 解法**：結合二分搜尋與 DP，求 LIS 長度。提供範例測資與完整解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤寫法 vs 正確寫法」的對比格式呈現至少 5 組：\n- 二維陣列初始化錯誤（[[0]*m]*n vs [[0]*m for _ in range(n)]）\n- lru_cache 用在含 list 參數的函式\n- 遞迴深度不足\n- 迴圈順序錯誤（0/1 背包一維優化時需倒序遍歷）\n- base case 遺漏\n\n## 五、複雜度分析與視覺化\n- 用表格比較暴力法 vs Top-down vs Bottom-up 的時間與空間複雜度。\n- 用 ASCII 圖示畫出費氏數列的遞迴樹（展示重疊子問題）。\n- 用表格畫出 LCS 的 DP 填表過程。\n\n## 六、APCS 考題連結\n- 說明 APCS 實作題中 DP 的出題模式（通常會包裝成最佳化問題或計數問題）。\n- 列舉歷屆 APCS 與 DP 相關的題目（如：2017/10 第 4 題物品堆疊、2019/06 第 4 題樹狀 DP 等）。\n- 提示解題時如何判斷一題是否適合用 DP 解。"
         },
         {
           "id": "l5_graph",
           "title": "圖論演算法",
           "desc": "最短路徑、拓撲排序與最小生成樹",
           "implementation": "依題目特性選擇 Dijkstra、BFS 或 Bellman-Ford",
-          "py_syntax": ["heapq.heappush()", "heapq.heappop()", "adj = defaultdict(list)", "indegree = [0] * n"],
-          "common_pitfalls": ["Dijkstra 不適用於負權邊", "拓撲排序只適用 DAG (有向無環圖)", "忘了處理圖不連通的情況"],
+          "py_syntax": [
+            "heapq.heappush()",
+            "heapq.heappop()",
+            "adj = defaultdict(list)",
+            "indegree = [0] * n"
+          ],
+          "common_pitfalls": [
+            "Dijkstra 不適用於負權邊",
+            "拓撲排序只適用 DAG (有向無環圖)",
+            "忘了處理圖不連通的情況",
+            "Dijkstra 使用 visited 集合時，在 heappop 後才檢查是否已拜訪，導致重複處理同一節點",
+            "建圖時無向圖只加了單向邊，忘了雙向都要加",
+            "節點編號從 1 開始但陣列從 0 開始，導致 off-by-one 錯誤",
+            "BFS 求最短路徑時忘了在入隊時就標記 visited，導致同一節點被多次入隊"
+          ],
           "mini_examples": [
             {
               "title": "Dijkstra 最短路徑",
@@ -294,39 +1315,201 @@
             {
               "title": "拓撲排序 (Kahn's Algorithm)",
               "type": "code",
-              "content": "from collections import deque\n\ndef topo_sort(n, adj, indegree):\n    q = deque(i for i in range(n) if indegree[i] == 0)\n    order = []\n    while q:\n        u = q.popleft()\n        order.append(u)\n        for v in adj[u]:\n            indegree[v] -= 1\n            if indegree[v] == 0:\n                q.append(v)\n    return order if len(order) == n else []"
+              "content": "from collections import deque, defaultdict\n\ndef topo_sort(n, adj, indegree):\n    q = deque(i for i in range(n) if indegree[i] == 0)\n    order = []\n    while q:\n        u = q.popleft()\n        order.append(u)\n        for v in adj[u]:\n            indegree[v] -= 1\n            if indegree[v] == 0:\n                q.append(v)\n    return order if len(order) == n else []"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「圖論演算法」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 圖的基本概念：節點 (vertex)、邊 (edge)、有向圖 vs 無向圖、加權圖。\n2. 圖的表示方式：鄰接矩陣 (adjacency matrix) vs 鄰接串列 (adjacency list)，分析各自的時間與空間複雜度，說明何時該用哪種。\n3. 圖的遍歷：BFS（廣度優先搜尋）與 DFS（深度優先搜尋）的差異與適用場景。\n4. 最短路徑演算法：\n   - BFS：適用於無權圖或所有邊權重相同的情況。\n   - Dijkstra：適用於非負權圖，使用優先佇列 (min-heap) 實作。\n   - Bellman-Ford：可處理負權邊，能偵測負環。\n5. 拓撲排序：適用於 DAG，用於排程、課程先修等問題。Kahn's Algorithm (BFS) 與 DFS 後序反轉兩種做法。\n6. 最小生成樹 (MST)：Kruskal（搭配 Union-Find）與 Prim 演算法。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n1. **BFS 求無權圖最短路徑**：使用 deque 實作 BFS，計算從起點到所有節點的最短距離。\n2. **DFS 判斷連通分量數**：遍歷所有節點，計算無向圖的連通分量個數。\n3. **Dijkstra 最短路徑**：使用 heapq 實作，處理加權有向圖的單源最短路徑。\n4. **拓撲排序**：使用 Kahn's Algorithm，處理課程先修問題。\n5. **Kruskal 最小生成樹**：將邊排序後，搭配 Union-Find 逐一加入不會形成環的邊。\n\n每個範例請提供完整可執行的 Python 程式碼，附上註解說明。\n\n## 三、練習題（5 題，難度遞增）\n1. ★☆☆☆☆ **連通分量計數**：給定 n 個節點與 m 條無向邊，求連通分量數。輸入：n=5, edges=[(0,1),(1,2),(3,4)]。輸出：2。提供範例測資與完整解答。\n2. ★★☆☆☆ **最短路徑 (BFS)**：在無權圖中求起點到終點的最短距離。輸入：n=6, edges=[(0,1),(0,2),(1,3),(2,3),(3,4),(4,5)], src=0, dst=5。輸出：3。提供範例測資與完整解答。\n3. ★★★☆☆ **Dijkstra 應用**：城市間有不同距離的道路，求從城市 0 到城市 n-1 的最短距離。提供範例測資與完整解答。\n4. ★★★★☆ **課程排程 (拓撲排序)**：n 門課有先修關係，判斷是否能完成所有課程，若能則輸出一種合法修課順序。提供範例測資與完整解答。\n5. ★★★★★ **最短路徑計數**：求從起點到終點的最短路徑有幾條（需同時記錄距離與路徑數）。提供範例測資與完整解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤寫法 vs 正確寫法」的對比格式呈現至少 5 組：\n- 無向圖只加單向邊\n- Dijkstra 沒有在 pop 時跳過已處理的節點\n- BFS 在入隊後才標記 visited\n- 拓撲排序未檢查是否所有節點都被處理（未偵測環）\n- 節點編號 off-by-one\n\n## 五、複雜度分析與視覺化\n- 用表格比較 BFS / Dijkstra / Bellman-Ford / Floyd-Warshall 的時間與空間複雜度。\n- 用 ASCII 圖示畫出一個小型圖的 BFS 與 Dijkstra 執行過程。\n- 用 ASCII 圖示展示拓撲排序的逐步處理流程。\n\n## 六、APCS 考題連結\n- 說明 APCS 實作題中圖論的出題模式（最短路徑、連通性、拓撲排序等）。\n- 列舉歷屆 APCS 與圖論相關的題目（如：2018/06 第 4 題、2020/01 第 3 題等）。\n- 提示解題時如何快速判斷該用哪種圖論演算法。"
         },
         {
           "id": "l5_greedy",
           "title": "貪心演算法",
           "desc": "每步選擇當前最佳解，適用於具貪心性質的問題",
           "implementation": "先排序再逐一處理，需證明局部最佳可推導全域最佳",
-          "py_syntax": ["sorted()", "heapq", "key=lambda"],
-          "common_pitfalls": ["未驗證貪心策略的正確性就直接套用", "排序的比較基準選錯導致答案錯誤"],
+          "py_syntax": [
+            "sorted()",
+            "heapq",
+            "key=lambda"
+          ],
+          "common_pitfalls": [
+            "未驗證貪心策略的正確性就直接套用",
+            "排序的比較基準選錯導致答案錯誤",
+            "題目不具備貪心性質卻誤用貪心，應改用 DP 或其他方法",
+            "多重排序條件時 key 函式的優先順序寫反",
+            "處理邊界條件時漏考慮空集合或只有一個元素的情況",
+            "區間問題中混淆「依起點排序」與「依終點排序」的適用場景",
+            "貪心選擇後忘了更新狀態（如剩餘容量、當前時間等）"
+          ],
           "mini_examples": [
             {
               "title": "區間排程 (Activity Selection)",
               "type": "code",
-              "content": "def max_activities(intervals):\n    intervals.sort(key=lambda x: x[1])\n    count = 0\n    end = -1\n    for s, e in intervals:\n        if s >= end:\n            count += 1\n            end = e\n    return count"
+              "content": "def activity_selection(activities):\n    # 依結束時間排序\n    activities.sort(key=lambda x: x[1])\n    result = [activities[0]]\n    for i in range(1, len(activities)):\n        if activities[i][0] >= result[-1][1]:\n            result.append(activities[i])\n    return result"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「貪心演算法 (Greedy Algorithm)」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 什麼是貪心演算法？用日常生活的找零錢問題引入——每次選最大面額的硬幣。\n2. 貪心策略的兩大前提：「貪心選擇性質」（局部最佳能導向全域最佳）與「最佳子結構」。\n3. 貪心 vs DP 的差異：貪心做出選擇後不回頭，DP 則考慮所有可能的子問題。什麼時候貪心會失敗？舉反例說明。\n4. 常見貪心問題類型：區間排程、Huffman 編碼、最小生成樹 (Kruskal/Prim)、分數背包問題。\n5. 如何「證明」貪心策略正確：交換論證法 (exchange argument) 的基本概念。\n6. 排序在貪心中的角色：大部分貪心演算法的第一步是排序，排序的 key 選擇至關重要。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n1. **找零錢問題**：面額為 [1, 5, 10, 25]，用最少硬幣湊出目標金額（此處面額具有貪心性質）。\n2. **區間排程 (Activity Selection)**：選出最多不重疊的活動。依結束時間排序後逐一挑選。\n3. **分數背包問題 (Fractional Knapsack)**：物品可拆分，依單位價值排序後優先放入高價值物品。\n4. **工作排程問題 (Job Scheduling)**：每項工作有截止日與收益，在截止日前完成以獲取最大收益。\n5. **最少跳躍次數 (Jump Game II)**：陣列中每個值代表可跳最遠距離，求從起點到終點的最少跳躍數。\n\n每個範例請提供完整可執行的 Python 程式碼，附上註解說明。\n\n## 三、練習題（5 題，難度遞增）\n1. ★☆☆☆☆ **發糖果**：n 個小孩排成一列，每人有一個評分，要求評分高的比鄰居多拿糖果，求最少總糖果數。輸入：ratings = [1, 0, 2]。輸出：5。提供範例測資與完整解答。\n2. ★★☆☆☆ **買賣股票最佳時機 II**：可以多次買賣，求最大利潤。輸入：prices = [7,1,5,3,6,4]。輸出：7。提供範例測資與完整解答。\n3. ★★★☆☆ **區間合併**：給定多個區間，合併重疊區間。輸入：intervals = [[1,3],[2,6],[8,10],[15,18]]。輸出：[[1,6],[8,10],[15,18]]。提供範例測資與完整解答。\n4. ★★★★☆ **加油站問題**：環形路線上有 n 個加油站，判斷能否繞一圈並找出起點。提供範例測資與完整解答。\n5. ★★★★★ **工作排程最大收益**：n 項工作各有截止日與收益，使用並查集優化的貪心策略求最大收益。提供範例測資與完整解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤寫法 vs 正確寫法」的對比格式呈現至少 5 組：\n- 找零錢問題面額不具貪心性質時仍套用貪心\n- 區間排程依起點排序（錯）vs 依終點排序（對）\n- key 函式多重排序條件優先順序寫反\n- 貪心選擇後忘了更新剩餘狀態\n- 未處理空輸入或只有一個元素的邊界條件\n\n## 五、複雜度分析與視覺化\n- 用表格列出各貪心問題的時間複雜度（通常以排序的 O(n log n) 為主）。\n- 用 ASCII 圖示展示區間排程的排序與選擇過程。\n- 對比貪心 O(n log n) 與暴力法 O(2^n) 的效率差異。\n\n## 六、APCS 考題連結\n- 說明 APCS 實作題中貪心的出題模式（排序後貪心選擇、配對問題等）。\n- 列舉歷屆 APCS 與貪心相關的題目。\n- 提供判斷一題是否適合用貪心解的快速檢查清單。"
         },
         {
           "id": "l5_divide_conquer",
           "title": "分治法",
           "desc": "將問題拆分為子問題，分別求解後合併",
           "implementation": "找出分割點與合併方式，遞迴處理子問題",
-          "py_syntax": ["def solve(l, r):", "mid = (l + r) // 2", "merge()"],
-          "common_pitfalls": ["分割到只剩一個元素時忘了回傳 (base case)", "合併步驟的複雜度太高導致整體退化"],
+          "py_syntax": [
+            "def solve(l, r):",
+            "mid = (l + r) // 2",
+            "merge()"
+          ],
+          "common_pitfalls": [
+            "分割到只剩一個元素時忘了回傳 (base case)",
+            "合併步驟的複雜度太高導致整體退化",
+            "計算 mid 時寫成 (l + r) / 2（Python 3 會變成浮點數），應用 // 整數除法",
+            "遞迴呼叫時區間邊界寫錯，例如 solve(l, mid) 和 solve(mid, r) 會在偶數長度時無限遞迴",
+            "合併排序的 merge 步驟中忘了處理其中一半已用完、另一半還有剩餘的情況",
+            "分治的子問題之間有依賴關係卻沒處理，導致結果錯誤",
+            "遞迴深度太深時未考慮改用迭代版本或增加遞迴限制"
+          ],
           "mini_examples": [
             {
               "title": "合併排序 (Merge Sort)",
               "type": "code",
-              "content": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result"
+              "content": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result"
             }
-          ]
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「分治法 (Divide and Conquer)」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 什麼是分治法？三步驟：Divide（拆分）→ Conquer（遞迴求解）→ Combine（合併結果）。\n2. 用切蛋糕的比喻說明：把一個大蛋糕切成小塊分別處理，最後把結果拼回來。\n3. 分治法的核心要素：如何選擇分割點？base case 是什麼？合併步驟怎麼做？\n4. 經典分治演算法：合併排序 (Merge Sort)、快速排序 (Quick Sort)、二分搜尋、最近點對問題。\n5. 分治法 vs 一般遞迴 vs DP 的差異：分治的子問題通常互不重疊，若重疊則用 DP。\n6. Master Theorem：分析分治演算法時間複雜度的利器。T(n) = aT(n/b) + O(n^d) 的三種情況。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n1. **二分搜尋 (Binary Search)**：在已排序陣列中搜尋目標值，展示最基本的分治思維。\n2. **合併排序 (Merge Sort)**：完整實作分割與合併步驟，計算時間複雜度為 O(n log n)。\n3. **快速排序 (Quick Sort)**：選擇 pivot、partition、遞迴排序兩半。討論最佳與最差情況。\n4. **逆序數對計數**：利用合併排序的合併步驟，在 O(n log n) 時間內計算逆序數對。\n5. **最大子陣列和（分治法版本）**：將陣列一分為二，答案在左半、右半或跨越中點。\n\n每個範例請提供完整可執行的 Python 程式碼，附上註解說明。\n\n## 三、練習題（5 題，難度遞增）\n1. ★☆☆☆☆ **冪次計算 (快速冪)**：用分治法在 O(log n) 時間內計算 x^n。輸入：x=2, n=10。輸出：1024。提供範例測資與完整解答。\n2. ★★☆☆☆ **合併排序實作**：實作完整的合併排序，輸出排序結果。輸入：[38, 27, 43, 3, 9, 82, 10]。輸出：[3, 9, 10, 27, 38, 43, 82]。提供範例測資與完整解答。\n3. ★★★☆☆ **第 K 小元素**：用快速選擇 (Quick Select) 在平均 O(n) 時間找到第 K 小的元素。提供範例測資與完整解答。\n4. ★★★★☆ **逆序數對計數**：計算陣列中 i < j 且 arr[i] > arr[j] 的對數。輸入：[5, 4, 3, 2, 1]。輸出：10。提供範例測資與完整解答。\n5. ★★★★★ **最近點對問題**：平面上 n 個點，求最近兩點之間的距離。分治法 O(n log n) 解法。提供範例測資與完整解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤寫法 vs 正確寫法」的對比格式呈現至少 5 組：\n- mid 計算用 / 而非 //\n- 區間邊界 [l, mid] 和 [mid, r] 導致無限遞迴，應為 [l, mid] 和 [mid+1, r]\n- base case 遺漏（陣列為空或只有一個元素）\n- 快速排序的 pivot 選擇策略不佳（已排序陣列選第一個元素作 pivot 退化為 O(n^2)）\n- merge 步驟中忘了處理剩餘元素\n\n## 五、複雜度分析與視覺化\n- 用 Master Theorem 分析合併排序 T(n) = 2T(n/2) + O(n) = O(n log n)。\n- 用 ASCII 圖示畫出合併排序的遞迴樹。\n- 用表格比較合併排序、快速排序、堆積排序的時間與空間複雜度。\n- 用 ASCII 圖示展示快速排序的 partition 過程。\n\n## 六、APCS 考題連結\n- 說明 APCS 實作題中分治法的出題模式。\n- 列舉歷屆 APCS 與分治法相關的題目。\n- 提示如何判斷一題適合用分治法（問題可自然地一分為二、子問題結構相同）。"
+        },
+        {
+          "id": "l5_dp_advanced",
+          "title": "進階 DP",
+          "desc": "區間 DP、位元遮罩 DP (bitmask DP)、最長遞增子序列 (LIS) 等進階動態規劃技巧",
+          "implementation": "區間 DP 需枚舉區間長度與分割點；bitmask DP 用整數的二進位表示集合狀態；LIS 可用二分搜尋優化至 O(n log n)",
+          "py_syntax": [
+            "dp[l][r] = min(dp[l][k] + dp[k][r] + cost)",
+            "dp[mask][i]",
+            "bisect.bisect_left(tails, x)",
+            "for mask in range(1 << n):",
+            "if mask & (1 << i):"
+          ],
+          "common_pitfalls": [
+            "區間 DP 的枚舉順序錯誤：必須先枚舉區間長度（由小到大），而非直接枚舉左右端點",
+            "bitmask DP 的 n 值太大（超過 20），導致 2^n 狀態數爆炸，記憶體不足或超時",
+            "LIS 使用 O(n^2) 解法在 n > 10^5 時超時，應改用 bisect 的 O(n log n) 做法",
+            "bitmask DP 中位元運算優先順序搞混，if mask & (1 << i) 需要加括號避免邏輯錯誤",
+            "區間 DP 的 base case 設定錯誤，例如長度為 1 的區間應初始化為 0 或特定值",
+            "LIS 回溯路徑時只記錄了長度卻沒記錄實際序列，需要額外陣列追蹤前驅"
+          ],
+          "mini_examples": [
+            {
+              "title": "最長遞增子序列 (LIS) — O(n log n)",
+              "type": "code",
+              "content": "import bisect\n\ndef lis_length(arr):\n    tails = []\n    for x in arr:\n        pos = bisect.bisect_left(tails, x)\n        if pos == len(tails):\n            tails.append(x)\n        else:\n            tails[pos] = x\n    return len(tails)\n\n# 範例：arr = [10, 9, 2, 5, 3, 7, 101, 18]\n# LIS 長度 = 4（例如 [2, 3, 7, 101]）"
+            },
+            {
+              "title": "旅行推銷員問題 (TSP) — bitmask DP",
+              "type": "code",
+              "content": "def tsp(dist, n):\n    INF = float('inf')\n    dp = [[INF] * n for _ in range(1 << n)]\n    dp[1][0] = 0  # 從城市 0 出發\n    for mask in range(1 << n):\n        for u in range(n):\n            if dp[mask][u] == INF:\n                continue\n            for v in range(n):\n                if mask & (1 << v):\n                    continue\n                new_mask = mask | (1 << v)\n                dp[new_mask][v] = min(dp[new_mask][v], dp[mask][u] + dist[u][v])\n    full = (1 << n) - 1\n    return min(dp[full][u] + dist[u][0] for u in range(n))"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「進階 DP（區間 DP、bitmask DP、LIS）」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 回顧基礎 DP 的核心概念（狀態、轉移、base case），為進階主題做準備。\n2. **區間 DP**：\n   - 狀態定義：dp[l][r] 代表區間 [l, r] 的最佳解。\n   - 轉移方式：枚舉分割點 k，dp[l][r] = min/max(dp[l][k] + dp[k+1][r] + cost(l, r))。\n   - 枚舉順序：必須先枚舉區間長度（從短到長），確保子區間已經計算完畢。\n   - 經典應用：矩陣連乘、石頭合併、戳氣球等。\n3. **位元遮罩 DP (bitmask DP)**：\n   - 用一個整數的二進位表示「已選取哪些元素」的集合狀態。\n   - 狀態定義：dp[mask] 或 dp[mask][i]。mask 的第 i 個 bit 為 1 表示第 i 個元素已被選取。\n   - 常用位元操作：mask & (1 << i)（檢查第 i 位）、mask | (1 << i)（設定第 i 位）、mask ^ (1 << i)（切換第 i 位）。\n   - 適用範圍：n <= 20 的小規模全排列或子集問題（因為 2^20 約 100 萬）。\n   - 經典應用：TSP（旅行推銷員問題）、任務分配問題。\n4. **最長遞增子序列 (LIS)**：\n   - O(n^2) 的基礎 DP 解法：dp[i] 為以 arr[i] 結尾的 LIS 長度。\n   - O(n log n) 的優化解法：維護 tails 陣列，用 bisect_left 找插入位置。\n   - tails[i] 的意義：長度為 i+1 的遞增子序列中，最後一個元素的最小可能值。\n5. 進階 DP 的通用策略：如何觀察題目特徵來決定使用哪種進階 DP 技巧。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n1. **LIS — O(n^2) 版本**：基礎雙層迴圈做法。\n2. **LIS — O(n log n) 版本**：使用 bisect 模組優化。\n3. **石頭合併（區間 DP）**：n 堆石頭排成一列，每次合併相鄰兩堆，代價為兩堆石頭數之和，求最小總代價。\n4. **TSP（bitmask DP）**：n 個城市（n <= 15），求從城市 0 出發拜訪所有城市再回到 0 的最短路徑。\n5. **戳氣球 (Burst Balloons)（區間 DP）**：每戳一個氣球獲得 left * self * right 的硬幣，求最大硬幣數。\n\n每個範例請提供完整可執行的 Python 程式碼，附上詳細註解。\n\n## 三、練習題（5 題，難度遞增）\n1. ★★☆☆☆ **LIS 長度**：給定整數陣列，求 LIS 長度。輸入：[10,9,2,5,3,7,101,18]。輸出：4。提供範例測資與解答（O(n^2) 與 O(n log n) 兩種）。\n2. ★★★☆☆ **石頭合併**：n 堆石頭，求最小合併代價。輸入：[4, 1, 2, 3]。輸出：19。提供範例測資與完整解答。\n3. ★★★☆☆ **最少完全平方數**：給定正整數 n，求最少幾個完全平方數之和等於 n。輸入：n=12。輸出：3（4+4+4）。提供範例測資與完整解答。\n4. ★★★★☆ **任務分配 (bitmask DP)**：n 個工人分配 n 項任務，每人只做一項，每項只被一人做，給定 cost[i][j]，求最小總成本。提供範例測資與完整解答。\n5. ★★★★★ **戳氣球**：氣球上有數字，戳破氣球 i 得到 nums[left]*nums[i]*nums[right] 硬幣，求最大硬幣數。輸入：[3,1,5,8]。輸出：167。提供範例測資與完整解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤寫法 vs 正確寫法」的對比格式呈現至少 5 組：\n- 區間 DP 枚舉順序：直接雙層迴圈枚舉 l, r（錯）vs 先枚舉長度再枚舉左端點（對）\n- bitmask 位元運算優先順序：if mask & 1 << i（可能錯）vs if mask & (1 << i)（對）\n- LIS 的 bisect_left vs bisect_right 選擇錯誤\n- bitmask DP 的 n 超過 20 卻硬用 bitmask（應改用其他方法）\n- 區間 DP base case 初始化遺漏\n\n## 五、複雜度分析與視覺化\n- 用表格比較三種進階 DP 的時間與空間複雜度。\n- 用 ASCII 圖示展示區間 DP 的填表順序（對角線方向）。\n- 用二進位數字展示 bitmask 的狀態轉移過程。\n- 用 ASCII 圖示展示 LIS 的 tails 陣列變化過程。\n\n## 六、APCS 考題連結\n- 說明 APCS 高級分（Level 4-5）實作題中進階 DP 的出題模式。\n- 列舉歷屆 APCS 與進階 DP 相關的題目。\n- 提供判斷何時該用區間 DP、bitmask DP 或 LIS 的決策流程圖。"
+        },
+        {
+          "id": "l5_union_find",
+          "title": "並查集 (Union-Find)",
+          "desc": "高效處理動態連通性問題的資料結構，支援合併與查詢操作",
+          "implementation": "使用路徑壓縮 (path compression) 與按秩合併 (union by rank) 達到近乎 O(1) 的均攤時間複雜度",
+          "py_syntax": [
+            "parent = list(range(n))",
+            "rank = [0] * n",
+            "def find(x): ...",
+            "def union(x, y): ..."
+          ],
+          "common_pitfalls": [
+            "find 函式沒有實作路徑壓縮，導致在長鏈情況下退化為 O(n)",
+            "union 時直接 parent[x] = y 而沒有先 find 到根節點再合併",
+            "按秩合併時 rank 更新邏輯錯誤：只有在兩棵樹的 rank 相等時才需要將新根的 rank 加 1",
+            "初始化 parent 陣列時忘了讓每個節點指向自己（parent[i] = i）",
+            "在需要計算連通分量大小的題目中，只追蹤了 rank 卻沒追蹤 size",
+            "將 find 實作為遞迴版本但未設定遞迴深度限制，在大規模資料下可能 RecursionError"
+          ],
+          "mini_examples": [
+            {
+              "title": "並查集基本實作（路徑壓縮 + 按秩合併）",
+              "type": "code",
+              "content": "class UnionFind:\n    def __init__(self, n):\n        self.parent = list(range(n))\n        self.rank = [0] * n\n\n    def find(self, x):\n        if self.parent[x] != x:\n            self.parent[x] = self.find(self.parent[x])  # 路徑壓縮\n        return self.parent[x]\n\n    def union(self, x, y):\n        rx, ry = self.find(x), self.find(y)\n        if rx == ry:\n            return False\n        if self.rank[rx] < self.rank[ry]:\n            rx, ry = ry, rx\n        self.parent[ry] = rx\n        if self.rank[rx] == self.rank[ry]:\n            self.rank[rx] += 1\n        return True"
+            },
+            {
+              "title": "計算連通分量數",
+              "type": "code",
+              "content": "def count_components(n, edges):\n    uf = UnionFind(n)\n    for u, v in edges:\n        uf.union(u, v)\n    # 連通分量數 = 不同根節點的數量\n    roots = set(uf.find(i) for i in range(n))\n    return len(roots)"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「並查集 (Union-Find / Disjoint Set Union)」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 問題背景：什麼是「動態連通性」問題？想像一群人，不斷有人結交朋友，隨時可能被問「A 和 B 是否在同一個朋友圈？」\n2. 並查集的基本概念：每個集合用一棵樹來表示，樹的根節點作為集合的代表元素。\n3. 兩大核心操作：\n   - **Find(x)**：找到 x 所在集合的根節點（代表元素）。\n   - **Union(x, y)**：將 x 和 y 所在的兩個集合合併為一個。\n4. 優化技巧一 —— 路徑壓縮 (Path Compression)：在 find 過程中，將路徑上的所有節點直接指向根節點，大幅減少後續查詢的時間。\n5. 優化技巧二 —— 按秩合併 (Union by Rank)：合併時將較矮的樹接到較高的樹下，避免樹的高度過度增長。\n6. 複雜度分析：同時使用路徑壓縮與按秩合併後，每次操作的均攤時間複雜度為 O(α(n))，其中 α 是反阿克曼函式，在實際應用中可視為常數。\n7. 並查集的應用場景：連通分量計數、Kruskal 最小生成樹、判斷圖中是否有環、社交網路分群等。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n1. **基本並查集（無優化）**：最簡單的 parent 陣列與 find/union 操作，理解基本原理。\n2. **路徑壓縮版本**：在 find 中加入路徑壓縮，對比優化前後的效率。\n3. **完整版本（路徑壓縮 + 按秩合併）**：工業級的並查集實作，包含 class 封裝。\n4. **帶 size 的並查集**：追蹤每個連通分量的大小，用於需要知道集合元素數量的題目。\n5. **Kruskal 最小生成樹**：將邊排序後逐一加入，用並查集判斷是否形成環。\n\n每個範例請提供完整可執行的 Python 程式碼，附上註解說明。\n\n## 三、練習題（5 題，難度遞增）\n1. ★☆☆☆☆ **朋友圈計數**：n 個人，給定 m 對朋友關係，求朋友圈（連通分量）數量。輸入：n=5, pairs=[(0,1),(1,2),(3,4)]。輸出：2。提供範例測資與完整解答。\n2. ★★☆☆☆ **判斷圖中是否有環**：給定 n 個節點與 m 條無向邊，逐一加入邊並判斷是否形成環。輸入：n=4, edges=[(0,1),(1,2),(2,3),(3,0)]。輸出：True（加入 (3,0) 時形成環）。提供範例測資與完整解答。\n3. ★★★☆☆ **最大連通分量大小**：動態加入邊，每次加入後輸出當前最大連通分量的大小。提供範例測資與完整解答。\n4. ★★★★☆ **Kruskal 最小生成樹**：給定加權無向圖，用 Kruskal 演算法求 MST 的總權重。提供範例測資與完整解答。\n5. ★★★★★ **冗餘連線**：一棵有 n 個節點的樹多加了一條邊形成環，找出可以移除的那條邊使圖恢復為樹。提供範例測資與完整解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤寫法 vs 正確寫法」的對比格式呈現至少 5 組：\n- find 未路徑壓縮：def find(x): while parent[x]!=x: x=parent[x]（慢）vs 遞迴路徑壓縮版本（快）\n- union 時直接 parent[x]=y 而未先 find 根節點\n- rank 更新邏輯錯誤（每次 union 都加 1 vs 只在 rank 相等時才加 1）\n- 忘了初始化 parent[i] = i\n- 遞迴版 find 在大規模資料下 RecursionError，應改用迭代版或先設定 recursion limit\n\n## 五、複雜度分析與視覺化\n- 用表格比較無優化 / 只有路徑壓縮 / 只有按秩合併 / 兩者兼具的時間複雜度。\n- 用 ASCII 圖示展示路徑壓縮前後的樹結構變化。\n- 用 ASCII 圖示展示按秩合併如何避免退化成長鏈。\n- 用 ASCII 圖示展示 Kruskal 演算法逐步加邊的過程。\n\n## 六、APCS 考題連結\n- 說明 APCS 實作題中並查集的出題模式（連通性判斷、最小生成樹等）。\n- 列舉歷屆 APCS 與並查集相關或可用並查集解的題目。\n- 提示如何判斷一題是否適合用並查集（動態合併集合、查詢是否同集合）。"
+        },
+        {
+          "id": "l5_binary_search_adv",
+          "title": "進階二分搜尋",
+          "desc": "將二分搜尋應用在答案空間上，解決最佳化問題與單調函數求解",
+          "implementation": "定義判定函式 check(mid)，根據結果縮小搜尋範圍。關鍵在於找出答案的單調性",
+          "py_syntax": [
+            "lo, hi = 0, max_val",
+            "while lo < hi:",
+            "mid = (lo + hi) // 2",
+            "bisect_left()",
+            "bisect_right()"
+          ],
+          "common_pitfalls": [
+            "lo 和 hi 的初始範圍設太小，導致正確答案不在搜尋範圍內",
+            "迴圈條件寫錯：while lo < hi vs while lo <= hi 的選擇取決於搜尋模式，搞混會導致無限迴圈或漏解",
+            "更新邊界時寫錯：應該是 lo = mid + 1 還是 lo = mid？hi = mid 還是 hi = mid - 1？需根據問題語意決定",
+            "浮點數二分搜尋時精度設定不當，eps 太大會不精確，太小會超時或浮點誤差",
+            "check(mid) 判定函式本身的邏輯有 bug，導致二分搜出錯誤答案",
+            "忘了考慮答案不存在的情況，直接輸出二分搜的結果而未驗證"
+          ],
+          "mini_examples": [
+            {
+              "title": "二分搜尋答案：切木頭問題",
+              "type": "code",
+              "content": "def max_cut_length(logs, k):\n    \"\"\"將 logs 切成 k 段等長木頭，求最大長度\"\"\"\n    def check(length):\n        return sum(log // length for log in logs) >= k\n\n    lo, hi = 1, max(logs)\n    while lo < hi:\n        mid = (lo + hi + 1) // 2  # 上取整，避免無限迴圈\n        if check(mid):\n            lo = mid\n        else:\n            hi = mid - 1\n    return lo\n\n# 範例：logs = [232, 124, 456], k = 7\n# 最大長度 = 114"
+            },
+            {
+              "title": "浮點數二分搜尋：求平方根",
+              "type": "code",
+              "content": "def sqrt_binary_search(x, eps=1e-9):\n    lo, hi = 0, max(1, x)\n    while hi - lo > eps:\n        mid = (lo + hi) / 2\n        if mid * mid < x:\n            lo = mid\n        else:\n            hi = mid\n    return (lo + hi) / 2\n\n# 範例：sqrt_binary_search(2) ≈ 1.414213562"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「進階二分搜尋（二分搜尋答案、浮點數二分、單調函數應用）」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 回顧基礎二分搜尋：在已排序陣列中搜尋目標值，O(log n) 的時間複雜度。\n2. **二分搜尋答案 (Binary Search on Answer)**：\n   - 核心思想：如果答案具有單調性（答案越大，越容易/越難滿足條件），就可以對答案做二分搜尋。\n   - 框架：定義搜尋範圍 [lo, hi]，寫一個判定函式 check(mid) 判斷「mid 是否可行」。\n   - 常見題型：「最小化最大值」或「最大化最小值」。\n3. **浮點數二分搜尋**：\n   - 當答案是實數時，用 while hi - lo > eps 控制精度。\n   - eps 的選擇：通常取 1e-7 到 1e-9，視題目精度要求而定。\n   - 也可以用固定迭代次數（如 100 次）取代 eps 判斷，避免浮點誤差問題。\n4. **bisect 模組的活用**：\n   - bisect_left(a, x)：找到 x 在 a 中的最左插入位置（第一個 >= x 的位置）。\n   - bisect_right(a, x)：找到 x 在 a 中的最右插入位置（第一個 > x 的位置）。\n   - 利用 bisect 快速實作 lower_bound 和 upper_bound。\n5. 如何判斷一題是否可以「二分搜答案」：觀察答案是否具有單調性，即存在某個臨界點使得一側全滿足、另一側全不滿足。\n\n## 二、Python 語法與程式碼範例（5 個，由簡到難）\n1. **bisect 模組基本用法**：展示 bisect_left 和 bisect_right 的差異。\n2. **切木頭問題**：有若干根木頭，要切成 k 段等長，求最大長度（二分搜答案經典題）。\n3. **浮點數二分求平方根**：不使用 math.sqrt，用二分搜尋逼近平方根。\n4. **分配書頁問題**：n 本書分給 k 個學生，每人拿連續幾本，最小化「頁數最多的那個學生的頁數」。\n5. **第 K 小的數對距離**：給定陣列，所有數對的距離中第 K 小的是多少（二分搜答案 + 雙指標驗證）。\n\n每個範例請提供完整可執行的 Python 程式碼，附上註解說明。\n\n## 三、練習題（5 題，難度遞增）\n1. ★★☆☆☆ **搜尋插入位置**：在已排序陣列中找到目標值的索引或應插入的位置。輸入：nums=[1,3,5,6], target=5。輸出：2。提供範例測資與完整解答。\n2. ★★☆☆☆ **求平方根（整數版）**：求 x 的平方根，向下取整。輸入：x=8。輸出：2。提供範例測資與完整解答。\n3. ★★★☆☆ **切木頭**：logs = [232, 124, 456], k = 7，求最大切割長度。輸出：114。提供範例測資與完整解答。\n4. ★★★★☆ **分配書頁**：books = [12, 34, 67, 90], students = 2，最小化最大頁數。輸出：113。提供範例測資與完整解答。\n5. ★★★★★ **第 K 小的數對距離**：nums = [1,3,1], k = 1，求第 1 小的數對距離。輸出：0。提供範例測資與完整解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤寫法 vs 正確寫法」的對比格式呈現至少 5 組：\n- while lo < hi 與 while lo <= hi 搞混\n- lo = mid 導致無限迴圈（應搭配 mid = (lo+hi+1)//2 上取整）\n- 浮點數 eps 設太小導致無限迴圈\n- check 函式邏輯與 lo/hi 更新方向不一致\n- 搜尋範圍 [lo, hi] 設太小漏掉正確答案\n\n## 五、複雜度分析與視覺化\n- 說明二分搜答案的總複雜度 = O(log(搜尋範圍) * check 函式的複雜度)。\n- 用 ASCII 圖示展示二分搜尋答案的收斂過程。\n- 用表格列出不同搜尋範圍大小與迭代次數的關係。\n- 對比暴力列舉答案 O(n) vs 二分搜尋答案 O(log n) 的效率。\n\n## 六、APCS 考題連結\n- 說明 APCS 實作題中「二分搜答案」的出題模式（最小化最大值、最大化最小值）。\n- 列舉歷屆 APCS 可用二分搜尋解的題目。\n- 提供快速判斷是否能用二分搜答案的檢查清單（答案有範圍、具單調性、check 可在合理時間內完成）。"
+        },
+        {
+          "id": "l5_complexity",
+          "title": "時間與空間複雜度",
+          "desc": "分析演算法效率的理論基礎，Big-O 表示法與 APCS 實戰時間估算",
+          "implementation": "根據 APCS 的時間限制（通常 1-2 秒），估算 Python 約可執行 10^6 至 10^7 次簡單運算，以此反推可接受的演算法複雜度",
+          "py_syntax": [
+            "import time",
+            "time.time()",
+            "O(n)",
+            "O(n log n)",
+            "O(n^2)"
+          ],
+          "common_pitfalls": [
+            "混淆 O(n) 和 O(n^2)：兩層巢狀迴圈不一定是 O(n^2)，要看內層迴圈的實際執行次數",
+            "忽略常數因子：Python 的常數因子約為 C/C++ 的 30-100 倍，同樣的 O(n^2) 在 Python 中可能超時",
+            "遞迴深度與空間複雜度搞混：遞迴的空間複雜度取決於最大遞迴深度，不是總呼叫次數",
+            "以為 sort() 是 O(n)：Python 的 sort 使用 Timsort，平均與最差都是 O(n log n)",
+            "字串拼接的隱藏複雜度：在迴圈中用 s += c 會導致 O(n^2)，應改用 ''.join(list)",
+            "list.insert(0, x) 是 O(n) 而非 O(1)，應改用 collections.deque"
+          ],
+          "mini_examples": [
+            {
+              "title": "APCS 時間限制估算表",
+              "type": "note",
+              "content": "APCS Python 時間估算（假設時限 2 秒）：\n- n ≤ 10^3 → O(n^3) 可行（約 10^9 次運算，但 Python 建議 n ≤ 500）\n- n ≤ 10^4 → O(n^2) 可行\n- n ≤ 10^5 → O(n log n) 可行，O(n^2) 會超時\n- n ≤ 10^6 → O(n) 或 O(n log n) 可行\n- n ≤ 10^7 → 只有 O(n) 可行\n\n提示：Python 每秒約可執行 10^6 ~ 10^7 次簡單運算（視操作而定）。\n使用 PyPy 可提速約 5-10 倍。"
+            },
+            {
+              "title": "常見操作的時間複雜度",
+              "type": "note",
+              "content": "Python 內建操作複雜度速查：\n- list.append(x): O(1) 均攤\n- list.insert(0, x): O(n)\n- list.pop(): O(1)\n- list.pop(0): O(n) → 改用 deque.popleft()\n- x in list: O(n) → 改用 set，O(1)\n- x in set: O(1) 平均\n- dict[key]: O(1) 平均\n- sorted(list): O(n log n)\n- list.sort(): O(n log n)，原地排序較省空間\n- ''.join(parts): O(總長度)\n- s += c（字串拼接，n 次）: O(n^2) → 用 list + join\n- heapq.heappush/heappop: O(log n)\n- bisect.bisect_left: O(log n)"
+            }
+          ],
+          "ai_tutor_prompt": "你是一位專精於 APCS 檢定的 Python 程式設計教師。請針對「時間與空間複雜度分析」這個主題，為高中生提供完整教學。\n\n## 一、觀念講解（由淺入深）\n1. 為什麼需要分析複雜度？程式不只要「寫對」，還要「跑得快、用得少」。APCS 有時間限制，超時就是零分。\n2. **Big-O 表示法**：\n   - O(1)：常數時間，不管輸入多大，操作次數固定。\n   - O(log n)：每步將問題規模減半，如二分搜尋。\n   - O(n)：線性，遍歷一次陣列。\n   - O(n log n)：排序的標準複雜度。\n   - O(n^2)：兩層巢狀迴圈。\n   - O(2^n)：指數型，通常代表暴力搜尋。\n   - O(n!)：階乘，全排列。\n   - 用直覺的類比說明：O(1) 像查字典第 100 頁、O(n) 像從頭翻到尾、O(n^2) 像每頁都跟其他每頁比一次。\n3. **如何分析程式的時間複雜度**：\n   - 單一迴圈：看迴圈跑幾次。\n   - 巢狀迴圈：外層 * 內層（但要注意內層是否跟外層有關）。\n   - 遞迴：畫出遞迴樹，或用 Master Theorem。\n   - 注意「隱藏」的複雜度：字串拼接、list 的 in 操作、list.insert(0, x) 等。\n4. **空間複雜度**：\n   - 額外使用的記憶體量。\n   - 遞迴的空間 = 遞迴深度 * 每層使用的空間。\n   - 原地演算法 (in-place) vs 需要額外空間的演算法。\n5. **APCS 實戰估算**：\n   - Python 每秒約 10^6 ~ 10^7 次簡單運算。\n   - 根據 n 的範圍反推需要的演算法複雜度。\n   - 記住常見門檻：n=10^4 可以 O(n^2)，n=10^5 需要 O(n log n)，n=10^6 需要 O(n)。\n\n## 二、Python 語法與程式碼範例（3 個，由簡到難）\n1. **測量執行時間**：用 time.time() 實際測量不同複雜度演算法的執行時間差異。O(n) vs O(n^2) 在 n=10^5 時的實際耗時對比。\n2. **常見隱藏複雜度陷阱**：字串拼接 O(n^2) vs join O(n)、list.insert(0,x) O(n) vs deque.appendleft O(1)、x in list O(n) vs x in set O(1)。展示錯誤寫法與正確寫法的執行時間差異。\n3. **遞迴複雜度分析**：費氏數列的暴力遞迴 O(2^n) vs 記憶化 O(n) vs 迭代 O(n)，用 time 模組實測三者在 n=35 時的耗時差異。\n\n## 三、練習題（5 題，難度遞增）\n1. ★☆☆☆☆ **分析複雜度**：給定 5 段不同的程式碼片段，判斷各自的時間複雜度。提供解答與詳細分析。\n2. ★★☆☆☆ **選擇正確演算法**：給定 n 的範圍與時間限制，判斷哪些演算法可行。例如：n=10^5, 時限 2 秒，O(n^2) 是否可行？提供解答。\n3. ★★★☆☆ **優化字串操作**：給定一段使用 s += c 的程式碼，改寫為使用 list + join 的版本，並比較兩者在 n=10^5 時的執行時間。提供解答。\n4. ★★★★☆ **遞迴 vs 迭代**：將一個 O(2^n) 的遞迴解法改寫為 O(n) 的 DP 解法，並分析時間與空間複雜度。提供解答。\n5. ★★★★★ **綜合估算**：給定一道 APCS 實作題的題目描述與 n 的範圍，判斷需要什麼複雜度的演算法，並設計符合要求的解法。提供解答。\n\n## 四、常見錯誤與陷阱\n請以「錯誤認知 vs 正確認知」的對比格式呈現至少 5 組：\n- 「兩層迴圈一定是 O(n^2)」→ 不一定，要看內層實際執行次數（如雙指標法是 O(n)）\n- 「sort() 是 O(n)」→ 排序是 O(n log n)\n- 「字串 s += c 是 O(1)」→ 每次都會複製整個字串，n 次拼接是 O(n^2)\n- 「list 和 set 的 in 操作一樣快」→ list 是 O(n)，set 是 O(1)\n- 「遞迴的空間是總呼叫次數」→ 空間取決於最大遞迴深度\n- 「Python 和 C++ 速度差不多」→ Python 慢 30-100 倍，需選擇更低複雜度的演算法\n\n## 五、複雜度分析與視覺化\n- 用表格列出 O(1), O(log n), O(n), O(n log n), O(n^2), O(2^n), O(n!) 在 n = 10, 100, 1000, 10000 時的運算次數。\n- 用 ASCII 圖表展示各複雜度的增長曲線。\n- 用表格列出 Python 常見內建操作的時間複雜度。\n- 提供 APCS 時間限制估算速查表。\n\n## 六、APCS 考題連結\n- 說明 APCS 觀念題中複雜度分析的出題模式（選擇最佳演算法、判斷程式執行次數等）。\n- 說明實作題中如何根據 n 的範圍選擇演算法。\n- 列舉歷屆 APCS 觀念題中與複雜度相關的題目範例。"
         }
       ]
     }

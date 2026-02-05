@@ -40,7 +40,8 @@
                       "content": { "type": "string" }
                     }
                   }
-                }
+                },
+                "ai_tutor_prompt": { "type": "string" }
               },
               "required": ["id", "title", "py_syntax"]
             }

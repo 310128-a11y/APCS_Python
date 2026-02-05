@@ -42,7 +42,7 @@ else:
         st.subheader(f"{cat['title']}")
         st.info(f"**能力重點：** {selected_level['focus']}")
 
-        t1, t2, t3 = st.tabs(["💡 實作要點", "⌨️ Python 語法", "⚠️ 常見陷阱"])
+        t1, t2, t3, t4 = st.tabs(["💡 實作要點", "⌨️ Python 語法", "⚠️ 常見陷阱", "🤖 AI 助教提示語"])
 
         with t1:
             st.write(cat['implementation'])
@@ -51,13 +51,22 @@ else:
                     st.code(ex['content'], language='python' if ex['type']=='code' else None)
 
         with t2:
-            cols = st.columns(len(cat['py_syntax']))
+            num_cols = min(len(cat['py_syntax']), 3)
+            cols = st.columns(num_cols)
             for i, syntax in enumerate(cat['py_syntax']):
-                cols[i % 3].code(syntax)
+                cols[i % num_cols].code(syntax)
 
         with t3:
             for pitfall in cat['common_pitfalls']:
                 st.warning(pitfall)
+
+        with t4:
+            prompt = cat.get('ai_tutor_prompt', '')
+            if prompt:
+                st.markdown("複製以下提示語，貼到 ChatGPT / Claude 等 AI 工具即可獲得完整教學：")
+                st.code(prompt, language=None)
+            else:
+                st.info("此知識點尚未提供 AI 助教提示語。")
 
     elif mode == "JSON 技術手冊":
         st.header("🛠️ JSON 規格與教學")
